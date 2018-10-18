@@ -10,6 +10,9 @@ class User(mdb.Document):
         'collection': 'users',
     }
 
+class Data(mdb.Document):
+    pass
+
 class Post(mdb.Document):
     postid = mdb.SequenceField()
     title = mdb.StringField(max_length=120, required=True)

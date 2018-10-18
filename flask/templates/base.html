@@ -1,0 +1,169 @@
+<!doctype html>
+<head>
+    <title>EPL Statistics</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    
+</head>
+<body>
+    <div class="container-fluid no-gutters">
+        
+            <!-- <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm"> -->
+            <div class="d-flex align-items-start flex-md-row flex-column" >
+                <div class="header-logo">
+                <img src="premier-league-logo-header.svg">
+            </div>
+        <header>
+            <!-- <h5 class="my-0 mr-md-auto font-weight-normal">Company name</h5> -->
+            <div class="row  align-items-center flex-md-row flex-column d-flex badges">
+                <ul class="clubs">
+                    <li><a class="d-none d-sm-block" href="#"><span class="badge-50 BOU"></span></a></li>
+                    <li><a class="d-none d-sm-block" href="#"><span class="badge-50 ARS"></span></a></li>
+                    <li><a class="d-none d-sm-block" href="#"><span class="badge-50 BHA"></span></a></li>
+                    <li><a class="d-none d-sm-block" href="#"><span class="badge-50 BUR"></span></a></li>
+                    <li><a class="d-none d-sm-block" href="#"><span class="badge-50 CAR"></span></a></li>
+                    <li><a class="d-none d-sm-block" href="#"><span class="badge-50 CHE"></span></a></li>
+                    <li><a class="d-none d-sm-block" href="#"><span class="badge-50 CRY"></span></a></li>
+                    <li><a class="d-none d-sm-block" href="#"><span class="badge-50 EVE"></span></a></li>
+                    <li><a class="d-none d-sm-block" href="#"><span class="badge-50 FUL"></span></a></li>
+                    <li><a class="d-none d-sm-block" href="#"><span class="badge-50 HUD"></span></a></li>
+                    <li><a class="d-none d-sm-block" href="#"><span class="badge-50 LEI"></span></a></li>
+                    <li><a class="d-none d-sm-block" href="#"><span class="badge-50 LIV"></span></a></li>
+                    <li><a class="d-none d-sm-block" href="#"><span class="badge-50 MCI"></span></a></li>
+                    <li><a class="d-none d-sm-block" href="#"><span class="badge-50 MUN"></span></a></li>
+                    <li><a class="d-none d-sm-block" href="#"><span class="badge-50 NEW"></span></a></li>
+                    <li><a class="d-none d-sm-block" href="#"><span class="badge-50 SOU"></span></a></li>
+                    <li><a class="d-none d-sm-block" href="#"><span class="badge-50 TOT"></span></a></li>
+                    <li><a class="d-none d-sm-block" href="#"><span class="badge-50 WAT"></span></a></li>
+                    <li><a class="d-none d-sm-block" href="#"><span class="badge-50 WHU"></span></a></li>
+                    <li><a class="d-none d-sm-block" href="#"><span class="badge-50 WOL"></span></a></li>
+                </ul>
+            </div>
+            <div class="row subheader">
+                <div class="col-12 fill-block">
+    
+                </div>
+            </div>
+        </header>
+        </div>
+        
+        <div class="row justify-content-center content-div no-gutters" >
+            <div class="col-9">
+            <div class="row">
+                <div class="col-md-auto d-none d-sm-block form-overlay">
+                    Div 1
+                    
+                </div>
+                <div class"col-sm-9 d3-content">
+                    <svg></svg>
+
+                </div>
+            </div>
+        </div>
+        </div>
+    </div> 
+</body>
+<script>
+    var svgWidth = 800, svgHeight = 600;
+    var margin = { top: 20, right: 20, bottom: 30, left: 50 };
+    var width = svgWidth - margin.left - margin.right;
+    var height = svgHeight - margin.top - margin.bottom;
+    var data = [1,5,4,8,3,1,6,6,2,3,9,13,17,3,18,21];
+    var arr = []
+    
+    for(var i in data) {
+            // console.log(i);
+            i = parseInt(i)
+            i = i + 1;
+            console.log(i);
+            arr.push({
+                round: i, //date
+                value: data[i] //convert string to number
+            });
+        }
+
+    var svg = d3.select("svg")
+        .attr("width", svgWidth)
+        .attr("height", svgHeight)
+        .attr("class", "line-graph");
+
+    var g = svg.append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    var x = d3.scaleLinear()
+        .domain([0,15])
+        .rangeRound([0, width]);
+    
+    var y = d3.scaleLinear()
+        .rangeRound([height, 0]);
+    
+    // x.domain([0,15]);
+    y.domain([21,1]);
+
+    // var line = svg.append("line")
+    //     .attr("x1", 100)
+    //     .attr("x2", 500)
+    //     .attr("y1", 50)
+    //     .attr("y2", 50)
+    //     .attr("stroke", "red")
+    //     .attr("stroke-width", 5);
+
+    var newLine = d3.line()
+        .x(function(d) { return x(d.round)})
+        .y(function(d) { return y(d.value)})
+        // x.domain(d3.extent(arr, function(d) { return d.round}));
+        
+        // y.domain(d3.extent(arr, function(d) { return d.value}));
+    var xAxis = d3.axisBottom(x)
+                .ticks(20);
+
+    var yAxis = d3.axisRight(y)
+        .ticks(20)
+        .tickSize(width);
+
+    g.append("g")
+    .attr("transform", "translate(0," + height + ")")
+    .call(xAxis)
+    .select(".domain")
+    .attr("stroke", "white");
+    // .call(d3.axisBottom(x))
+    // .ticks(20);
+    // .select(".domain")
+    // .remove();
+
+    g.append("g")
+        // .call(d3.axisLeft(y))
+        .call(yAxis)
+        .append("text")
+        .attr("fill", "#000")
+        .attr("transform", "rotate(-90)")
+        .attr("y", -30)
+        .attr("dy", "0.71em")
+        .attr("text-anchor", "end")
+        .attr("fill", "white")
+        .text("Position");
+
+    g.append("g")
+        .call(yAxis)
+        .select(".domain")
+        .attr("stroke", "white")
+        .remove();
+
+
+    g.append("path")
+        .datum(arr)
+        .attr("fill", "none")
+        .attr("stroke", "steelblue")
+        .attr("stroke-linejoin", "round")
+        .attr("stroke-linecap", "round")
+        .attr("stroke-width", 3)
+        .attr("d", newLine);
+
+      g.selectAll(".tick line").attr("stroke", "#fff").attr("stroke-opacity", "0.05").attr("stroke-width", 2);
+      g.selectAll(".tick text").attr("fill", "white");
+
+    </script>
