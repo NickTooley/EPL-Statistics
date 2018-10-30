@@ -146,7 +146,7 @@
                                     <label for="positions-rb">Positions</label>
                                 </li>
                                 <li class="labels">
-                                    <input type="radio" name="graph-rb" id="points-rb" />
+                                    <input type="radio" name="graph-rb" id="points-rb" onclick="newPathFun()"/>
                                     <label for="points-rb">Points</label>
                                 </li>
                                 <li class="labels">
@@ -198,28 +198,26 @@
     for(var i in data) {
         // console.log(i);
         i = parseInt(i)
-        i = i + 1;
+        
         console.log(i);
         arr.push({
             round: i, //date
             value: data[i] //convert string to number
         });
+        i = i + 1;
     }
 
     for(var i in data2) {
         // console.log(i);
         i = parseInt(i)
-        i = i + 1;
+        
         console.log(i);
         arr2.push({
             round: i, //date
             value: data[i] //convert string to number
         });
+        i = i + 1;
     }
-
-    newPaths(arr, 1, 21, 20);
-
-    function newPaths(arr, scaleTop, scaleBottom, ticks){
 
 
     var svg = d3.select("svg")
@@ -238,7 +236,7 @@
         .rangeRound([height, 0]);
     
     // x.domain([0,15]);
-    y.domain([scaleBottom,scaleTop]);
+    y.domain([21,1]);
 
     // var line = svg.append("line")
     //     .attr("x1", 100)
@@ -299,7 +297,8 @@
         .attr("stroke-width", 3)
         .attr("d", newLine)
         .on("mouseover", handleMouseOver)
-        .on("mouseout", handleMouseOut);
+        .on("mouseout", handleMouseOut)
+        .attr("id", "path1");
 
       g.selectAll(".tick line").attr("stroke", "#fff").attr("stroke-opacity", "0.05").attr("stroke-width", 2);
       g.selectAll(".tick text").attr("fill", "white").attr("padding", "2px");
@@ -312,6 +311,59 @@
       function handleMouseOut(d, i) {
           d3.select(this).attr("stroke-width", 3).attr("stroke", "steelblue");
       }
-    }
+
+      //var rb1 = document.getElementById('wins-rb');
+      //rb1.onclick = newPathFun();
+
+      function newPathFun(){
+          console.log("Clicked");
+        var data2 = [90,72,43,52,71,72,81,45,61,14,37,35,17,32,52,100];
+        // var arr2 = [[0,90], [1, 72], [2,43], [3,52], [4,71], [5,72], [6,81], [7,45], [8,61], [9,14], [10,37], [11,35], [12,17], [13,32], [14,52], [15,33]];
+        var arr2 = [];
+
+        var height = svgHeight - margin.top - margin.bottom;
+        console.log(height);
+
+        var x = d3.scaleLinear()
+        .domain([0,15])
+        .rangeRound([0, width]);
+
+        var y = d3.scaleLinear()
+        .domain([0,100])
+        .rangeRound([height, 0]);
+
+        for(var i in data2) {
+            // console.log(i);
+            i = parseInt(i);
+            // arr2.push({
+            //     round: x(i), //date
+            //     value: y(data2[i]) //convert string to number
+            // });
+            arr2.push([x(i), y(data2[i])]);
+            i = i + 1;
+        }
+
+        console.log(arr2);
+
+        
+    
+        // var y = d3.scaleLinear()
+        // .rangeRound([height, 0]);
+
+        
+
+        // var newline2 = d3.line()
+        // .x(function(d) { return x(x)})
+        // .y(function(d) { return y(y)});
+
+        // var newline2 = d3.line()
+        // .x(function(d) { return x(d.round)})
+        // .y(function(d) { return y(d.value)});
+
+        var newline2 = d3.line();
+
+        d3.select("#path1").transition().attr('d', newline2(arr2));
+      }
+    
 
     </script>

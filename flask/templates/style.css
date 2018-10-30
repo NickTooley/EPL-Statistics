@@ -16,7 +16,8 @@
     margin-top:-20px;
     background-color: white;
     width:300px;
-    height:780px;
+    height:785px;
+    padding-top: 5px;
     border-left: 1px solid #e7e7e7;
     border-right:  1px solid #e7e7e7;
     border-bottom:  1px solid #e7e7e7;
@@ -112,6 +113,7 @@ header{
 .clubs{
     list-style-type: none;
     padding-bottom: 0px;
+    padding-left: 80px;
 }
 
 .clubs li{
@@ -163,7 +165,7 @@ header{
 .form-checkboxes input[type="checkbox"]:checked + label::before{
   top: 10%;
   width: 100%;
-  height: 90%;
+  height: 90%; 
   z-index: -1;
   background: #e90052;
 }
