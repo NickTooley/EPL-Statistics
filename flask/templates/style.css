@@ -120,17 +120,17 @@ header{
 }
 
 
-.form-overlay{
+.form-checkboxes{
     font-size: 14px;
 }
 
-.form-overlay input[type="checkbox"] {
+.form-checkboxes input[type="checkbox"] {
   position: absolute;
   opacity: 0;
-  z-index: 1;
+  z-index: -1;
 }
 
-.form-overlay label {
+.form-checkboxes label {
     position: relative;
     display: inline-block;
     margin-right: 10px;
@@ -141,7 +141,7 @@ header{
     cursor: pointer;
 }
 
-.form-overlay label::before {
+.form-checkboxes label::before {
     content: " ";
     position: absolute;
     top: 8px;
@@ -151,23 +151,32 @@ header{
     height: 20px;
     border: 2px solid #e90052;
     border-radius: 4px;
-    z-index: 1;
+    z-index: -0;
   }
 
-.form-overlay input[type="checkbox"]:checked + label{
+.form-checkboxes input[type="checkbox"]:checked + label{
   padding-left: 10px;
   color: #fff;
+  z-index: 1;
 }
 
-.form-overlay input[type="checkbox"]:checked + label::before{
+.form-checkboxes input[type="checkbox"]:checked + label::before{
   top: 10%;
   width: 100%;
   height: 90%;
+  z-index: -1;
   background: #e90052;
 }
 
-.form-overlay label,
+.form-checkboxes label,
 label::before {
+  -webkit-transition: .25s all ease;
+  -o-transition: .25s all ease;
+  transition: .25s all ease;
+}
+
+.form-checkboxes label::before,
+label {
   -webkit-transition: .25s all ease;
   -o-transition: .25s all ease;
   transition: .25s all ease;
