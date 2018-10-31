@@ -1,0 +1,336 @@
+{% extends 'base.html' %}
+
+{% block sideform %}
+<div class="form-checkboxes">
+    <input type="checkbox" name="cb" id="ARS" checked/>
+    <label for="ARS">Arsenal</label><br />
+</div>
+<div class="form-checkboxes">  
+    <input type="checkbox" name="cb" id="BOU" checked/>
+    <label for="BOU">Bournemouth</label><br />
+</div>
+<div class="form-checkboxes">
+    <input type="checkbox" name="cb" id="BHA" checked/>
+    <label for="BHA">Brighton</label><br />
+</div>
+<div class="form-checkboxes">
+    <input type="checkbox" name="cb" id="BUR" checked/>
+    <label for="BUR">Burnley</label><br />
+</div>
+<div class="form-checkboxes">
+    <input type="checkbox" name="cb" id="CAR" checked/>
+    <label for="CAR">Cardiff</label><br />
+</div>
+<div class="form-checkboxes">
+    <input type="checkbox" name="cb" id="CHE" checked/>
+    <label for="CHE">Chelsea</label><br />
+</div>
+<div class="form-checkboxes">
+    <input type="checkbox" name="cb" id="CRY" checked/>
+    <label for="CRY">Crystal Palace</label><br />
+</div>
+<div class="form-checkboxes">
+    <input type="checkbox" name="cb" id="EVE" checked/>
+    <label for="EVE">Everton</label><br />
+</div>
+<div class="form-checkboxes">
+    <input type="checkbox" name="cb" id="FUL" checked/>
+    <label for="FUL">Fulham</label><br />
+</div>
+<div class="form-checkboxes">
+    <input type="checkbox" name="cb" id="HUD" checked/>
+    <label for="HUD">Huddersfield</label><br />
+</div>
+<div class="form-checkboxes">
+    <input type="checkbox" name="cb" id="LEI" checked/>
+    <label for="LEI">Leicester City</label><br />
+</div>
+<div class="form-checkboxes">
+    <input type="checkbox" name="cb" id="LIV" checked/>
+    <label for="LIV">Liverpool</label><br />
+</div>
+<div class="form-checkboxes">
+    <input type="checkbox" name="cb" id="MCI" checked/>
+    <label for="MCI">Man City</label><br />
+</div>
+<div class="form-checkboxes">
+    <input type="checkbox" name="cb" id="MUN" checked/>
+    <label for="MUN">Man United</label><br />
+</div>
+<div class="form-checkboxes">
+    <input type="checkbox" name="cb" id="NEW" checked/>
+    <label for="NEW">Newcastle</label><br />
+</div>
+<div class="form-checkboxes">
+    <input type="checkbox" name="cb" id="SOU" checked/>
+    <label for="SOU">Southampton</label><br />
+</div>
+<div class="form-checkboxes">
+    <input type="checkbox" name="cb" id="TOT" checked/>
+    <label for="TOT">Tottenham</label><br />
+</div>
+<div class="form-checkboxes">
+    <input type="checkbox" name="cb" id="WAT" checked/>
+    <label for="WAT">Watford</label><br />
+</div>
+<div class="form-checkboxes">
+    <input type="checkbox" name="cb" id="WHU" checked/>
+    <label for="WHU">West Ham</label><br />
+</div>
+<div class="form-checkboxes">
+    <input type="checkbox" name="cb" id="WOL" checked/>
+    <label for="WOL">Wolves</label><br />
+</div>
+{% endblock %}
+
+{% block graphtags %}
+<ul class="graph-labels-ul">
+        <li class="labels">
+            <input type="radio" name="graph-rb" id="positions-rb" checked/>
+            <label for="positions-rb">Positions</label>
+        </li>
+        <li class="labels">
+            <input type="radio" name="graph-rb" id="points-rb" onclick="newPathFun()"/>
+            <label for="points-rb">Points</label>
+        </li>
+        <li class="labels">
+            <input type="radio" name="graph-rb" id="wins-rb" />
+            <label for="wins-rb">Wins</label>
+        </li>
+        <li class="labels">
+            <input type="radio" name="graph-rb" id="draws-rb" />
+            <label for="draws-rb">Draws</label>
+        </li>
+        <li class="labels">
+            <input type="radio" name="graph-rb" id="losses-rb" />
+            <label for="losses-rb">Losses</label>
+        </li>
+    </ul>
+<div class="row align-items-center flex-md-row flex-column d-flex no-gutters labels-row2">
+    <ul class="graph-labels-ul">
+        <li class="labels">
+                <input type="radio" name="graph-rb" id="goalsfor-rb" />
+                <label for="goalsfor-rb">Goals For</label>
+        </li>
+        <li class="labels">
+                <input type="radio" name="graph-rb" id="goalsagainst-rb" />
+                <label for="goalsagainst-rb">Goals Against</label>
+        </li>
+        <li class="labels">
+                <input type="radio" name="graph-rb" id="goaldiff-rb" />
+                <label for="goaldiff-rb">Goal Difference</label>
+        </li>
+    </ul>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+
+    function getCheckedBoxes(chkboxName) {
+    var checkboxes = document.getElementsByName(chkboxName);
+    var checkboxesChecked = [];
+    // loop over them all
+    for (var i=0; i<checkboxes.length; i++) {
+        // And stick the checked ones onto an array...
+        if (checkboxes[i].checked) {
+            checkboxesChecked.push(checkboxes[i].id);
+        }
+    }
+    // Return the array if it is non-empty, or null
+    return checkboxesChecked.length > 0 ? checkboxesChecked : null;
+    }
+
+    var svgWidth = $("#d3-content").width(), svgHeight = 600;
+    var margin = { top: 20, right: 20, bottom: 30, left: 50 };
+    var width = svgWidth - margin.left - margin.right;
+    var height = svgHeight - margin.top - margin.bottom;
+    // var data = [1,5,4,8,3,1,6,6,2,3,9,13,17,3,18,21];
+    // var data2 = [90,72,43,52,71,72,81,45,61,14,37,35,17,32,52,33,41];
+    // var arr = [];
+    // var arr2 = [];
+
+
+    function data_to_arr(dataset){
+        for(var i in dataset) {
+            // console.log(i);
+            i = parseInt(i)
+            newarr = []
+            console.log(i);
+            newarr.push({
+                round: i, //date
+                value: data[i] //convert string to number
+            });
+            i = i + 1;
+        }
+        return newarr;
+    }
+
+    function new_Line_function(id, datas, scaleupper, scalelower){
+
+        var height = svgHeight - margin.top - margin.bottom;
+        console.log(height);
+
+        var newlinearr = [];
+
+        var x = d3.scaleLinear()
+        .domain([0,datas.length])
+        .rangeRound([0, width]);
+
+        var y = d3.scaleLinear()
+        .domain([scalelower,scaleupper])
+        .rangeRound([height, 0]);
+
+        for(var i in datas) {
+            i = parseInt(i);
+            newlinearr.push([x(i), y(datas[i])]);
+            i = i + 1;
+        }
+
+        var newline2 = d3.line();
+
+        var svg = d3.select("svg")
+
+        g.append("path")
+        .datum(newlinearr)
+        .attr("fill", "none")
+        .attr("stroke", "steelblue")
+        .attr("stroke-linejoin", "round")
+        .attr("stroke-linecap", "round")
+        .attr("stroke-width", 3)
+        .attr("z-index", 0)
+        .attr("d", newline2)
+        .on("mouseover", handleMouseOver)
+        .on("mouseout", handleMouseOut)
+        .attr("id", id);
+
+    }
+
+
+    var svg = d3.select("svg")
+        .attr("width", svgWidth)
+        .attr("height", svgHeight)
+        .attr("class", "line-graph");
+
+    var g = svg.append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    var x = d3.scaleLinear()
+        .domain([0,15])
+        .rangeRound([0, width]);
+
+    var y = d3.scaleLinear()
+        .rangeRound([height, 0]);
+
+    // x.domain([0,15]);
+    y.domain([21,1]);
+
+    var newLine = d3.line()
+        .x(function(d) { return x(d.round)})
+        .y(function(d) { return y(d.value)})
+        // x.domain(d3.extent(arr, function(d) { return d.round}));
+        
+        // y.domain(d3.extent(arr, function(d) { return d.value}));
+    var xAxis = d3.axisBottom(x)
+                .ticks(25);
+
+    var yAxis = d3.axisRight(y)
+        .ticks(20)
+        .tickSize(width);
+
+    g.append("g")
+    .attr("transform", "translate(0," + height + ")")
+    .call(xAxis)
+    .select(".domain")
+    .attr("stroke", "white");
+    // .call(d3.axisBottom(x))
+    // .ticks(20);
+    // .select(".domain")
+    // .remove();
+
+    g.append("g")
+        // .call(d3.axisLeft(y))
+        .call(yAxis)
+        .append("text")
+        .attr("fill", "#000")
+        .attr("transform", "rotate(-90)")
+        .attr("y", -30)
+        .attr("dy", "0.71em")
+        .attr("text-anchor", "end")
+        .attr("fill", "white")
+        .text("Position");
+
+    g.append("g")
+        .call(yAxis)
+        .select(".domain")
+        .attr("stroke", "white")
+        .remove();
+
+    {% for data in dataset %}
+    var positions = {{ data.position }};
+    var checkedteams = getCheckedBoxes("cb");
+    if(checkedteams.indexOf("{{data.teamID}}") > -1){
+        console.log(checkedteams);
+        var teamid = "{{data.teamID}}-line";
+        new_Line_function(teamid, positions, 1, 23);
+    }
+    {% endfor %}
+
+    g.selectAll(".tick line").attr("stroke", "#fff").attr("stroke-opacity", "0.05").attr("stroke-width", 2);
+    g.selectAll(".tick text").attr("fill", "white").attr("padding", "2px");
+
+    function handleMouseOver(d, i) {
+        d3.select(this).attr("stroke-width", 5).attr("stroke", "#e90052").attr("z-index", 10);
+
+    }
+
+    function handleMouseOut(d, i) {
+        d3.select(this).attr("stroke-width", 3).attr("stroke", "steelblue").attr("z-index", 0);
+    }
+
+    function modPathFun(dataset, scaleupper, scalelower, id){
+        console.log("Clicked");
+        var arr2 = data_to_arr(dataset);
+
+        var height = svgHeight - margin.top - margin.bottom;
+        console.log(height);
+
+        var x = d3.scaleLinear()
+        .domain([0,15])
+        .rangeRound([0, width]);
+
+        var y = d3.scaleLinear()
+        .domain([scalelower,scaleupper])
+        .rangeRound([height, 0]);
+
+        for(var i in data2) {
+            i = parseInt(i);
+            arr2.push([x(i), y(data2[i])]);
+            i = i + 1;
+        }
+
+        console.log(arr2);
+        // var y = d3.scaleLinear()
+        // .rangeRound([height, 0]);
+
+        // var newline2 = d3.line()
+        // .x(function(d) { return x(x)})
+        // .y(function(d) { return y(y)});
+
+        // var newline2 = d3.line()
+        // .x(function(d) { return x(d.round)})
+        // .y(function(d) { return y(d.value)});
+
+        var newline2 = d3.line();
+
+        d3.select(id).transition().attr('d', newline2(arr2));
+    }
+
+    
+
+    
+
+
+</script>
+
+{% endblock %}

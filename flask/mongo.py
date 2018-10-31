@@ -80,13 +80,13 @@ def init_data(csv2):
                         if i >= len(years):
                             break
                     else:
-                        positions.append(row[3])
-                        points.append(row[10])
-                        wins.append(row[4])
-                        draws.append(row[5])
-                        losses.append(row[6])
-                        goalsfor.append(row[7])
-                        goalsagainst.append(row[8])
+                        positions.append(int(row[3]))
+                        points.append(int(row[10]))
+                        wins.append(int(row[4]))
+                        draws.append(int(row[5]))
+                        losses.append(int(row[6]))
+                        goalsfor.append(int(row[7]))
+                        goalsagainst.append(int(row[8]))
                         goaldiff.append(row[9])
                     
                     i = i + 1
