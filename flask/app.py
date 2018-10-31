@@ -18,5 +18,8 @@ def create_app():
     except OSError:
         pass
 
+    import teams
+    app.register_blueprint(teams.bp)
+
     return app
     
