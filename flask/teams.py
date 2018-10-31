@@ -12,8 +12,6 @@ def show_team(team):
 
 @bp.route('/')
 def show_league():
-    allData = Data.objects.all()
-    for data in allData:
-        print(data.position)  
+    allData = Data.objects.all() 
 
     return render_template('league/league.html', dataset=allData)

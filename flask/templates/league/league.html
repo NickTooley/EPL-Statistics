@@ -86,38 +86,38 @@
 {% block graphtags %}
 <ul class="graph-labels-ul">
         <li class="labels">
-            <input type="radio" name="graph-rb" id="positions-rb" checked/>
+            <input type="radio" name="graph-rb" id="positions-rb" onclick="changedataset('position')" checked/>
             <label for="positions-rb">Positions</label>
         </li>
         <li class="labels">
-            <input type="radio" name="graph-rb" id="points-rb" onclick="newPathFun()"/>
+            <input type="radio" name="graph-rb" id="points-rb" onclick="changedataset('points')"/>
             <label for="points-rb">Points</label>
         </li>
         <li class="labels">
-            <input type="radio" name="graph-rb" id="wins-rb" />
+            <input type="radio" name="graph-rb" id="wins-rb" onclick="changedataset('wins')"/>
             <label for="wins-rb">Wins</label>
         </li>
         <li class="labels">
-            <input type="radio" name="graph-rb" id="draws-rb" />
+            <input type="radio" name="graph-rb" id="draws-rb" onclick="changedataset('draws')"/>
             <label for="draws-rb">Draws</label>
         </li>
         <li class="labels">
-            <input type="radio" name="graph-rb" id="losses-rb" />
+            <input type="radio" name="graph-rb" id="losses-rb" onclick="changedataset('losses')"/>
             <label for="losses-rb">Losses</label>
         </li>
     </ul>
 <div class="row align-items-center flex-md-row flex-column d-flex no-gutters labels-row2">
     <ul class="graph-labels-ul">
         <li class="labels">
-                <input type="radio" name="graph-rb" id="goalsfor-rb" />
+                <input type="radio" name="graph-rb" id="goalsfor-rb" onclick="changedataset('goalsfor')"/>
                 <label for="goalsfor-rb">Goals For</label>
         </li>
         <li class="labels">
-                <input type="radio" name="graph-rb" id="goalsagainst-rb" />
+                <input type="radio" name="graph-rb" id="goalsagainst-rb" onclick="changedataset('goalsagainst')"/>
                 <label for="goalsagainst-rb">Goals Against</label>
         </li>
         <li class="labels">
-                <input type="radio" name="graph-rb" id="goaldiff-rb" />
+                <input type="radio" name="graph-rb" id="goaldiff-rb" onclick="changedataset('goaldiff')"/>
                 <label for="goaldiff-rb">Goal Difference</label>
         </li>
     </ul>
@@ -216,7 +216,7 @@
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
     var x = d3.scaleLinear()
-        .domain([0,15])
+        .domain([0,26])
         .rangeRound([0, width]);
 
     var y = d3.scaleLinear()
@@ -267,20 +267,121 @@
         .remove();
 
     {% for data in dataset %}
-    var positions = {{ data.position }};
-    var checkedteams = getCheckedBoxes("cb");
-    if(checkedteams.indexOf("{{data.teamID}}") > -1){
-        console.log(checkedteams);
-        var teamid = "{{data.teamID}}-line";
-        new_Line_function(teamid, positions, 1, 23);
-    }
+        var positions = {{ data.position }};
+        var checkedteams = getCheckedBoxes("cb");
+        if(checkedteams.indexOf("{{data.teamID}}") > -1){
+            console.log(checkedteams);
+            var teamid = "{{data.teamID}}-line";
+            new_Line_function(teamid, positions, 1, 23);
+        }
     {% endfor %}
+
+    function changedataset(field){
+            switch(field) {
+                case "position":
+                {% for data in dataset %}
+                    var positions = {{ data.position }};
+                    var checkedteams = getCheckedBoxes("cb");
+                    if(checkedteams.indexOf("{{data.teamID}}") > -1){
+                        console.log(checkedteams);
+                        var teamid = "{{data.teamID}}-line";
+                        modPathFun(teamid, positions, 1, 23);
+                    }
+                    {% endfor %}
+                    break;
+                
+                case "points":
+                {% for data in dataset %}
+                    var points = {{ data.points }};
+                    var checkedteams = getCheckedBoxes("cb");
+                    if(checkedteams.indexOf("{{data.teamID}}") > -1){
+                        console.log(checkedteams);
+                        var teamid = "{{data.teamID}}-line";
+                        modPathFun(teamid, points, 100, 30);
+                    }
+                    {% endfor %}
+                    break;
+                
+                case "wins": 
+                {% for data in dataset %}
+                    var wins = {{ data.wins }};
+                    var checkedteams = getCheckedBoxes("cb");
+                    if(checkedteams.indexOf("{{data.teamID}}") > -1){
+                        console.log(checkedteams);
+                        var teamid = "{{data.teamID}}-line";
+                        modPathFun(teamid, wins, 40, 0);
+                    }
+                    {% endfor %}
+                    break;
+
+                case "draws": 
+                {% for data in dataset %}
+                    var draws = {{ data.draws }};
+                    var checkedteams = getCheckedBoxes("cb");
+                    if(checkedteams.indexOf("{{data.teamID}}") > -1){
+                        console.log(checkedteams);
+                        var teamid = "{{data.teamID}}-line";
+                        modPathFun(teamid, draws, 40, 0);
+                    }
+                    {% endfor %}
+                    break;
+
+                case "losses": 
+                {% for data in dataset %}
+                    var losses = {{ data.losses }};
+                    var checkedteams = getCheckedBoxes("cb");
+                    if(checkedteams.indexOf("{{data.teamID}}") > -1){
+                        console.log(checkedteams);
+                        var teamid = "{{data.teamID}}-line";
+                        modPathFun(teamid, losses, 40, 0);
+                    }
+                    {% endfor %}
+                    break;
+
+                case "goalsagainst": 
+                {% for data in dataset %}
+                    var goalsagainst = {{ data.goalsagainst }};
+                    var checkedteams = getCheckedBoxes("cb");
+                    if(checkedteams.indexOf("{{data.teamID}}") > -1){
+                        console.log(checkedteams);
+                        var teamid = "{{data.teamID}}-line";
+                        modPathFun(teamid, goalsagainst, 100, 0);
+                    }
+                    {% endfor %}
+                    break;
+
+                case "goalsfor": 
+                {% for data in dataset %}
+                    var wins = {{ data.goalsfor }};
+                    var checkedteams = getCheckedBoxes("cb");
+                    if(checkedteams.indexOf("{{data.teamID}}") > -1){
+                        console.log(checkedteams);
+                        var teamid = "{{data.teamID}}-line";
+                        modPathFun(teamid, goalsfor, 100, 0);
+                    }
+                    {% endfor %}
+                    break;
+
+                // case "goaldiff": 
+                // {% for data in dataset %}
+                //     var goaldiff = {{ data.goaldiff }};
+                //     var checkedteams = getCheckedBoxes("cb");
+                //     if(checkedteams.indexOf("{{data.teamID}}") > -1){
+                //         console.log(checkedteams);
+                //         var teamid = "{{data.teamID}}-line";
+                //         modPathFun(teamid, goaldiff, 50, -50);
+                //     }
+                //     {% endfor %}
+                //     break;
+            }
+        
+    }
 
     g.selectAll(".tick line").attr("stroke", "#fff").attr("stroke-opacity", "0.05").attr("stroke-width", 2);
     g.selectAll(".tick text").attr("fill", "white").attr("padding", "2px");
 
     function handleMouseOver(d, i) {
-        d3.select(this).attr("stroke-width", 5).attr("stroke", "#e90052").attr("z-index", 10);
+        d3.select(this).attr("z-index", 10).attr("stroke-width", 5).attr("stroke", "#e90052");
 
     }
 
@@ -288,43 +389,70 @@
         d3.select(this).attr("stroke-width", 3).attr("stroke", "steelblue").attr("z-index", 0);
     }
 
-    function modPathFun(dataset, scaleupper, scalelower, id){
-        console.log("Clicked");
-        var arr2 = data_to_arr(dataset);
+    // function modPathFun(dataset, scaleupper, scalelower, id){
+    //     console.log("Clicked");
+    //     var arr2 = data_to_arr(dataset);
 
+    //     var height = svgHeight - margin.top - margin.bottom;
+    //     console.log(height);
+
+    //     var x = d3.scaleLinear()
+    //     .domain([0,15])
+    //     .rangeRound([0, width]);
+
+    //     var y = d3.scaleLinear()
+    //     .domain([scalelower,scaleupper])
+    //     .rangeRound([height, 0]);
+
+    //     for(var i in data2) {
+    //         i = parseInt(i);
+    //         arr2.push([x(i), y(data2[i])]);
+    //         i = i + 1;
+    //     }
+
+    //     console.log(arr2);
+    //     // var y = d3.scaleLinear()
+    //     // .rangeRound([height, 0]);
+
+    //     // var newline2 = d3.line()
+    //     // .x(function(d) { return x(x)})
+    //     // .y(function(d) { return y(y)});
+
+    //     // var newline2 = d3.line()
+    //     // .x(function(d) { return x(d.round)})
+    //     // .y(function(d) { return y(d.value)});
+
+    //     var newline2 = d3.line();
+
+    //     d3.select(id).transition().attr('d', newline2(arr2));
+    // }
+
+    function modPathFun(id, datas, scaleupper, scalelower){
         var height = svgHeight - margin.top - margin.bottom;
         console.log(height);
 
+        var newlinearr = [];
+
         var x = d3.scaleLinear()
-        .domain([0,15])
+        .domain([0,datas.length])
         .rangeRound([0, width]);
 
         var y = d3.scaleLinear()
         .domain([scalelower,scaleupper])
         .rangeRound([height, 0]);
 
-        for(var i in data2) {
+        for(var i in datas) {
             i = parseInt(i);
-            arr2.push([x(i), y(data2[i])]);
+            newlinearr.push([x(i), y(datas[i])]);
             i = i + 1;
         }
 
-        console.log(arr2);
-        // var y = d3.scaleLinear()
-        // .rangeRound([height, 0]);
-
-        // var newline2 = d3.line()
-        // .x(function(d) { return x(x)})
-        // .y(function(d) { return y(y)});
-
-        // var newline2 = d3.line()
-        // .x(function(d) { return x(d.round)})
-        // .y(function(d) { return y(d.value)});
+        console.log(datas.length);
 
         var newline2 = d3.line();
+        d3.select("#"+id).transition().attr('d', newline2(newlinearr));
 
-        d3.select(id).transition().attr('d', newline2(arr2));
-    }
+        }
 
     
 

@@ -43,17 +43,17 @@ def init_data(csv2):
                 if row is None:
                     break;   
                 if teamname != initialteam:
-                    if initialteam is not None:
-                        for i in range(len(positions), len(years)):
-                            positions.append(23)
-                            points.append(0)
-                            wins.append(0)
-                            draws.append(0)
-                            losses.append(0)
-                            goalsfor.append(0)
-                            goalsagainst.append(0)
-                            goaldiff.append(0)
-                        newData = Data(teamID=teamid, teamName=initialteam, position=positions, points=points, wins=wins, draws=draws, losses=losses, goalsfor=goalsfor, goalsagainst=goalsagainst, goaldiff=goaldiff).save()
+                    # if initialteam is not None:
+                    #     for i in range(len(positions), len(years)):
+                    #         positions.append(23)
+                    #         points.append(0)
+                    #         wins.append(0)
+                    #         draws.append(0)
+                    #         losses.append(0)
+                    #         goalsfor.append(0)
+                    #         goalsagainst.append(0)
+                    #         goaldiff.append(0)
+                    
                     i = 0
                     initialteam = teamname
                     teamid = row[1]
@@ -65,9 +65,7 @@ def init_data(csv2):
                     goalsfor = []
                     goalsagainst = []
                     goaldiff = []
-
-                while teamname == initialteam:
-                    while row[2] == years[i]:
+                    for i in range (0,len(years)):
                         positions.append(23)
                         points.append(0)
                         wins.append(0)
@@ -76,25 +74,27 @@ def init_data(csv2):
                         goalsfor.append(0)
                         goalsagainst.append(0)
                         goaldiff.append(0)
-                        i = i + 1
-                        if i >= len(years):
-                            break
-                    else:
-                        positions.append(int(row[3]))
-                        points.append(int(row[10]))
-                        wins.append(int(row[4]))
-                        draws.append(int(row[5]))
-                        losses.append(int(row[6]))
-                        goalsfor.append(int(row[7]))
-                        goalsagainst.append(int(row[8]))
-                        goaldiff.append(row[9])
+                        
+
+                while teamname == initialteam:
                     
-                    i = i + 1
+                    year = int(row[2])
+                    index = years.index(year)
+                    positions[index] = int(row[3])
+                    points[index] = int(row[10])
+                    wins[index] = int(row[4])
+                    draws[index] = int(row[5])
+                    losses[index] = int(row[6])
+                    goalsfor[index] = int(row[7])
+                    goalsagainst[index] = int(row[8])
+                    goaldiff[index] = row[9]
+            
                     row = next(datareader, None)
                     if row is None:
                         break
                     teamname = row[0]
-            newData = Data(teamID=teamid, teamName=initialteam, position=positions, points=points, wins=wins, draws=draws, losses=losses, goalsfor=goalsfor, goalsagainst=goalsagainst, goaldiff=goaldiff).save()
+                newData = Data(teamID=teamid, teamName=initialteam, position=positions, points=points, wins=wins, draws=draws, losses=losses, goalsfor=goalsfor, goalsagainst=goalsagainst, goaldiff=goaldiff).save()
+            # newData = Data(teamID=teamid, teamName=initialteam, position=positions, points=points, wins=wins, draws=draws, losses=losses, goalsfor=goalsfor, goalsagainst=goalsagainst, goaldiff=goaldiff).save()
 
 
 
