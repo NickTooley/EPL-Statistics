@@ -389,43 +389,22 @@
         d3.select(this).attr("stroke-width", 3).attr("stroke", "steelblue").attr("z-index", 0);
     }
 
-    // function modPathFun(dataset, scaleupper, scalelower, id){
-    //     console.log("Clicked");
-    //     var arr2 = data_to_arr(dataset);
+    function handleChange(checkbox){
+        if(checkbox.checked){
+            addLine();
+        }else{
+            removeLine(checkbox.id);
+        }
+    }
 
-    //     var height = svgHeight - margin.top - margin.bottom;
-    //     console.log(height);
+    function removeLine(id) {
+        d3.select("#"+id+"-line").remove;
+    }
 
-    //     var x = d3.scaleLinear()
-    //     .domain([0,15])
-    //     .rangeRound([0, width]);
+    function addLine() {
 
-    //     var y = d3.scaleLinear()
-    //     .domain([scalelower,scaleupper])
-    //     .rangeRound([height, 0]);
 
-    //     for(var i in data2) {
-    //         i = parseInt(i);
-    //         arr2.push([x(i), y(data2[i])]);
-    //         i = i + 1;
-    //     }
-
-    //     console.log(arr2);
-    //     // var y = d3.scaleLinear()
-    //     // .rangeRound([height, 0]);
-
-    //     // var newline2 = d3.line()
-    //     // .x(function(d) { return x(x)})
-    //     // .y(function(d) { return y(y)});
-
-    //     // var newline2 = d3.line()
-    //     // .x(function(d) { return x(d.round)})
-    //     // .y(function(d) { return y(d.value)});
-
-    //     var newline2 = d3.line();
-
-    //     d3.select(id).transition().attr('d', newline2(arr2));
-    // }
+    }
 
     function modPathFun(id, datas, scaleupper, scalelower){
         var height = svgHeight - margin.top - margin.bottom;

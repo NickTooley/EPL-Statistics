@@ -1,0 +1,6 @@
+MANIFEST.in
+eplstats.egg-info/PKG-INFO
+eplstats.egg-info/SOURCES.txt
+eplstats.egg-info/dependency_links.txt
+eplstats.egg-info/not-zip-safe
+eplstats.egg-info/top_level.txt
