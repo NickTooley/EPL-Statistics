@@ -2,8 +2,8 @@
 
 {% block sideform %}
 <div class="form-checkboxes">
-    <input type="checkbox" name="cb" id="ARS" onclick="handleChange(this)" checked/>
-    <label for="ARS">Arsenal</label><br />
+    <input type="checkbox" name="cb" id="ARS" onclick="handleChange(this)"  onmouseover="handleMouseOverForm('#ARS-line')" onmouseexit="handleMouseOutForm('#ARS-line')" checked/>
+    <label for="ARS"  onmouseover="handleMouseOverForm('#ARS-line')" onmouseout="handleMouseOutForm('#ARS-line')">Arsenal</label><br />
 </div>
 <div class="form-checkboxes">  
     <input type="checkbox" name="cb" id="BOU" onclick="handleChange(this)" checked/>
@@ -62,8 +62,8 @@
     <label for="NEW">Newcastle</label><br />
 </div>
 <div class="form-checkboxes">
-    <input type="checkbox" name="cb" id="SOU" onclick="handleChange(this)" checked/>
-    <label for="SOU">Southampton</label><br />
+    <input type="checkbox" name="cb" id="SOT" onclick="handleChange(this)" checked/>
+    <label for="SOT">Southampton</label><br />
 </div>
 <div class="form-checkboxes">
     <input type="checkbox" name="cb" id="TOT" onclick="handleChange(this)" checked/>
@@ -352,7 +352,7 @@
 
                 case "goalsfor": 
                 {% for data in dataset %}
-                    var wins = {{ data.goalsfor }};
+                    var goalsfor = {{ data.goalsfor }};
                     var checkedteams = getCheckedBoxes("cb");
                     if(checkedteams.indexOf("{{data.teamID}}") > -1){
                         console.log(checkedteams);
@@ -384,6 +384,17 @@
         d3.select(this).attr("z-index", 10).attr("stroke-width", 5).attr("stroke", "#e90052");
 
     }
+
+    function handleMouseOverForm(id) {
+	d3.select(id).attr("z-index", 10).attr("stroke-width", 5).attr("stroke", "#e90052");
+
+    }
+    
+    function handleMouseOutForm(id) {
+    	d3.select(id).attr("stroke-width", 3).attr("stroke", "steelblue").attr("z-index", 0);
+
+    }
+
 
     function handleMouseOut(d, i) {
         d3.select(this).attr("stroke-width", 3).attr("stroke", "steelblue").attr("z-index", 0);
