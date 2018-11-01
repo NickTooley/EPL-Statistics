@@ -391,19 +391,55 @@
 
     function handleChange(checkbox){
         if(checkbox.checked){
-            addLine();
+            addLine(checkbox.id);
         }else{
             removeLine(checkbox.id);
         }
     }
 
     function removeLine(id) {
-        d3.select("#"+id+"-line").remove;
+        console.log("#"+id+"-line");
+        d3.select("#"+id+"-line").remove();
     }
 
-    function addLine() {
-
-
+    function addLine(id) {
+	var teamid = id+"-line";
+	var data = null;
+	var scaleupper = 0;
+	var scalelower = 0;
+	var toRetrieve = $("input[name=graph-rb]:checked").attr('id');
+	
+	console.log(toRetrieve);
+	switch(toRetrieve){
+		case 'positions-rb':
+			{% for data in dataset %}
+			if(id == "{{ data.teamID }}"){
+				scaleupper = 1;
+				scalelower = 23;
+				data = {{ data.position }}
+			}
+			{% endfor %} 
+			break;
+		case 'points-rb':
+			
+			break;
+		case 'draws-rb':
+			
+			break;
+		case 'losses=rb':
+			
+			break;
+		case 'goalsfor-rb':
+			
+			break;
+		case 'goalsagainst-rb':
+			
+			break;
+			
+	}
+	if(data != null){
+		new_Line_function(teamid, data, scaleupper, scalelower);
+	}
     }
 
     function modPathFun(id, datas, scaleupper, scalelower){
