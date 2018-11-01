@@ -2,55 +2,55 @@
 
 {% block sideform %}
 <div class="form-checkboxes">
-    <input type="checkbox" name="cb" id="ARS" checked/>
+    <input type="checkbox" name="cb" id="ARS" onclick="handleChange(this)" checked/>
     <label for="ARS">Arsenal</label><br />
 </div>
 <div class="form-checkboxes">  
-    <input type="checkbox" name="cb" id="BOU" checked/>
+    <input type="checkbox" name="cb" id="BOU" onclick="handleChange(this)" checked/>
     <label for="BOU">Bournemouth</label><br />
 </div>
 <div class="form-checkboxes">
-    <input type="checkbox" name="cb" id="BHA" checked/>
+    <input type="checkbox" name="cb" id="BHA" onclick="handleChange(this)" checked/>
     <label for="BHA">Brighton</label><br />
 </div>
 <div class="form-checkboxes">
-    <input type="checkbox" name="cb" id="BUR" checked/>
+    <input type="checkbox" name="cb" id="BUR" onclick="handleChange(this)" checked/>
     <label for="BUR">Burnley</label><br />
 </div>
 <div class="form-checkboxes">
-    <input type="checkbox" name="cb" id="CAR" checked/>
+    <input type="checkbox" name="cb" id="CAR" onclick="handleChange(this)" checked/>
     <label for="CAR">Cardiff</label><br />
 </div>
 <div class="form-checkboxes">
-    <input type="checkbox" name="cb" id="CHE" checked/>
+    <input type="checkbox" name="cb" id="CHE" onclick="handleChange(this)" checked/>
     <label for="CHE">Chelsea</label><br />
 </div>
 <div class="form-checkboxes">
-    <input type="checkbox" name="cb" id="CRY" checked/>
+    <input type="checkbox" name="cb" id="CRY" onclick="handleChange(this)" checked/>
     <label for="CRY">Crystal Palace</label><br />
 </div>
 <div class="form-checkboxes">
-    <input type="checkbox" name="cb" id="EVE" checked/>
+    <input type="checkbox" name="cb" id="EVE" onclick="handleChange(this)" checked/>
     <label for="EVE">Everton</label><br />
 </div>
 <div class="form-checkboxes">
-    <input type="checkbox" name="cb" id="FUL" checked/>
+    <input type="checkbox" name="cb" id="FUL" onclick="handleChange(this)" checked/>
     <label for="FUL">Fulham</label><br />
 </div>
 <div class="form-checkboxes">
-    <input type="checkbox" name="cb" id="HUD" checked/>
+    <input type="checkbox" name="cb" id="HUD" onclick="handleChange(this)" checked/>
     <label for="HUD">Huddersfield</label><br />
 </div>
 <div class="form-checkboxes">
-    <input type="checkbox" name="cb" id="LEI" checked/>
+    <input type="checkbox" name="cb" id="LEI" onclick="handleChange(this)" checked/>
     <label for="LEI">Leicester City</label><br />
 </div>
 <div class="form-checkboxes">
-    <input type="checkbox" name="cb" id="LIV" checked/>
+    <input type="checkbox" name="cb" id="LIV" onclick="handleChange(this)" checked/>
     <label for="LIV">Liverpool</label><br />
 </div>
 <div class="form-checkboxes">
-    <input type="checkbox" name="cb" id="MCI" checked/>
+    <input type="checkbox" name="cb" id="MCI" onclick="handleChange(this)" checked/>
     <label for="MCI">Man City</label><br />
 </div>
 <div class="form-checkboxes">
@@ -58,11 +58,11 @@
     <label for="MUN">Man United</label><br />
 </div>
 <div class="form-checkboxes">
-    <input type="checkbox" name="cb" id="NEW" checked/>
+    <input type="checkbox" name="cb" id="NEW" onclick="handleChange(this)" checked/>
     <label for="NEW">Newcastle</label><br />
 </div>
 <div class="form-checkboxes">
-    <input type="checkbox" name="cb" id="SOU" checked/>
+    <input type="checkbox" name="cb" id="SOU" onclick="handleChange(this)" checked/>
     <label for="SOU">Southampton</label><br />
 </div>
 <div class="form-checkboxes">
@@ -70,15 +70,15 @@
     <label for="TOT">Tottenham</label><br />
 </div>
 <div class="form-checkboxes">
-    <input type="checkbox" name="cb" id="WAT" checked/>
+    <input type="checkbox" name="cb" id="WAT" onclick="handleChange(this)" checked/>
     <label for="WAT">Watford</label><br />
 </div>
 <div class="form-checkboxes">
-    <input type="checkbox" name="cb" id="WHU" checked/>
+    <input type="checkbox" name="cb" id="WHU" onclick="handleChange(this)" checked/>
     <label for="WHU">West Ham</label><br />
 </div>
 <div class="form-checkboxes">
-    <input type="checkbox" name="cb" id="WOL" checked/>
+    <input type="checkbox" name="cb" id="WOL" onclick="handleChange(this)" checked/>
     <label for="WOL">Wolves</label><br />
 </div>
 {% endblock %}
@@ -421,19 +421,49 @@
 			{% endfor %} 
 			break;
 		case 'points-rb':
-			
+			{% for data in dataset %}
+			if(id == "{{ data.teamID }}"){
+				scaleupper = 100;
+				scalelower = 0;
+				data = {{ data.points }}
+			}
+			{% endfor %} 
 			break;
 		case 'draws-rb':
-			
+			{% for data in dataset %}
+			if(id == "{{ data.teamID }}"){
+				scaleupper = 30;
+				scalelower = 0;
+				data = {{ data.draws }}
+			}
+			{% endfor %} 
 			break;
 		case 'losses=rb':
-			
+			{% for data in dataset %}
+			if(id == "{{ data.teamID }}"){
+				scaleupper = 30;
+				scalelower = 0;
+				data = {{ data.losses }}
+			}
+			{% endfor %} 
 			break;
 		case 'goalsfor-rb':
-			
+			{% for data in dataset %}
+			if(id == "{{ data.teamID }}"){
+				scaleupper = 100;
+				scalelower = 0;
+				data = {{ data.goalsfor }}
+			}
+			{% endfor %} 
 			break;
 		case 'goalsagainst-rb':
-			
+			{% for data in dataset %}
+			if(id == "{{ data.teamID }}"){
+				scaleupper = 100;
+				scalelower = 0;
+				data = {{ data.goalsagainst }}
+			}
+			{% endfor %}  
 			break;
 			
 	}
