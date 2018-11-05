@@ -43,16 +43,6 @@ def init_data(csv2):
                 if row is None:
                     break;   
                 if teamname != initialteam:
-                    # if initialteam is not None:
-                    #     for i in range(len(positions), len(years)):
-                    #         positions.append(23)
-                    #         points.append(0)
-                    #         wins.append(0)
-                    #         draws.append(0)
-                    #         losses.append(0)
-                    #         goalsfor.append(0)
-                    #         goalsagainst.append(0)
-                    #         goaldiff.append(0)
                     
                     i = 0
                     initialteam = teamname

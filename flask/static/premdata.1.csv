@@ -24,15 +24,89 @@ Arsenal,ARS,2015,3,22,9,7,71,36,35,75
 Arsenal,ARS,2016,2,20,11,7,65,36,29,71
 Arsenal,ARS,2017,5,23,6,9,77,44,33,75
 Arsenal,ARS,2018,6,19,6,13,74,51,23,63
+Aston Villa,AVL,1993,2,21,11,10,57,40,17,74
+Aston Villa,AVL,1994,10,15,12,15,46,50,−4,57
+Aston Villa,AVL,1995,18,11,15,16,51,56,−5,48
+Aston Villa,AVL,1996,4,18,9,11,52,35,17,63
+Aston Villa,AVL,1997,5,17,10,11,47,34,13,61
+Aston Villa,AVL,1998,7,17,6,15,49,48,1,57
+Aston Villa,AVL,1999,6,15,10,13,51,46,5,55
+Aston Villa,AVL,2000,6,15,13,10,46,35,11,58
+Aston Villa,AVL,2001,8,13,15,10,46,43,3,54
+Aston Villa,AVL,2002,8,12,14,12,46,47,−1,50
+Aston Villa,AVL,2003,16,12,9,17,42,47,−5,45
+Aston Villa,AVL,2004,6,15,11,12,48,44,4,56
+Aston Villa,AVL,2005,10,12,11,15,45,52,−7,47
+Aston Villa,AVL,2006,16,10,12,16,42,55,−13,42
+Aston Villa,AVL,2007,11,11,17,10,43,41,2,50
+Aston Villa,AVL,2008,6,16,12,10,71,51,20,60
+Aston Villa,AVL,2009,6,17,11,10,54,48,6,62
+Aston Villa,AVL,2010,6,17,13,8,52,39,13,64
+Aston Villa,AVL,2011,9,12,12,14,48,59,−11,48
+Aston Villa,AVL,2012,16,7,17,14,37,53,−16,38
+Aston Villa,AVL,2013,15,10,11,17,47,69,−22,41
+Aston Villa,AVL,2014,15,10,8,20,39,61,−22,38
+Aston Villa,AVL,2015,17,10,8,20,31,57,−26,38
+Aston Villa,AVL,2016,20,3,8,27,27,76,−49,17
+Barnsley,BAR,1998,19,10,5,23,37,82,−45,35
+Birmingham City,BIR,2003,13,13,9,16,41,49,−8,48
+Birmingham City,BIR,2004,10,12,14,12,43,48,−5,50
+Birmingham City,BIR,2005,12,11,12,15,40,46,−6,45
+Birmingham City,BIR,2006,18,8,10,20,28,50,−22,34
+Birmingham City,BIR,2008,19,8,11,19,46,62,−16,35
+Birmingham City,BIR,2010,9,13,11,14,38,47,−9,50
+Birmingham City,BIR,2011,18,8,15,15,37,58,−21,39
+Blackburn Rovers,BLB,1993,4,20,11,11,68,46,22,71
+Blackburn Rovers,BLB,1994,2,25,9,8,63,36,27,84
+Blackburn Rovers,BLB,1995,1,27,8,7,80,39,41,89
+Blackburn Rovers,BLB,1996,7,18,7,13,61,47,14,61
+Blackburn Rovers,BLB,1997,13,9,15,14,42,43,−1,42
+Blackburn Rovers,BLB,1998,6,16,10,12,57,52,5,58
+Blackburn Rovers,BLB,1999,19,7,14,17,38,52,−14,35
+Blackburn Rovers,BLB,2002,10,12,10,16,55,51,4,46
+Blackburn Rovers,BLB,2003,6,16,12,10,52,43,9,60
+Blackburn Rovers,BLB,2004,15,12,8,18,51,59,−8,44
+Blackburn Rovers,BLB,2005,15,9,15,14,32,43,−11,42
+Blackburn Rovers,BLB,2006,6,19,6,13,51,42,9,63
+Blackburn Rovers,BLB,2007,10,15,7,16,52,54,−2,52
+Blackburn Rovers,BLB,2008,7,15,13,10,50,48,2,58
+Blackburn Rovers,BLB,2009,15,10,11,17,40,60,−20,41
+Blackburn Rovers,BLB,2010,10,13,11,14,41,55,−14,50
+Blackburn Rovers,BLB,2011,15,11,10,17,46,59,−13,43
+Blackburn Rovers,BLB,2012,19,8,7,23,48,78,−30,31
+Blackpool,BLP,2011,19,10,9,19,55,78,−23,39
+Bolton Wanderers,BOL,1996,20,8,5,25,39,71,−32,29
+Bolton Wanderers,BOL,1998,18,9,13,16,41,61,−20,40
+Bolton Wanderers,BOL,2002,16,9,13,16,44,62,−18,40
+Bolton Wanderers,BOL,2003,17,10,14,14,41,51,−10,44
+Bolton Wanderers,BOL,2004,8,14,11,13,48,56,−8,53
+Bolton Wanderers,BOL,2005,6,16,10,12,49,44,5,58
+Bolton Wanderers,BOL,2006,8,15,11,12,49,41,8,56
+Bolton Wanderers,BOL,2007,7,16,8,14,47,52,−5,56
+Bolton Wanderers,BOL,2008,16,9,10,19,36,54,−18,37
+Bolton Wanderers,BOL,2009,13,11,8,19,41,53,−12,41
+Bolton Wanderers,BOL,2010,14,10,9,19,42,67,−25,39
+Bolton Wanderers,BOL,2011,14,12,10,16,52,56,−4,46
+Bolton Wanderers,BOL,2012,18,10,6,22,46,77,−31,36
 Bournemouth,BOU,2016,16,11,9,18,45,67,−22,42
 Bournemouth,BOU,2017,9,12,10,16,55,67,−12,46
 Bournemouth,BOU,2018,12,11,11,16,45,61,−16,44
+Bradford City,BRA,2000,17,9,9,20,38,68,−30,36
+Bradford City,BRA,2001,20,5,11,22,30,70,−40,26
 Brighton & Hove Albion,BHA,2018,15,9,13,16,34,54,−20,40
 Burnley,BUR,2010,18,8,6,24,42,82,−40,30
 Burnley,BUR,2015,19,7,12,19,28,53,−25,33
 Burnley,BUR,2017,16,11,7,20,39,55,−16,40
 Burnley,BUR,2018,7,14,12,12,36,39,−3,54
 Cardiff City,CAR,2014,20,7,9,22,32,74,−42,30
+Charlton Athletic,CHA,1999,18,8,12,18,41,56,−15,36
+Charlton Athletic,CHA,2001,9,14,10,14,50,57,−7,52
+Charlton Athletic,CHA,2002,14,10,14,14,38,49,−11,44
+Charlton Athletic,CHA,2003,12,14,7,17,45,56,−11,49
+Charlton Athletic,CHA,2004,7,14,11,13,51,51,0,53
+Charlton Athletic,CHA,2005,11,12,10,16,42,58,−16,46
+Charlton Athletic,CHA,2006,13,13,8,17,41,55,−14,47
+Charlton Athletic,CHA,2007,19,8,10,20,34,60,−26,34
 Chelsea,CHE,1993,11,14,14,14,51,54,−3,56
 Chelsea,CHE,1994,14,13,12,17,49,53,−4,51
 Chelsea,CHE,1995,11,13,15,14,50,55,−5,54
@@ -59,6 +133,15 @@ Chelsea,CHE,2015,1,26,9,3,73,32,41,87
 Chelsea,CHE,2016,10,12,14,12,59,53,6,50
 Chelsea,CHE,2017,1,30,3,5,85,33,52,93
 Chelsea,CHE,2018,5,21,7,10,62,38,24,70
+Coventry City,COV,1993,15,13,13,16,52,57,−5,52
+Coventry City,COV,1994,11,14,14,14,43,45,−2,56
+Coventry City,COV,1995,16,12,14,16,44,62,−18,50
+Coventry City,COV,1996,16,8,14,16,42,60,−18,38
+Coventry City,COV,1997,17,9,14,15,38,54,−16,41
+Coventry City,COV,1998,11,12,16,10,46,44,2,52
+Coventry City,COV,1999,15,11,9,18,39,51,−12,42
+Coventry City,COV,2000,14,12,8,18,47,54,−7,44
+Coventry City,COV,2001,19,8,10,20,36,63,−27,34
 Crystal Palace,CRY,1993,20,11,16,15,48,61,−13,49
 Crystal Palace,CRY,1995,19,11,12,19,34,49,−15,45
 Crystal Palace,CRY,1998,20,8,9,21,37,71,−34,33
@@ -68,6 +151,13 @@ Crystal Palace,CRY,2015,10,13,9,16,47,51,−4,48
 Crystal Palace,CRY,2016,15,11,9,18,39,51,−12,42
 Crystal Palace,CRY,2017,14,12,5,21,50,63,−13,41
 Crystal Palace,CRY,2018,11,11,11,16,45,55,−10,44
+Derby County,DER,1997,12,11,13,14,45,58,−13,46
+Derby County,DER,1998,9,16,7,15,52,49,3,55
+Derby County,DER,1999,8,13,13,12,40,45,−5,52
+Derby County,DER,2000,16,9,11,18,44,57,−13,38
+Derby County,DER,2001,17,10,12,16,37,59,−22,42
+Derby County,DER,2002,19,8,6,24,33,63,−30,30
+Derby County,DER,2008,20,1,8,29,20,89,−69,11
 Everton,EVE,1993,13,15,8,19,53,55,−2,53
 Everton,EVE,1994,17,12,8,22,42,63,−21,44
 Everton,EVE,1995,15,11,17,14,44,51,−7,50
@@ -108,6 +198,28 @@ Fulham,FUL,2012,9,14,10,14,48,51,−3,52
 Fulham,FUL,2013,12,11,10,17,50,60,−10,43
 Fulham,FUL,2014,19,9,5,24,40,85,−45,32
 Huddersfield Town,HUD,2018,16,9,10,19,28,58,−30,37
+Hull City,HUL,2009,17,8,11,19,39,64,−25,35
+Hull City,HUL,2010,19,6,12,20,34,75,−41,30
+Hull City,HUL,2014,16,10,7,21,38,53,−15,37
+Hull City,HUL,2015,18,8,11,19,33,51,−18,35
+Hull City,HUL,2017,18,9,7,22,37,80,−43,34
+Ipswich Town,IPS,1993,16,12,16,14,50,55,−5,52
+Ipswich Town,IPS,1994,19,9,16,17,35,58,−23,43
+Ipswich Town,IPS,1995,22,7,6,29,36,93,−57,27
+Ipswich Town,IPS,2001,5,20,6,12,57,42,15,66
+Ipswich Town,IPS,2002,18,9,9,20,41,64,−23,36
+Leeds United,LEE,1993,17,12,15,15,57,62,−5,51
+Leeds United,LEE,1994,5,18,16,8,65,39,26,70
+Leeds United,LEE,1995,5,20,13,9,59,38,21,73
+Leeds United,LEE,1996,13,12,7,19,40,57,−17,43
+Leeds United,LEE,1997,11,11,13,14,28,38,−10,46
+Leeds United,LEE,1998,5,17,8,13,57,46,11,59
+Leeds United,LEE,1999,4,18,13,7,62,34,28,67
+Leeds United,LEE,2000,3,21,6,11,58,43,15,69
+Leeds United,LEE,2001,4,20,8,10,64,43,21,68
+Leeds United,LEE,2002,5,18,12,8,53,37,16,66
+Leeds United,LEE,2003,15,14,5,19,58,57,1,47
+Leeds United,LEE,2004,19,8,9,21,40,79,−39,33
 Leicester City,LEI,1995,21,6,11,25,45,80,−35,29
 Leicester City,LEI,1997,9,12,11,15,46,54,−8,47
 Leicester City,LEI,1998,10,13,14,11,51,41,10,53
@@ -193,6 +305,21 @@ Manchester United,MUN,2015,4,20,10,8,62,37,25,70
 Manchester United,MUN,2016,5,19,9,10,49,35,14,66
 Manchester United,MUN,2017,6,18,15,5,54,29,25,69
 Manchester United,MUN,2018,2,25,6,7,68,28,40,81
+Middlesbrough,MID,1993,21,11,11,20,54,75,−21,44
+Middlesbrough,MID,1996,12,11,10,17,35,50,−15,43
+Middlesbrough,MID,1997,19,10,12,16,51,60,−9,39
+Middlesbrough,MID,1999,9,12,15,11,48,54,−6,51
+Middlesbrough,MID,2000,12,14,10,14,46,52,−6,52
+Middlesbrough,MID,2001,14,9,15,14,44,44,0,42
+Middlesbrough,MID,2002,12,12,9,17,35,47,−12,45
+Middlesbrough,MID,2003,11,13,10,15,48,44,4,49
+Middlesbrough,MID,2004,11,13,9,16,44,52,−8,48
+Middlesbrough,MID,2005,7,14,13,11,53,46,7,55
+Middlesbrough,MID,2006,14,12,9,17,48,58,−10,45
+Middlesbrough,MID,2007,12,12,10,16,44,49,−5,46
+Middlesbrough,MID,2008,13,10,12,16,43,53,−10,42
+Middlesbrough,MID,2009,19,7,11,20,28,57,−29,32
+Middlesbrough,MID,2017,19,5,13,20,27,53,−26,28
 Newcastle United,NEW,1994,3,23,8,11,82,41,41,77
 Newcastle United,NEW,1995,6,20,12,10,67,47,20,72
 Newcastle United,NEW,1996,2,24,6,8,66,37,29,78
@@ -216,6 +343,49 @@ Newcastle United,NEW,2014,10,15,4,19,43,59,−16,49
 Newcastle United,NEW,2015,15,10,9,19,40,63,−23,39
 Newcastle United,NEW,2016,18,9,10,19,44,65,−21,37
 Newcastle United,NEW,2018,10,12,8,18,39,47,−8,44
+Norwich City,NOR,1993,3,21,9,12,61,65,−4,72
+Norwich City,NOR,1994,12,12,17,13,65,61,4,53
+Norwich City,NOR,1995,20,10,13,19,37,54,−17,43
+Norwich City,NOR,2005,19,7,12,19,42,77,−35,33
+Norwich City,NOR,2012,12,12,11,15,52,66,−14,47
+Norwich City,NOR,2013,11,10,14,14,41,58,−17,44
+Norwich City,NOR,2014,18,8,9,21,28,62,−34,33
+Norwich City,NOR,2016,19,9,7,22,39,67,−28,34
+Nottingham Forest,FOR,1993,22,10,10,22,41,62,−21,40
+Nottingham Forest,FOR,1995,3,22,11,9,72,43,29,77
+Nottingham Forest,FOR,1996,9,15,13,10,50,54,−4,58
+Nottingham Forest,FOR,1997,20,6,16,16,31,59,−28,34
+Nottingham Forest,FOR,1999,20,7,9,22,35,69,−34,30
+Oldham Athletic,OLD,1993,19,13,10,19,63,74,−11,49
+Oldham Athletic,OLD,1994,21,9,13,20,42,68,−26,40
+Portsmouth,POR,2004,13,12,9,17,47,54,−7,45
+Portsmouth,POR,2005,16,10,9,19,43,59,−16,39
+Portsmouth,POR,2006,17,10,8,20,37,62,−25,38
+Portsmouth,POR,2007,9,14,12,12,45,42,3,54
+Portsmouth,POR,2008,8,16,9,13,48,40,8,57
+Portsmouth,POR,2009,14,10,11,17,38,57,−19,41
+Portsmouth,POR,2010,20,7,7,24,34,66,−32,19
+Queens Park Rangers,QPR,1993,5,17,12,13,63,55,8,63
+Queens Park Rangers,QPR,1994,9,16,12,14,62,61,1,60
+Queens Park Rangers,QPR,1995,8,17,9,16,61,59,2,60
+Queens Park Rangers,QPR,1996,19,9,6,23,38,57,−19,33
+Queens Park Rangers,QPR,2012,17,10,7,21,43,66,−23,37
+Queens Park Rangers,QPR,2013,20,4,13,21,30,60,−30,25
+Queens Park Rangers,QPR,2015,20,8,6,24,42,73,−31,30
+Reading,REA,2007,8,16,7,15,52,47,5,55
+Reading,REA,2008,18,10,6,22,41,66,−25,36
+Reading,REA,2013,19,6,10,22,43,73,−30,28
+Sheffield United,SHU,1993,14,14,10,18,54,53,1,52
+Sheffield United,SHU,1994,20,8,18,16,42,60,−18,42
+Sheffield United,SHU,2007,18,10,8,20,32,55,−23,38
+Sheffield Wednesday,SHW,1993,7,15,14,13,55,51,4,59
+Sheffield Wednesday,SHW,1994,7,16,16,10,76,54,22,64
+Sheffield Wednesday,SHW,1995,13,13,12,17,49,57,−8,51
+Sheffield Wednesday,SHW,1996,15,10,10,18,48,61,−13,40
+Sheffield Wednesday,SHW,1997,7,14,15,9,50,51,−1,57
+Sheffield Wednesday,SHW,1998,16,12,8,18,52,67,−15,44
+Sheffield Wednesday,SHW,1999,12,13,7,18,41,42,−1,46
+Sheffield Wednesday,SHW,2000,19,8,7,23,38,70,−32,31
 Southampton,SOT,1993,18,13,11,18,54,61,−7,50
 Southampton,SOT,1994,18,12,7,23,49,66,−17,43
 Southampton,SOT,1995,10,12,18,12,61,63,−2,54
@@ -235,6 +405,40 @@ Southampton,SOT,2015,7,18,6,14,54,33,21,60
 Southampton,SOT,2016,6,18,9,11,59,41,18,63
 Southampton,SOT,2017,8,12,10,16,41,48,−7,46
 Southampton,SOT,2018,17,7,15,16,37,56,−19,36
+Stoke City,STO,2009,12,12,9,17,38,55,−17,45
+Stoke City,STO,2010,11,11,14,13,34,48,−14,47
+Stoke City,STO,2011,13,13,7,18,46,48,−2,46
+Stoke City,STO,2012,14,11,12,15,36,53,−17,45
+Stoke City,STO,2013,13,9,15,14,34,45,−11,42
+Stoke City,STO,2014,9,13,11,14,45,52,−7,50
+Stoke City,STO,2015,9,15,9,14,48,45,3,54
+Stoke City,STO,2016,9,14,9,15,41,55,−14,51
+Stoke City,STO,2017,13,11,11,16,41,56,−15,44
+Stoke City,STO,2018,19,7,12,19,35,68,−33,33
+Sunderland,SUN,1997,18,10,10,18,35,53,−18,40
+Sunderland,SUN,2000,7,16,10,12,57,56,1,58
+Sunderland,SUN,2001,7,15,12,11,46,41,5,57
+Sunderland,SUN,2002,17,10,10,18,29,51,−22,40
+Sunderland,SUN,2003,20,4,7,27,21,65,−44,19
+Sunderland,SUN,2006,20,3,6,29,26,69,−43,15
+Sunderland,SUN,2008,15,11,6,21,36,59,−23,39
+Sunderland,SUN,2009,16,9,9,20,34,54,−20,36
+Sunderland,SUN,2010,13,11,11,16,48,56,−8,44
+Sunderland,SUN,2011,10,12,11,15,45,56,−11,47
+Sunderland,SUN,2012,13,11,12,15,45,46,−1,45
+Sunderland,SUN,2013,17,9,12,17,41,54,−13,39
+Sunderland,SUN,2014,14,10,8,20,41,60,−19,38
+Sunderland,SUN,2015,16,7,17,14,31,53,−22,38
+Sunderland,SUN,2016,17,9,12,17,48,62,−14,39
+Sunderland,SUN,2017,20,6,6,26,29,69,−40,24
+Swansea City,SWA,2012,11,12,11,15,44,51,−7,47
+Swansea City,SWA,2013,9,11,13,14,47,51,−4,46
+Swansea City,SWA,2014,12,11,9,18,54,54,0,42
+Swansea City,SWA,2015,8,16,8,14,46,49,−3,56
+Swansea City,SWA,2016,12,12,11,15,42,52,−10,47
+Swansea City,SWA,2017,15,12,5,21,45,70,−25,41
+Swansea City,SWA,2018,18,8,9,21,28,56,−28,33
+Swindon Town,SWI,1994,22,5,15,22,47,100,−53,30
 Tottenham Hotspur,TOT,1993,8,16,11,15,60,66,−6,59
 Tottenham Hotspur,TOT,1994,15,11,12,19,54,59,−5,45
 Tottenham Hotspur,TOT,1995,7,16,14,12,66,58,8,62
@@ -266,6 +470,18 @@ Watford,WAT,2007,20,5,13,20,29,59,−30,28
 Watford,WAT,2016,13,12,9,17,40,50,−10,45
 Watford,WAT,2017,17,11,7,20,40,68,−28,40
 Watford,WAT,2018,14,11,8,19,44,64,−20,41
+West Bromwich Albion,WBA,2003,19,6,8,24,29,65,−36,26
+West Bromwich Albion,WBA,2005,17,6,16,16,36,61,−25,34
+West Bromwich Albion,WBA,2006,19,7,9,22,31,58,−27,30
+West Bromwich Albion,WBA,2009,20,8,8,22,36,67,−31,32
+West Bromwich Albion,WBA,2011,11,12,11,15,56,71,−15,47
+West Bromwich Albion,WBA,2012,10,13,8,17,45,52,−7,47
+West Bromwich Albion,WBA,2013,8,14,7,17,53,57,−4,49
+West Bromwich Albion,WBA,2014,17,7,15,16,43,59,−16,36
+West Bromwich Albion,WBA,2015,13,11,11,16,38,51,−13,44
+West Bromwich Albion,WBA,2016,14,10,13,15,34,48,−14,43
+West Bromwich Albion,WBA,2017,10,12,9,17,43,51,−8,45
+West Bromwich Albion,WBA,2018,20,6,13,19,31,56,−25,31
 West Ham United,WHU,1994,13,13,13,16,47,58,−11,52
 West Ham United,WHU,1995,14,13,11,18,44,48,−4,50
 West Ham United,WHU,1996,10,14,9,15,43,52,−9,51
@@ -288,6 +504,22 @@ West Ham United,WHU,2015,12,12,11,15,44,47,−3,47
 West Ham United,WHU,2016,7,16,14,8,65,51,14,62
 West Ham United,WHU,2017,11,12,9,17,47,64,−17,45
 West Ham United,WHU,2018,13,10,12,16,48,68,−20,42
+Wigan Athletic,WIG,2006,10,15,6,17,45,52,−7,51
+Wigan Athletic,WIG,2007,17,10,8,20,37,59,−22,38
+Wigan Athletic,WIG,2008,14,10,10,18,34,51,−17,40
+Wigan Athletic,WIG,2009,11,12,9,17,34,45,−11,45
+Wigan Athletic,WIG,2010,16,9,9,20,37,79,−42,36
+Wigan Athletic,WIG,2011,16,9,15,14,40,61,−21,42
+Wigan Athletic,WIG,2012,15,11,10,17,42,62,−20,43
+Wigan Athletic,WIG,2013,18,9,9,20,47,73,−26,36
+Wimbledon,WIM,1993,12,14,12,16,56,55,1,54
+Wimbledon,WIM,1994,6,18,11,13,56,53,3,65
+Wimbledon,WIM,1995,9,15,11,16,48,65,−17,56
+Wimbledon,WIM,1996,14,10,11,17,55,70,−15,41
+Wimbledon,WIM,1997,8,15,11,12,49,46,3,56
+Wimbledon,WIM,1998,15,10,14,14,34,46,−12,44
+Wimbledon,WIM,1999,16,10,12,16,40,63,−23,42
+Wimbledon,WIM,2000,18,7,12,19,46,74,−28,33
 Wolverhampton Wanderers,WOL,2004,20,7,12,19,38,77,−39,33
 Wolverhampton Wanderers,WOL,2010,15,9,11,18,32,56,−24,38
 Wolverhampton Wanderers,WOL,2011,17,11,7,20,46,66,−20,40
