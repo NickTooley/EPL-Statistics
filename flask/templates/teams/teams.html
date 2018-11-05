@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 
 {% block sideform %}
-    <div class="form-radios">
+    <div class="form-checkboxes">
         <input type="radio" name="cb" id="none-cb" onclick="changeteamcompare('none')" checked/>
         <label for="none-cb" >None</label><br />
     </div>
     {% for data in dataset %}
         {% if data.teamID != teamData.teamID %}
-            <div class="form-radios">
+            <div class="form-checkboxes">
                 <input type="radio" name="cb" id="{{ data.teamID }}""  onclick="changeteamcompare('{{data.teamID}}')"/>
                 <!-- <label for="{{ data.teamID }}"  onmouseover="handleMouseOverForm('#{{ data.teamID }}-line')" onmouseout="handleMouseOutForm('#{{ data.teamID }}-line')">{{ data.teamName }}</label><br /> -->
                 <label for="{{ data.teamID }}" >{{ data.teamName }}</label><br />
@@ -79,7 +79,8 @@
 
     function changedataset(checkbox){
         if(checkbox.checked){
-            // var checked = $('input[name=cb]:checked').name();
+            var checked = $("input[name=cb]:checked").attr('id');
+            console.log(checked);
             var str = checkbox.id;
             var index = str.indexOf("-rb");
             var newstr = str.substring(0,index);
@@ -117,6 +118,12 @@
                     new_team_line("goaldiff",goaldiff, 80,-80,"#3785fa"); 
                     break;
             }
+
+            {% for data in dataset %}
+                if("{{data.teamID}}" == checked ){
+                    changeteamcompare("{{data.teamID}}");
+                }
+            {% endfor %}
 
             // if(checked != "none-cb"){
 
