@@ -53,24 +53,24 @@
     z-index: -1;
   }
 
-.labels input[type="checkbox"],input[type="radio"] {
+.labels input[type="checkbox"], .labels input[type="radio"] {
     position: absolute;
     opacity: 0;
     z-index: -1;
   }
 
-.labels input[type="checkbox"]+label::before,input[type="radio"]+label::before {
+.labels input[type="checkbox"]+label::before, .labels input[type="radio"]+label::before {
     border-radius: 18px;
   }  
 
-.labels input[type="checkbox"]:checked+label,input[type="radio"]:checked+label {
+.labels input[type="checkbox"]:checked+label, .labels input[type="radio"]:checked+label {
     padding-left: 25px;
     padding-right: 25px;
     color: #fff;
     border-radius: 100px;
   }  
 
-.labels input[type="checkbox"]:checked+label::before,input[type="radio"]:checked+label::before {
+.labels input[type="checkbox"]:checked+label::before, .labels input[type="radio"]:checked+label::before {
     top: 0;
     width: 100%;
     height: 100%;
@@ -83,7 +83,7 @@
 }
 
 .labels label,
-label::before {
+.labels label::before {
   -webkit-transition: .25s all ease;
   -o-transition: .25s all ease;
   transition: .25s all ease;
@@ -126,7 +126,7 @@ header{
     font-size: 14px;
 }
 
-.form-checkboxes input[type="checkbox"],input[type="radio"] {
+.form-checkboxes input[type="checkbox"], .form-checkboxes input[type="radio"] {
   position: absolute;
   opacity: 0;
   z-index: -1;
@@ -156,13 +156,13 @@ header{
     z-index: -0;
   }
 
-.form-checkboxes input[type="checkbox"]:checked+label,input[type="radio"]:checked+label{
+.form-checkboxes input[type="checkbox"]:checked+label, .form-checkboxes input[type="radio"]:checked+label{
   padding-left: 10px;
   color: #fff;
   z-index: 1;
 }
 
-.form-checkboxes input[type="checkbox"]:checked+label::before,input[type="radio"]:checked+label::before{
+.form-checkboxes input[type="checkbox"]:checked+label::before, .form-checkboxes input[type="radio"]:checked+label::before{
   top: 10%;
   width: 100%;
   height: 90%; 
@@ -171,14 +171,14 @@ header{
 }
 
 .form-checkboxes label,
-label::before {
+.form-checkboxes label::before {
   -webkit-transition: .25s all ease;
   -o-transition: .25s all ease;
   transition: .25s all ease;
 }
 
 .form-checkboxes label::before,
-label {
+.form-checkboxes label {
   -webkit-transition: .25s all ease;
   -o-transition: .25s all ease;
   transition: .25s all ease;
