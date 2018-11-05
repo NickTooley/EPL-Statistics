@@ -61,8 +61,8 @@ def init_data(csv2):
                         wins.append(0)
                         draws.append(0)
                         losses.append(0)
-                        goalsfor.append(0)
-                        goalsagainst.append(0)
+                        goalsfor.append(20)
+                        goalsagainst.append(10)
                         goaldiff.append(0)
                         
 
@@ -77,7 +77,8 @@ def init_data(csv2):
                     losses[index] = int(row[6])
                     goalsfor[index] = int(row[7])
                     goalsagainst[index] = int(row[8])
-                    goaldiff[index] = row[9]
+                    goaldiffnum = int(float(row[9]))
+                    goaldiff[index] = goaldiffnum
             
                     row = next(datareader, None)
                     if row is None:

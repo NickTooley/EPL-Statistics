@@ -107,7 +107,7 @@
         .attr("z-index", 0)
         .attr("d", newline2)
         .on("mouseover", handleMouseOver)
-        .on("mouseout", handleMouseOut)
+        // .on("mouseout", handleMouseOut)
         .attr("id", id);
 
     }
@@ -121,10 +121,14 @@
     var g = svg.append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    var x = d3.scaleLinear()
-        // .domain([0,26])
-        .domain([1993,2018])
-        .rangeRound([0, width]);
+    // var x = d3.scaleLinear()
+    //     // .domain([0,26])
+    //     .domain([1993,2018])
+    //     .rangeRound([0, width]);
+
+    var x = d3.scaleTime()
+        .domain([new Date(1993,0,0), new Date(2018,0,0)])
+        .rangeRound([0,width]);    
 
     var y = d3.scaleLinear()
         .rangeRound([height, 0]);
@@ -252,7 +256,7 @@
                     if(checkedteams.indexOf("{{data.teamID}}") > -1){
                         console.log(checkedteams);
                         var teamid = "{{data.teamID}}-line";
-                        modPathFun(teamid, goalsagainst, 100, 0);
+                        modPathFun(teamid, goalsagainst, 100, 10);
                     }
                     {% endfor %}
                     break;
@@ -264,22 +268,22 @@
                     if(checkedteams.indexOf("{{data.teamID}}") > -1){
                         console.log(checkedteams);
                         var teamid = "{{data.teamID}}-line";
-                        modPathFun(teamid, goalsfor, 100, 0);
+                        modPathFun(teamid, goalsfor, 100, 20);
                     }
                     {% endfor %}
                     break;
 
-                // case "goaldiff": 
-                // {% for data in dataset %}
-                //     var goaldiff = {{ data.goaldiff }};
-                //     var checkedteams = getCheckedBoxes("cb");
-                //     if(checkedteams.indexOf("{{data.teamID}}") > -1){
-                //         console.log(checkedteams);
-                //         var teamid = "{{data.teamID}}-line";
-                //         modPathFun(teamid, goaldiff, 50, -50);
-                //     }
-                //     {% endfor %}
-                //     break;
+                case "goaldiff": 
+                {% for data in dataset %}
+                    var goaldiff = {{ data.goaldiff }};
+                    var checkedteams = getCheckedBoxes("cb");
+                    if(checkedteams.indexOf("{{data.teamID}}") > -1){
+                        console.log(checkedteams);
+                        var teamid = "{{data.teamID}}-line";
+                        modPathFun(teamid, goaldiff, 80, -80);
+                    }
+                    {% endfor %}
+                    break;
             }
         
     }
@@ -288,21 +292,37 @@
     g.selectAll(".tick text").attr("fill", "white").attr("padding", "2px");
 
     function handleMouseOver(d, i) {
-        d3.select(this).attr("z-index", 10).attr("stroke-width", 5).attr("stroke", "#e90052");
-
+        d3.select("#hoveredline").remove();
+        // d3.select(this).attr("z-index", 10).attr("stroke-width", 5).attr("stroke", "#e90052");
+        console.log(i);
+        var newline3 = d3.line();
+        g.append("path")
+        .datum(d)
+        .attr("fill", "none")
+        .attr("stroke", "#e90052")
+        .attr("stroke-linejoin", "round")
+        .attr("stroke-linecap", "round")
+        .attr("stroke-width", 5)
+        .attr("z-index", 0)
+        .attr("d", newline3)
+        .attr("id", "hoveredline")
+        .on("mouseout", handleMouseOut);
     }
 
     function handleMouseOverForm(id) {
+        d3.select("#hoveredline").remove();
 	    d3.select(id).attr("z-index", 10).attr("stroke-width", 5).attr("stroke", "#e90052");
     }
     
     function handleMouseOutForm(id) {
+        d3.select("#hoveredline").remove();
     	d3.select(id).attr("stroke-width", 3).attr("stroke", "steelblue").attr("z-index", 0);
     }
 
 
     function handleMouseOut(d, i) {
         d3.select(this).attr("stroke-width", 3).attr("stroke", "steelblue").attr("z-index", 0);
+        d3.select("#hoveredline").remove();
     }
 
     function handleChange(checkbox){
@@ -401,33 +421,9 @@
         .ticks(21)
         .tickSize(width);
 
-    //     g.selectAll(".tick text").remove();
-
-    //    g.append("g")
-    //     // .call(d3.axisLeft(y))
-    //     .call(yAxis)
-    //     .append("text")
-    //     .attr("fill", "#000")
-    //     .attr("transform", "rotate(-90)")
-    //     .attr("y", -30)
-    //     .attr("dy", "0.71em")
-    //     .attr("text-anchor", "end")
-    //     .attr("fill", "white")
-    //     .text("Position");
-
-        // g.append("g")
-        // .call(yAxis)
-        // .select(".domain")
-        // .attr("stroke", "null")
-        // .attr("z-index", -4)
-        // .id("newSet")
-        // .remove();
-
         svg.select(".yAxis").transition().call(yAxis2);
-        // g.selectAll(".tick line").transition().call(yAxis);
-        //g.selectAll(".tick text").attr("fill", "white").attr("padding", "2px");
 
-         g.selectAll(".tick line").attr("stroke", "#fff").attr("stroke-opacity", "0.05").attr("stroke-width", 2);
+        g.selectAll(".tick line").attr("stroke", "#fff").attr("stroke-opacity", "0.05").attr("stroke-width", 2);
         g.selectAll(".tick text").attr("fill", "white").attr("padding", "2px");
 
         for(var i in datas) {
