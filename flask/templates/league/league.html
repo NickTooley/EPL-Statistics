@@ -50,132 +50,21 @@
 </div>
 {% endblock %}
 
+
 {% block scripts %}
 <script>
-
-    function getCheckedBoxes(chkboxName) {
-        var checkboxes = document.getElementsByName(chkboxName);
-        var checkboxesChecked = [];
-        // loop over them all
-        for (var i=0; i<checkboxes.length; i++) {
-            // And stick the checked ones onto an array...
-            if (checkboxes[i].checked) {
-                checkboxesChecked.push(checkboxes[i].id);
-            }
-        }
-        return checkboxesChecked.length > 0 ? checkboxesChecked : null;
-    }
-
-    var svgWidth = $("#d3-content").width(), svgHeight = 600;
-    var margin = { top: 20, right: 20, bottom: 30, left: 50 };
-    var width = svgWidth - margin.left - margin.right;
-    var height = svgHeight - margin.top - margin.bottom;
-
-    function new_Line_function(id, datas, scaleupper, scalelower){
-
-        var height = svgHeight - margin.top - margin.bottom;
-        console.log(height);
-
-        var newlinearr = [];
-
-        var x = d3.scaleLinear()
-        // .domain([0,datas.length])
-        .domain([0,datas.length])
-        .rangeRound([0, width]);
-
-        var y = d3.scaleLinear()
-        .domain([scalelower,scaleupper])
-        .rangeRound([height, 0]);
-
-        for(var i in datas) {
-            i = parseInt(i);
-            newlinearr.push([x(i), y(datas[i])]);
-            i = i + 1;
-        }
-
-        var newline2 = d3.line();
-
-        var svg = d3.select("svg")
-
-        g.append("path")
-        .datum(newlinearr)
-        .attr("fill", "none")
-        .attr("stroke", "steelblue")
-        .attr("stroke-linejoin", "round")
-        .attr("stroke-linecap", "round")
-        .attr("stroke-width", 3)
-        .attr("z-index", 0)
-        .attr("d", newline2)
-        .on("mouseover", handleMouseOver)
-        // .on("mouseout", handleMouseOut)
-        .attr("id", id);
-
-    }
-
-
-    var svg = d3.select("svg")
-        .attr("width", svgWidth)
-        .attr("height", svgHeight)
-        .attr("class", "line-graph");
-
-    var g = svg.append("g")
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-    // var x = d3.scaleLinear()
-    //     // .domain([0,26])
-    //     .domain([1993,2018])
-    //     .rangeRound([0, width]);
-
-    var x = d3.scaleTime()
-        .domain([new Date(1993,0,0), new Date(2018,0,0)])
-        .rangeRound([0,width]);    
-
-    var y = d3.scaleLinear()
-        .rangeRound([height, 0]);
-
-    // x.domain([0,15]);
-    y.domain([21,1]);
-
-    var newLine = d3.line()
-        .x(function(d) { return x(d.round)})
-        .y(function(d) { return y(d.value)})
-        // x.domain(d3.extent(arr, function(d) { return d.round}));
-        
-        // y.domain(d3.extent(arr, function(d) { return d.value}));
-    var xAxis = d3.axisBottom(x)
-                .ticks(24);
-
-    var yAxis = d3.axisRight(y)
-        .ticks(21)
-        .tickSize(width);
-
-    g.append("g")
-    .attr("transform", "translate(0," + height + ")")
-    .call(xAxis)
-    .select(".domain")
-    .attr("stroke", "white");
-    // .call(d3.axisBottom(x))
-    // .ticks(20);
-    // .select(".domain")
-    // .remove();
-
-    g.append("g")
-        .attr("class", "yAxis")
-        // .call(d3.axisLeft(y))
-        .call(yAxis)
-        .append("text")
-        .attr("fill", "#000")
-        .attr("transform", "rotate(-90)")
-        .attr("y", -30)
-        .attr("dy", "0.71em")
-        .attr("text-anchor", "end")
-        .attr("fill", "white")
-        .text("Position");
-
-    g.append("g")
-        .select(".domain")
-        .attr("stroke", "white")
-        .remove();
+    var POINTSUPPER = 100;
+    var POINTSLOWER = 20;
+    var POSITIONUPPER = 1;
+    var POSITIONLOWER = 21;
+    var RESULTUPPER = 40;
+    var RESULTLOWER = 0;
+    var GOALSFORUPPER = 100;
+    var GOALSFORLOWER = 20;
+    var GOALSAGAINSTUPPER = 100;
+    var GOALSAGAINSTLOWER = 10;
+    var GOALDIFFUPPER = 80;
+    var GOALDIFFLOWER = -80;
 
     {% for data in dataset %}
         var positions = {{ data.position }};
@@ -187,6 +76,9 @@
         }
     {% endfor %}
 
+    // g.selectAll(".tick line").attr("stroke", "#fff").attr("stroke-opacity", "0.05").attr("stroke-width", 2);
+    // g.selectAll(".tick text").attr("fill", "white").attr("padding", "2px");
+
     function changedataset(field){
             switch(field) {
                 case "position":
@@ -196,7 +88,7 @@
                     if(checkedteams.indexOf("{{data.teamID}}") > -1){
                         console.log(checkedteams);
                         var teamid = "{{data.teamID}}-line";
-                        modPathFun(teamid, positions, 1, 21);
+                        modPathFun(teamid, positions, POSITIONUPPER, POSITIONLOWER);
                     }
                     {% endfor %}
                     break;
@@ -208,7 +100,7 @@
                     if(checkedteams.indexOf("{{data.teamID}}") > -1){
                         console.log(checkedteams);
                         var teamid = "{{data.teamID}}-line";
-                        modPathFun(teamid, points, 100, 20);
+                        modPathFun(teamid, points, POINTSUPPER, POINTSLOWER);
                     }
                     {% endfor %}
                     break;
@@ -220,7 +112,7 @@
                     if(checkedteams.indexOf("{{data.teamID}}") > -1){
                         console.log(checkedteams);
                         var teamid = "{{data.teamID}}-line";
-                        modPathFun(teamid, wins, 40, 0);
+                        modPathFun(teamid, wins, RESULTUPPER, RESULTLOWER);
                     }
                     {% endfor %}
                     break;
@@ -232,7 +124,7 @@
                     if(checkedteams.indexOf("{{data.teamID}}") > -1){
                         console.log(checkedteams);
                         var teamid = "{{data.teamID}}-line";
-                        modPathFun(teamid, draws, 40, 0);
+                        modPathFun(teamid, draws, RESULTUPPER, RESULTLOWER);
                     }
                     {% endfor %}
                     break;
@@ -244,7 +136,7 @@
                     if(checkedteams.indexOf("{{data.teamID}}") > -1){
                         console.log(checkedteams);
                         var teamid = "{{data.teamID}}-line";
-                        modPathFun(teamid, losses, 40, 0);
+                        modPathFun(teamid, losses, RESULTUPPER, RESULTLOWER);
                     }
                     {% endfor %}
                     break;
@@ -256,7 +148,7 @@
                     if(checkedteams.indexOf("{{data.teamID}}") > -1){
                         console.log(checkedteams);
                         var teamid = "{{data.teamID}}-line";
-                        modPathFun(teamid, goalsagainst, 100, 10);
+                        modPathFun(teamid, goalsagainst, GOALSAGAINSTUPPER, GOALSAGAINSTLOWER);
                     }
                     {% endfor %}
                     break;
@@ -268,7 +160,7 @@
                     if(checkedteams.indexOf("{{data.teamID}}") > -1){
                         console.log(checkedteams);
                         var teamid = "{{data.teamID}}-line";
-                        modPathFun(teamid, goalsfor, 100, 20);
+                        modPathFun(teamid, goalsfor, GOALSFORUPPER, GOALSFORLOWER);
                     }
                     {% endfor %}
                     break;
@@ -280,7 +172,7 @@
                     if(checkedteams.indexOf("{{data.teamID}}") > -1){
                         console.log(checkedteams);
                         var teamid = "{{data.teamID}}-line";
-                        modPathFun(teamid, goaldiff, 80, -80);
+                        modPathFun(teamid, goaldiff, GOALDIFFUPPER, GOALDIFFLOWER);
                     }
                     {% endfor %}
                     break;
@@ -288,41 +180,25 @@
         
     }
 
-    g.selectAll(".tick line").attr("stroke", "#fff").attr("stroke-opacity", "0.05").attr("stroke-width", 2);
-    g.selectAll(".tick text").attr("fill", "white").attr("padding", "2px");
+
+    
+
 
     function handleMouseOver(d, i) {
-        d3.select("#hoveredline").remove();
-        // d3.select(this).attr("z-index", 10).attr("stroke-width", 5).attr("stroke", "#e90052");
-        console.log(i);
-        var newline3 = d3.line();
-        g.append("path")
-        .datum(d)
-        .attr("fill", "none")
-        .attr("stroke", "#e90052")
-        .attr("stroke-linejoin", "round")
-        .attr("stroke-linecap", "round")
-        .attr("stroke-width", 5)
-        .attr("z-index", 0)
-        .attr("d", newline3)
-        .attr("id", "hoveredline")
-        .on("mouseout", handleMouseOut);
+        d3.select(this).attr("z-index", 10).attr("stroke-width", 5).attr("stroke", "#e90052");
     }
 
     function handleMouseOverForm(id) {
-        d3.select("#hoveredline").remove();
 	    d3.select(id).attr("z-index", 10).attr("stroke-width", 5).attr("stroke", "#e90052");
     }
     
     function handleMouseOutForm(id) {
-        d3.select("#hoveredline").remove();
     	d3.select(id).attr("stroke-width", 3).attr("stroke", "steelblue").attr("z-index", 0);
     }
 
 
     function handleMouseOut(d, i) {
         d3.select(this).attr("stroke-width", 3).attr("stroke", "steelblue").attr("z-index", 0);
-        d3.select("#hoveredline").remove();
     }
 
     function handleChange(checkbox){
@@ -348,8 +224,8 @@
             case 'positions-rb':
                 {% for data in dataset %}
                 if(id == "{{ data.teamID }}"){
-                    scaleupper = 1;
-                    scalelower = 21;
+                    scaleupper = POSITIONUPPER;
+                    scalelower = POSITIONLOWER;
                     data = {{ data.position }}
                 }
                 {% endfor %} 
@@ -357,8 +233,8 @@
             case 'points-rb':
                 {% for data in dataset %}
                 if(id == "{{ data.teamID }}"){
-                    scaleupper = 100;
-                    scalelower = 0;
+                    scaleupper = POINTSUPPER;
+                    scalelower = POINTSLOWER;
                     data = {{ data.points }}
                 }
                 {% endfor %} 
@@ -366,8 +242,8 @@
             case 'draws-rb':
                 {% for data in dataset %}
                 if(id == "{{ data.teamID }}"){
-                    scaleupper = 30;
-                    scalelower = 0;
+                    scaleupper = RESULTUPPER;
+                    scalelower = RESULTLOWER;
                     data = {{ data.draws }}
                 }
                 {% endfor %} 
@@ -375,8 +251,8 @@
             case 'losses=rb':
                 {% for data in dataset %}
                 if(id == "{{ data.teamID }}"){
-                    scaleupper = 30;
-                    scalelower = 0;
+                    scaleupper = RESULTUPPER;
+                    scalelower = RESULTLOWER;
                     data = {{ data.losses }}
                 }
                 {% endfor %} 
@@ -384,8 +260,8 @@
             case 'goalsfor-rb':
                 {% for data in dataset %}
                 if(id == "{{ data.teamID }}"){
-                    scaleupper = 100;
-                    scalelower = 0;
+                    scaleupper = GOALSFORUPPER;
+                    scalelower = GOALSFORLOWER;
                     data = {{ data.goalsfor }}
                 }
                 {% endfor %} 
@@ -393,9 +269,27 @@
             case 'goalsagainst-rb':
                 {% for data in dataset %}
                 if(id == "{{ data.teamID }}"){
-                    scaleupper = 100;
-                    scalelower = 0;
+                    scaleupper = GOALSAGAINSTUPPER;
+                    scalelower = GOALSAGAINSTLOWER;
                     data = {{ data.goalsagainst }}
+                }
+                {% endfor %}  
+                break;
+            case 'wins-rb':
+                {% for data in dataset %}
+                if(id == "{{ data.teamID }}"){
+                    scaleupper = RESULTUPPER;
+                    scalelower = RESULTLOWER;
+                    data = {{ data.wins }}
+                }
+                {% endfor %}  
+                break;
+            case 'goaldiff-rb':
+                {% for data in dataset %}
+                if(id == "{{ data.teamID }}"){
+                    scaleupper = GOALDIFFUPPER;
+                    scalelower = GOALDIFFLOWER;
+                    data = {{ data.goaldiff }}
                 }
                 {% endfor %}  
                 break;
@@ -436,11 +330,6 @@
         d3.select("#"+id).transition().attr('d', newline2(newlinearr));
 
     }
-
-    
-
-    
-
 
 </script>
 
