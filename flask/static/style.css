@@ -177,6 +177,7 @@ header{
   transition: .25s all ease;
 }
 
+
 .form-checkboxes label::before,
 .form-checkboxes label {
   -webkit-transition: .25s all ease;

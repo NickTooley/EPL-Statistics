@@ -67,6 +67,13 @@
     var goalsagainst = {{teamData.goalsagainst}};
     var goaldiff = {{teamData.goaldiff}};
     var points = {{teamData.points}};
+
+    var y2 = d3.scaleLinear().domain([0,100]).rangeRound([height,0]);
+    var yAxis2 = d3.axisLeft(y2).ticks(21).tickSize(0);
+
+    g.append("g").call(yAxis2).attr("class", "leftAxis");
+    g.selectAll(".tick text").attr("fill", "white").attr("padding", "2px");
+
     
     new_team_line("positions", positions, 1, 21, "#e90052");
     new_team_line("wins", wins, 100, 0, "#04f5ff");
