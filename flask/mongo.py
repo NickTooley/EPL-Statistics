@@ -56,8 +56,8 @@ def init_data(csv2):
                     goalsagainst = []
                     goaldiff = []
                     for i in range (0,len(years)):
-                        positions.append(23)
-                        points.append(0)
+                        positions.append(21)
+                        points.append(20)
                         wins.append(0)
                         draws.append(0)
                         losses.append(0)

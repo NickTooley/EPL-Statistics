@@ -1,86 +1,12 @@
 {% extends 'base.html' %}
 
 {% block sideform %}
-<div class="form-checkboxes">
-    <input type="checkbox" name="cb" id="ARS" onclick="handleChange(this)" checked/>
-    <label for="ARS"  onmouseover="handleMouseOverForm('#ARS-line')" onmouseout="handleMouseOutForm('#ARS-line')">Arsenal</label><br />
-</div>
-<div class="form-checkboxes">  
-    <input type="checkbox" name="cb" id="BOU" onclick="handleChange(this)" checked/>
-    <label for="BOU" onmouseover="handleMouseOverForm('#BOU-line')" onmouseout="handleMouseOutForm('#BOU-line')">Bournemouth</label><br />
-</div>
-<div class="form-checkboxes">
-    <input type="checkbox" name="cb" id="BHA" onclick="handleChange(this)" checked/>
-    <label for="BHA" onmouseover="handleMouseOverForm('#BHA-line')" onmouseout="handleMouseOutForm('#BHA-line')">Brighton</label><br />
-</div>
-<div class="form-checkboxes">
-    <input type="checkbox" name="cb" id="BUR" onclick="handleChange(this)" checked/>
-    <label for="BUR" onmouseover="handleMouseOverForm('#BUR-line')" onmouseout="handleMouseOutForm('#BUR-line')">Burnley</label><br />
-</div>
-<div class="form-checkboxes">
-    <input type="checkbox" name="cb" id="CAR" onclick="handleChange(this)" checked/>
-    <label for="CAR" onmouseover="handleMouseOverForm('#CAR-line')" onmouseout="handleMouseOutForm('#CAR-line')">Cardiff</label><br />
-</div>
-<div class="form-checkboxes">
-    <input type="checkbox" name="cb" id="CHE" onclick="handleChange(this)" checked/>
-    <label for="CHE" onmouseover="handleMouseOverForm('#CHE-line')" onmouseout="handleMouseOutForm('#CHE-line')">Chelsea</label><br />
-</div>
-<div class="form-checkboxes">
-    <input type="checkbox" name="cb" id="CRY" onclick="handleChange(this)" checked/>
-    <label for="CRY" onmouseover="handleMouseOverForm('#CRY-line')" onmouseout="handleMouseOutForm('#CRY-line')">Crystal Palace</label><br />
-</div>
-<div class="form-checkboxes">
-    <input type="checkbox" name="cb" id="EVE" onclick="handleChange(this)" checked/>
-    <label for="EVE" onmouseover="handleMouseOverForm('#EVE-line')" onmouseout="handleMouseOutForm('#EVE-line')">Everton</label><br />
-</div>
-<div class="form-checkboxes">
-    <input type="checkbox" name="cb" id="FUL" onclick="handleChange(this)" checked/>
-    <label for="FUL"onmouseover="handleMouseOverForm('#FUL-line')" onmouseout="handleMouseOutForm('#FUL-line')">Fulham</label><br />
-</div>
-<div class="form-checkboxes">
-    <input type="checkbox" name="cb" id="HUD" onclick="handleChange(this)" checked/>
-    <label for="HUD" onmouseover="handleMouseOverForm('#HUD-line')" onmouseout="handleMouseOutForm('#HUD-line')">Huddersfield</label><br />
-</div>
-<div class="form-checkboxes">
-    <input type="checkbox" name="cb" id="LEI" onclick="handleChange(this)" checked/>
-    <label for="LEI"onmouseover="handleMouseOverForm('#LEI-line')" onmouseout="handleMouseOutForm('#LEI-line')">Leicester City</label><br />
-</div>
-<div class="form-checkboxes">
-    <input type="checkbox" name="cb" id="LIV" onclick="handleChange(this)" checked/>
-    <label for="LIV" onmouseover="handleMouseOverForm('#LIV-line')" onmouseout="handleMouseOutForm('#LIV-line')">Liverpool</label><br />
-</div>
-<div class="form-checkboxes">
-    <input type="checkbox" name="cb" id="MCI" onclick="handleChange(this)" checked/>
-    <label for="MCI" onmouseover="handleMouseOverForm('#MCI-line')" onmouseout="handleMouseOutForm('#MCI-line')">Man City</label><br />
-</div>
-<div class="form-checkboxes">
-    <input type="checkbox" name="cb" id="MUN" onclick="handleChange(this)" checked/>
-    <label for="MUN" onmouseover="handleMouseOverForm('#MUN-line')" onmouseout="handleMouseOutForm('#MUN-line')">Man United</label><br />
-</div>
-<div class="form-checkboxes">
-    <input type="checkbox" name="cb" id="NEW" onclick="handleChange(this)" checked/>
-    <label for="NEW" onmouseover="handleMouseOverForm('#NEW-line')" onmouseout="handleMouseOutForm('#NEW-line')">Newcastle</label><br />
-</div>
-<div class="form-checkboxes">
-    <input type="checkbox" name="cb" id="SOT" onclick="handleChange(this)" checked/>
-    <label for="SOT" onmouseover="handleMouseOverForm('#SOT-line')" onmouseout="handleMouseOutForm('#SOT-line')">Southampton</label><br />
-</div>
-<div class="form-checkboxes">
-    <input type="checkbox" name="cb" id="TOT" onclick="handleChange(this)" checked/>
-    <label for="TOT" onmouseover="handleMouseOverForm('#TOT-line')" onmouseout="handleMouseOutForm('#TOT-line')">Tottenham</label><br />
-</div>
-<div class="form-checkboxes">
-    <input type="checkbox" name="cb" id="WAT" onclick="handleChange(this)" checked/>
-    <label for="WAT" onmouseover="handleMouseOverForm('#WAT-line')" onmouseout="handleMouseOutForm('#WAT-line')">Watford</label><br />
-</div>
-<div class="form-checkboxes">
-    <input type="checkbox" name="cb" id="WHU" onclick="handleChange(this)" checked/>
-    <label for="WHU" onmouseover="handleMouseOverForm('#WHU-line')" onmouseout="handleMouseOutForm('#WHU-line')">West Ham</label><br />
-</div>
-<div class="form-checkboxes">
-    <input type="checkbox" name="cb" id="WOL" onclick="handleChange(this)" checked/>
-    <label for="WOL" onmouseover="handleMouseOverForm('#WOL-line')" onmouseout="handleMouseOutForm('#WOL-line')">Wolves</label><br />
-</div>
+    {% for data in dataset %}
+        <div class="form-checkboxes">
+            <input type="checkbox" name="cb" id="{{ data.teamID }}" onclick="handleChange(this)" checked/>
+            <label for="{{ data.teamID }}"  onmouseover="handleMouseOverForm('#{{ data.teamID }}-line')" onmouseout="handleMouseOutForm('#{{ data.teamID }}-line')">{{ data.teamName }}</label><br />
+        </div>
+    {% endfor %} 
 {% endblock %}
 
 {% block graphtags %}
@@ -128,43 +54,22 @@
 <script>
 
     function getCheckedBoxes(chkboxName) {
-    var checkboxes = document.getElementsByName(chkboxName);
-    var checkboxesChecked = [];
-    // loop over them all
-    for (var i=0; i<checkboxes.length; i++) {
-        // And stick the checked ones onto an array...
-        if (checkboxes[i].checked) {
-            checkboxesChecked.push(checkboxes[i].id);
+        var checkboxes = document.getElementsByName(chkboxName);
+        var checkboxesChecked = [];
+        // loop over them all
+        for (var i=0; i<checkboxes.length; i++) {
+            // And stick the checked ones onto an array...
+            if (checkboxes[i].checked) {
+                checkboxesChecked.push(checkboxes[i].id);
+            }
         }
-    }
-    // Return the array if it is non-empty, or null
-    return checkboxesChecked.length > 0 ? checkboxesChecked : null;
+        return checkboxesChecked.length > 0 ? checkboxesChecked : null;
     }
 
     var svgWidth = $("#d3-content").width(), svgHeight = 600;
     var margin = { top: 20, right: 20, bottom: 30, left: 50 };
     var width = svgWidth - margin.left - margin.right;
     var height = svgHeight - margin.top - margin.bottom;
-    // var data = [1,5,4,8,3,1,6,6,2,3,9,13,17,3,18,21];
-    // var data2 = [90,72,43,52,71,72,81,45,61,14,37,35,17,32,52,33,41];
-    // var arr = [];
-    // var arr2 = [];
-
-
-    function data_to_arr(dataset){
-        for(var i in dataset) {
-            // console.log(i);
-            i = parseInt(i)
-            newarr = []
-            console.log(i);
-            newarr.push({
-                round: i, //date
-                value: data[i] //convert string to number
-            });
-            i = i + 1;
-        }
-        return newarr;
-    }
 
     function new_Line_function(id, datas, scaleupper, scalelower){
 
@@ -174,6 +79,7 @@
         var newlinearr = [];
 
         var x = d3.scaleLinear()
+        // .domain([0,datas.length])
         .domain([0,datas.length])
         .rangeRound([0, width]);
 
@@ -216,7 +122,8 @@
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
     var x = d3.scaleLinear()
-        .domain([0,26])
+        // .domain([0,26])
+        .domain([1993,2018])
         .rangeRound([0, width]);
 
     var y = d3.scaleLinear()
@@ -232,10 +139,10 @@
         
         // y.domain(d3.extent(arr, function(d) { return d.value}));
     var xAxis = d3.axisBottom(x)
-                .ticks(25);
+                .ticks(24);
 
     var yAxis = d3.axisRight(y)
-        .ticks(20)
+        .ticks(21)
         .tickSize(width);
 
     g.append("g")
@@ -249,6 +156,7 @@
     // .remove();
 
     g.append("g")
+        .attr("class", "yAxis")
         // .call(d3.axisLeft(y))
         .call(yAxis)
         .append("text")
@@ -261,7 +169,6 @@
         .text("Position");
 
     g.append("g")
-        .call(yAxis)
         .select(".domain")
         .attr("stroke", "white")
         .remove();
@@ -272,7 +179,7 @@
         if(checkedteams.indexOf("{{data.teamID}}") > -1){
             console.log(checkedteams);
             var teamid = "{{data.teamID}}-line";
-            new_Line_function(teamid, positions, 1, 23);
+            new_Line_function(teamid, positions, 1, 21);
         }
     {% endfor %}
 
@@ -285,7 +192,7 @@
                     if(checkedteams.indexOf("{{data.teamID}}") > -1){
                         console.log(checkedteams);
                         var teamid = "{{data.teamID}}-line";
-                        modPathFun(teamid, positions, 1, 23);
+                        modPathFun(teamid, positions, 1, 21);
                     }
                     {% endfor %}
                     break;
@@ -297,7 +204,7 @@
                     if(checkedteams.indexOf("{{data.teamID}}") > -1){
                         console.log(checkedteams);
                         var teamid = "{{data.teamID}}-line";
-                        modPathFun(teamid, points, 100, 30);
+                        modPathFun(teamid, points, 100, 20);
                     }
                     {% endfor %}
                     break;
@@ -386,13 +293,11 @@
     }
 
     function handleMouseOverForm(id) {
-	d3.select(id).attr("z-index", 10).attr("stroke-width", 5).attr("stroke", "#e90052");
-
+	    d3.select(id).attr("z-index", 10).attr("stroke-width", 5).attr("stroke", "#e90052");
     }
     
     function handleMouseOutForm(id) {
     	d3.select(id).attr("stroke-width", 3).attr("stroke", "steelblue").attr("z-index", 0);
-
     }
 
 
@@ -409,83 +314,80 @@
     }
 
     function removeLine(id) {
-        console.log("#"+id+"-line");
         d3.select("#"+id+"-line").remove();
     }
 
     function addLine(id) {
-	var teamid = id+"-line";
-	var data = null;
-	var scaleupper = 0;
-	var scalelower = 0;
-	var toRetrieve = $("input[name=graph-rb]:checked").attr('id');
-	
-	console.log(toRetrieve);
-	switch(toRetrieve){
-		case 'positions-rb':
-			{% for data in dataset %}
-			if(id == "{{ data.teamID }}"){
-				scaleupper = 1;
-				scalelower = 23;
-				data = {{ data.position }}
-			}
-			{% endfor %} 
-			break;
-		case 'points-rb':
-			{% for data in dataset %}
-			if(id == "{{ data.teamID }}"){
-				scaleupper = 100;
-				scalelower = 0;
-				data = {{ data.points }}
-			}
-			{% endfor %} 
-			break;
-		case 'draws-rb':
-			{% for data in dataset %}
-			if(id == "{{ data.teamID }}"){
-				scaleupper = 30;
-				scalelower = 0;
-				data = {{ data.draws }}
-			}
-			{% endfor %} 
-			break;
-		case 'losses=rb':
-			{% for data in dataset %}
-			if(id == "{{ data.teamID }}"){
-				scaleupper = 30;
-				scalelower = 0;
-				data = {{ data.losses }}
-			}
-			{% endfor %} 
-			break;
-		case 'goalsfor-rb':
-			{% for data in dataset %}
-			if(id == "{{ data.teamID }}"){
-				scaleupper = 100;
-				scalelower = 0;
-				data = {{ data.goalsfor }}
-			}
-			{% endfor %} 
-			break;
-		case 'goalsagainst-rb':
-			{% for data in dataset %}
-			if(id == "{{ data.teamID }}"){
-				scaleupper = 100;
-				scalelower = 0;
-				data = {{ data.goalsagainst }}
-			}
-			{% endfor %}  
-			break;
-			
-	}
-	if(data != null){
-		new_Line_function(teamid, data, scaleupper, scalelower);
-	}
+        var teamid = id+"-line";
+        var data = null;
+        var scaleupper = 0;
+        var scalelower = 0;
+        var toRetrieve = $("input[name=graph-rb]:checked").attr('id');
+        
+        switch(toRetrieve){
+            case 'positions-rb':
+                {% for data in dataset %}
+                if(id == "{{ data.teamID }}"){
+                    scaleupper = 1;
+                    scalelower = 21;
+                    data = {{ data.position }}
+                }
+                {% endfor %} 
+                break;
+            case 'points-rb':
+                {% for data in dataset %}
+                if(id == "{{ data.teamID }}"){
+                    scaleupper = 100;
+                    scalelower = 0;
+                    data = {{ data.points }}
+                }
+                {% endfor %} 
+                break;
+            case 'draws-rb':
+                {% for data in dataset %}
+                if(id == "{{ data.teamID }}"){
+                    scaleupper = 30;
+                    scalelower = 0;
+                    data = {{ data.draws }}
+                }
+                {% endfor %} 
+                break;
+            case 'losses=rb':
+                {% for data in dataset %}
+                if(id == "{{ data.teamID }}"){
+                    scaleupper = 30;
+                    scalelower = 0;
+                    data = {{ data.losses }}
+                }
+                {% endfor %} 
+                break;
+            case 'goalsfor-rb':
+                {% for data in dataset %}
+                if(id == "{{ data.teamID }}"){
+                    scaleupper = 100;
+                    scalelower = 0;
+                    data = {{ data.goalsfor }}
+                }
+                {% endfor %} 
+                break;
+            case 'goalsagainst-rb':
+                {% for data in dataset %}
+                if(id == "{{ data.teamID }}"){
+                    scaleupper = 100;
+                    scalelower = 0;
+                    data = {{ data.goalsagainst }}
+                }
+                {% endfor %}  
+                break;
+                
+        }
+        if(data != null){
+            new_Line_function(teamid, data, scaleupper, scalelower);
+        }
     }
 
     function modPathFun(id, datas, scaleupper, scalelower){
         var height = svgHeight - margin.top - margin.bottom;
-        console.log(height);
 
         var newlinearr = [];
 
@@ -493,9 +395,40 @@
         .domain([0,datas.length])
         .rangeRound([0, width]);
 
-        var y = d3.scaleLinear()
-        .domain([scalelower,scaleupper])
-        .rangeRound([height, 0]);
+        y.domain([scalelower,scaleupper]);
+
+        var yAxis2 = d3.axisRight(y)
+        .ticks(21)
+        .tickSize(width);
+
+    //     g.selectAll(".tick text").remove();
+
+    //    g.append("g")
+    //     // .call(d3.axisLeft(y))
+    //     .call(yAxis)
+    //     .append("text")
+    //     .attr("fill", "#000")
+    //     .attr("transform", "rotate(-90)")
+    //     .attr("y", -30)
+    //     .attr("dy", "0.71em")
+    //     .attr("text-anchor", "end")
+    //     .attr("fill", "white")
+    //     .text("Position");
+
+        // g.append("g")
+        // .call(yAxis)
+        // .select(".domain")
+        // .attr("stroke", "null")
+        // .attr("z-index", -4)
+        // .id("newSet")
+        // .remove();
+
+        svg.select(".yAxis").transition().call(yAxis2);
+        // g.selectAll(".tick line").transition().call(yAxis);
+        //g.selectAll(".tick text").attr("fill", "white").attr("padding", "2px");
+
+         g.selectAll(".tick line").attr("stroke", "#fff").attr("stroke-opacity", "0.05").attr("stroke-width", 2);
+        g.selectAll(".tick text").attr("fill", "white").attr("padding", "2px");
 
         for(var i in datas) {
             i = parseInt(i);
@@ -503,12 +436,10 @@
             i = i + 1;
         }
 
-        console.log(datas.length);
-
         var newline2 = d3.line();
         d3.select("#"+id).transition().attr('d', newline2(newlinearr));
 
-        }
+    }
 
     
 
