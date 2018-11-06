@@ -24,7 +24,22 @@ class Data(mdb.Document):
         'collection': 'premdata',
     }
 
+class DataTypes(mdb.Document):
+    typeName = mdb.StringField(required=True)
+    meta = {
+        'collection': 'premdatatypes',
+    }
+
 def init_data(csv2):
+    if(DataTypes.objects.count() == 0):
+        DataTypes(typeName="position").save()
+        DataTypes(typeName="points").save()
+        DataTypes(typeName="wins").save()
+        DataTypes(typeName="draws").save()
+        DataTypes(typeName="losses").save()
+        DataTypes(typeName="goalsfor").save()
+        DataTypes(typeName="goalsagainst").save()
+        DataTypes(typeName="goaldiff").save()
     if(Data.objects.count() == 0):
         print("We here")
         years = []
