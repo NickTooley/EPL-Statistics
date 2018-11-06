@@ -26,20 +26,23 @@ class Data(mdb.Document):
 
 class DataTypes(mdb.Document):
     typeName = mdb.StringField(required=True)
+    color = mdb.StringField(required=True)
+    scaleupper = mdb.IntField()
+    scalelower = mdb.IntField()
     meta = {
         'collection': 'premdatatypes',
     }
 
 def init_data(csv2):
     if(DataTypes.objects.count() == 0):
-        DataTypes(typeName="position").save()
-        DataTypes(typeName="points").save()
-        DataTypes(typeName="wins").save()
-        DataTypes(typeName="draws").save()
-        DataTypes(typeName="losses").save()
-        DataTypes(typeName="goalsfor").save()
-        DataTypes(typeName="goalsagainst").save()
-        DataTypes(typeName="goaldiff").save()
+        DataTypes(typeName="position", color="#e90052", scaleupper=1, scalelower=21).save()
+        DataTypes(typeName="points", color="#9604ff", scaleupper=100, scalelower=0).save()
+        DataTypes(typeName="wins", color="#04f5ff", scaleupper=100, scalelower=0).save()
+        DataTypes(typeName="draws", color="#ffffff", scaleupper=100, scalelower=0).save()
+        DataTypes(typeName="losses", color="#00ff85", scaleupper=100, scalelower=0).save()
+        DataTypes(typeName="goalsfor", color="#EAFF04", scaleupper=100, scalelower=0).save()
+        DataTypes(typeName="goalsagainst", color="#e94a00", scaleupper=100, scalelower=0).save()
+        DataTypes(typeName="goaldiff", color="#3785fa", scaleupper=80, scalelower=-80).save()
     if(Data.objects.count() == 0):
         print("We here")
         years = []
@@ -72,12 +75,12 @@ def init_data(csv2):
                     goaldiff = []
                     for i in range (0,len(years)):
                         positions.append(21)
-                        points.append(20)
+                        points.append(0)
                         wins.append(0)
                         draws.append(0)
                         losses.append(0)
-                        goalsfor.append(20)
-                        goalsagainst.append(10)
+                        goalsfor.append(0)
+                        goalsagainst.append(0)
                         goaldiff.append(0)
                         
 

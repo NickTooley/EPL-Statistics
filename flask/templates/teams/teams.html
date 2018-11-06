@@ -19,8 +19,8 @@
 {% block graphtags %}
 <ul class="graph-labels-ul">
         <li class="labels">
-            <input type="checkbox" name="graph-rb" id="positions-cb" onclick="changedataset(this)" checked/>
-            <label for="positions-cb" id="positions-cb2" >Positions</label>
+            <input type="checkbox" name="graph-rb" id="position-cb" onclick="changedataset(this)" checked/>
+            <label for="position-cb" id="position-cb2" >Position</label>
         </li>
         <li class="labels">
             <input type="checkbox" name="graph-rb" id="points-cb" onclick="changedataset(this)" />
@@ -59,7 +59,7 @@
 
 {% block scripts %}
 <script>
-    var positions = {{ teamData.position }};
+    var position = {{ teamData.position }};
     var wins = {{teamData.wins}};
     var draws = {{teamData.draws}};
     var losses = {{teamData.losses}};
@@ -75,13 +75,9 @@
     g.selectAll(".tick text").attr("fill", "white").attr("padding", "2px");
 
     
-    new_team_line("positions", positions, 1, 21, "#e90052");
+    new_team_line("position", position, 1, 21, "#e90052");
     new_team_line("wins", wins, 100, 0, "#04f5ff");
-    // new_team_line("draws", draws, 100, 0, "#ffffff");
     new_team_line("losses", losses, 100, 0, "#00ff85");
-    // new_team_line("goalsfor", goalsfor, 100, 0, "#EAFF04");
-    // new_team_line("goalsagainst", goalsagainst, 100, 0, "#e94a00");
-    // new_team_line("points", points, 100, 0, "#9604ff");
     new_team_line("goaldiff",goaldiff, 80,-80,"#3785fa");
 
     function changedataset(checkbox){
@@ -93,37 +89,12 @@
             var newstr = str.substring(0,index);
 
             switch (newstr){
-                case "positions":
-                    new_team_line("positions", positions, 1, 21, "#e90052");
-                    break;
+                {% for type in dataTypes %}
+                    case "{{type.typeName}}":
+                        new_team_line("{{type.typeName}}", {{type.typeName}}, {{type.scaleupper}}, {{type.scalelower}}, "{{type.color}}" );
+                        break;
+                {% endfor %}
                 
-                case "points":
-                    new_team_line("points", points, 100, 0, "#9604ff");
-                    break; 
-                
-                case "wins":
-                    new_team_line("wins", wins, 100, 0, "#04f5ff");   
-                    break;
-                
-                case "draws": 
-                    new_team_line("draws", draws, 100, 0, "#ffffff");
-                    break;
-
-                case "losses":
-                    new_team_line("losses", losses, 100, 0, "#00ff85");
-                    break;
-                
-                case "goalsfor":
-                    new_team_line("goalsfor", goalsfor, 100, 0, "#EAFF04");  
-                    break;
-                
-                case "goalsagainst":
-                    new_team_line("goalsagainst", goalsagainst, 100, 0, "#e94a00"); 
-                    break;
-                
-                case "goaldiff":
-                    new_team_line("goaldiff",goaldiff, 80,-80,"#3785fa"); 
-                    break;
             }
 
             {% for data in dataset %}
@@ -132,16 +103,12 @@
                 }
             {% endfor %}
 
-            // if(checked != "none-cb"){
-
-            // }
-
 
 
         }else{
             console.log(checkbox.id);
             var str = checkbox.id;
-            var index = str.indexOf("-rb");
+            var index = str.indexOf("-cb");
             var newstr = str.substring(0,index);
             console.log(".compare #"+newstr);
 
@@ -240,37 +207,22 @@
         if("{{data.teamID}}" == id){
             for(var i = 0; i < checkedData.length; i++ ){
                 switch(checkedData[i]){
-                    case "positions-cb":
-                        compare_team_line("positions", {{data.position}}, 1, 21, "#e90052");
+                    {% for type in dataTypes %}
+                    {% set typeStr = type.typeName %}
+                    {% set typeSet = obj_to_dict(data) %}
+                    case "{{type.typeName}}-cb":
+                        var scaleupper = 100;
+                        var scalelower = 0;
+                        if("{{type.typeName}}" == "position"){
+                            scaleupper = 1;
+                            scalelower = 21;
+                        }else if("{{type.typeName}}" == "goaldiff"){
+                           scaleupper = 80;
+                           scalelower = -80;
+                        }
+                        compare_team_line("{{type.typeName}}", {{typeSet.get(typeStr)}}, scaleupper, scalelower, "{{ type.color }}");
                         break;
-
-                    case "points-cb":
-                        compare_team_line("points", {{data.points}}, 100, 0, "#9604ff");
-                        break;
-
-                    case "wins-cb":
-                        compare_team_line("wins", {{data.wins}}, 100, 0, "#04f5ff"); 
-                        break;
-
-                    case "draws-cb":
-                        compare_team_line("draws", {{data.draws}}, 100, 0, "#ffffff"); 
-                        break;
-
-                    case "losses-cb": 
-                        compare_team_line("losses", {{data.losses}}, 100, 0, "#00ff85");
-                        break;
-
-                    case "goalsfor-cb":
-                        compare_team_line("goalsfor", {{data.goalsfor}}, 100, 0, "#EAFF04"); 
-                        break;
-
-                    case "goalsagainst-cb":
-                        compare_team_line("goalsagainst", {{data.goalsagainst}}, 100, 0, "#e94a00"); 
-                        break;
-
-                    case "goaldiff-cb":
-                        compare_team_line("goaldiff",{{data.goaldiff}}, 80,-80,"#3785fa"); 
-                        break;
+                    {% endfor %}
                 }
 
 

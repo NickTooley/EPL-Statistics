@@ -21,5 +21,10 @@ def create_app():
     import teams
     app.register_blueprint(teams.bp)
 
+    def obj_to_dict(obj):
+        return obj.to_mongo()
+
+    app.jinja_env.globals.update(obj_to_dict=obj_to_dict)
+
     return app
     
