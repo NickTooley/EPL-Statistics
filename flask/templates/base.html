@@ -23,7 +23,7 @@
                     <ul class="clubs">
                     {% for data in dataset%}    
                     {% set teamStr = data.teamID %}
-                        <li><a class="d-none d-md-block" href="{{ url_for('teams.show_team', team=teamStr) }}"><span class="badge-50 {{teamStr}}"></span></a></li>
+                        <li><a class="d-none d-md-block headericons" href="{{ url_for('teams.show_team', team=teamStr) }}"><span class="badge-50 {{teamStr}}"></span></a></li>
                     {% endfor %}
                     </ul>
             </div>
@@ -63,6 +63,13 @@
     var tooltip = d3.select("body").append("div")	
         .attr("class", "tooltip")				
         .style("opacity", 0);
+
+    window.onmousemove = function (e) {
+    var x = e.clientX,
+        y = e.clientY;
+    tooltip.style.top = (y - 50) + 'px';
+    tooltip.style.left = (x - 25) + 'px';
+    };
 
     var svgWidth = $("#d3-content").width(), svgHeight = 600;
     var margin = { top: 20, right: 20, bottom: 30, left: 50 };

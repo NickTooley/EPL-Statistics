@@ -201,18 +201,37 @@ header{
   transition: .25s all ease;
 }
 
+.tooltiplogo{
+    float:left;
+}
+
 div.tooltip {	
     position: absolute;			
-    text-align: center;			
-    width: 60px;					
-    height: 28px;					
-    padding: 2px;				
-    font: 12px sans-serif;		
+    width: 250px;		
+    height: 50px;					
+    padding: 2px;		
     background: lightsteelblue;	
     border: 0px;		
-    border-radius: 8px;			
+    border-radius: 4px;			
     pointer-events: none;			
 }
+
+.tooltipcontent{
+    height:50px;
+}
+
+.tooltip li{
+    list-style: none;
+    display: inline;
+}
+
+.tooltip li.tooltiptext{
+    position: absolute;
+    top: 15px;
+    left: 50px;
+}
+
+
 
 .header-logo{
     z-index:100;
