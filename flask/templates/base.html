@@ -60,6 +60,10 @@
 
 
 <script>
+    var tooltip = d3.select("body").append("div")	
+        .attr("class", "tooltip")				
+        .style("opacity", 0);
+
     var svgWidth = $("#d3-content").width(), svgHeight = 600;
     var margin = { top: 20, right: 20, bottom: 30, left: 50 };
     var width = svgWidth - margin.left - margin.right;
