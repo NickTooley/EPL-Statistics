@@ -21,26 +21,10 @@
             <!-- <h5 class="my-0 mr-md-auto font-weight-normal">Company name</h5> -->
             <div class="row  align-items-center flex-md-row flex-column d-flex badges">
                     <ul class="clubs">
-                        <li><a class="d-none d-md-block" href="{{ url_for('teams.show_team', team='BOU') }}"><span class="badge-50 BOU"></span></a></li>
-                        <li><a class="d-none d-md-block" href="/teams/ARS"><span class="badge-50 ARS"></span></a></li>
-                        <li><a class="d-none d-md-block" href="/teams/BHA"><span class="badge-50 BHA"></span></a></li>
-                        <li><a class="d-none d-md-block" href="/teams/BUR"><span class="badge-50 BUR"></span></a></li>
-                        <li><a class="d-none d-md-block" href="/teams/CAR"><span class="badge-50 CAR"></span></a></li>
-                        <li><a class="d-none d-md-block" href="/teams/CHE"><span class="badge-50 CHE"></span></a></li>
-                        <li><a class="d-none d-md-block" href="/teams/CRY"><span class="badge-50 CRY"></span></a></li>
-                        <li><a class="d-none d-md-block" href="/teams/EVE"><span class="badge-50 EVE"></span></a></li>
-                        <li><a class="d-none d-md-block" href="/teams/FUL"><span class="badge-50 FUL"></span></a></li>
-                        <li><a class="d-none d-md-block" href="/teams/HUD"><span class="badge-50 HUD"></span></a></li>
-                        <li><a class="d-none d-md-block" href="/teams/LEI"><span class="badge-50 LEI"></span></a></li>
-                        <li><a class="d-none d-md-block" href="/teams/LIV"><span class="badge-50 LIV"></span></a></li>
-                        <li><a class="d-none d-md-block" href="/teams/MCI"><span class="badge-50 MCI"></span></a></li>
-                        <li><a class="d-none d-md-block" href="/teams/MUN"><span class="badge-50 MUN"></span></a></li>
-                        <li><a class="d-none d-md-block" href="/teams/NEW"><span class="badge-50 NEW"></span></a></li>
-                        <li><a class="d-none d-md-block" href="/teams/SOU"><span class="badge-50 SOU"></span></a></li>
-                        <li><a class="d-none d-md-block" href="/teams/TOT"><span class="badge-50 TOT"></span></a></li>
-                        <li><a class="d-none d-md-block" href="/teams/WAT"><span class="badge-50 WAT"></span></a></li>
-                        <li><a class="d-none d-md-block" href="/teams/WHU"><span class="badge-50 WHU"></span></a></li>
-                        <li><a class="d-none d-md-block" href="/teams/WOL"><span class="badge-50 WOL"></span></a></li>
+                    {% for data in dataset%}    
+                    {% set teamStr = data.teamID %}
+                        <li><a class="d-none d-md-block" href="{{ url_for('teams.show_team', team=teamStr) }}"><span class="badge-50 {{teamStr}}"></span></a></li>
+                    {% endfor %}
                     </ul>
             </div>
             <div class="row subheader">

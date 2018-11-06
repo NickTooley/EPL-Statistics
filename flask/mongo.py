@@ -4,11 +4,6 @@ import csv
 
 mdb = MongoEngine()
 
-class Team(mdb.Document):
-    teamID = mdb.StringField(max_length=3, required=True)
-    teamName = mdb.StringField(max_length=50, required=True)
-    teamColor = mdb.StringField(required=True)
-
 class Data(mdb.Document):
     teamID = mdb.StringField(max_length=3, required=True)
     teamName = mdb.StringField(required=True)

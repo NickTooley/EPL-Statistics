@@ -102,11 +102,7 @@
                     changeteamcompare("{{data.teamID}}");
                 }
             {% endfor %}
-
-
-
         }else{
-            console.log(checkbox.id);
             var str = checkbox.id;
             var index = str.indexOf("-cb");
             var newstr = str.substring(0,index);
@@ -224,8 +220,6 @@
                         break;
                     {% endfor %}
                 }
-
-
             }
         }
         {% endfor %}
