@@ -66,11 +66,17 @@
         .attr("class", "tooltip")				
         .style("opacity", 0);
 
+    var tooltip2 = d3.select("body").append("div")	
+        .attr("class", "tooltip2")				
+        .style("opacity", 0);
+
     window.onmousemove = function (e) {
     var x = e.clientX,
         y = e.clientY;
-    tooltip.style.top = (y - 50) + 'px';
-    tooltip.style.left = (x - 25) + 'px';
+    tooltip.style.top = (y - 60) + 'px';
+    tooltip.style.left = (x - 50) + 'px';
+    tooltip2.style.top = (y - 40) + 'px';
+    tooltip2.style.left = (x - 40) + 'px';
     };
 
     var svgWidth = $("#d3-content").width(), svgHeight = 600;
