@@ -1,5 +1,16 @@
 {% extends 'base.html' %}
 
+{% block headerlogos %}
+    {% for data in dataset%}    
+        {% set teamStr = data.teamID %}
+        {% if teamStr == teamData.teamID %}
+        <li class="active"><a class="d-none d-md-block headericons" href="{{ url_for('teams.show_team', team=teamStr) }}"><span class="badge-50 {{teamStr}} headerspan"></span></a></li>
+        {% else %}
+        <li><a class="d-none d-md-block headericons" href="{{ url_for('teams.show_team', team=teamStr) }}"><span class="badge-50 {{teamStr}} headerspan"></span></a></li>
+        {% endif %}
+    {% endfor %}
+{% endblock %}
+
 {% block sideform %}
     <div class="form-checkboxes">
         <input type="radio" name="cb" id="none-cb" onclick="changeteamcompare('none')" checked/>

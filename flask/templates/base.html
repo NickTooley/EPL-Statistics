@@ -21,10 +21,12 @@
             <!-- <h5 class="my-0 mr-md-auto font-weight-normal">Company name</h5> -->
             <div class="row  align-items-center flex-md-row flex-column d-flex badges">
                     <ul class="clubs">
-                    {% for data in dataset%}    
-                    {% set teamStr = data.teamID %}
-                        <li><a class="d-none d-md-block headericons" href="{{ url_for('teams.show_team', team=teamStr) }}"><span class="badge-50 {{teamStr}}"></span></a></li>
-                    {% endfor %}
+                    {% block headerlogos %}
+                        {% for data in dataset%}    
+                            {% set teamStr = data.teamID %}
+                            <li><a class="d-none d-md-block headericons" href="{{ url_for('teams.show_team', team=teamStr) }}"><span class="badge-50 {{teamStr}} headerspan"></span></a></li>
+                        {% endfor %}
+                    {% endblock %}
                     </ul>
             </div>
             <div class="row subheader">
@@ -158,6 +160,9 @@
 
         var svg = d3.select("svg")
 
+        var index = id.indexOf("-");
+        var newID = id.substring(0,index);
+
         g.append("path")
         .datum(newlinearr)
         .attr("fill", "none")
@@ -166,9 +171,11 @@
         .attr("stroke-linecap", "round")
         .attr("stroke-width", 3)
         .attr("z-index", 0)
-        .attr("d", newline2)
+        .attr("d", newline2)    
         .on("mouseover", handleMouseOver)
         .on("mouseout", handleMouseOut)
+        .on("click", handleOnClick)
+        .attr("xlink:href", "{{ url_for('teams.show_team', team='') }}"+newID)
         .attr("id", id);
     }
 

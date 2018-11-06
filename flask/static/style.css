@@ -207,7 +207,7 @@ header{
 
 div.tooltip {	
     position: absolute;			
-    width: 250px;		
+    width: 200px;		
     height: 50px;					
     padding: 2px;		
     background: lightsteelblue;	
@@ -259,7 +259,19 @@ div.tooltip {
     height: 50px;
     display: block;
     transform: scale(.6);
+}
+
+.badge-50.headerspan{
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+.badge-50.tooltiplogo{
     margin-right: 15px;
+}
+
+li.active{
+    border-bottom: 5px solid #e90052;
 }
 
 /* .content-div{
