@@ -101,15 +101,17 @@ var goalsfor = [];
 var goalsagainst = [];
 var goaldiff = [];
 
-TeamName.sync({force:true}).then(() => {
-    fs.createReadStream('premdata.csv')
-    .pipe(csv())
-    .on('data', function(data){
-        teamname = data[0];
-        if (teamname != initTeam){
-            console.log(teamname);
-            if(initTeam != null){
-                TeamName.create({
+TeamName.sync({force:false}).then(() => {
+    TeamName.count().then(c => {
+        if(c == 0){
+            fs.createReadStream('premdata.csv')
+            .pipe(csv())
+            .on('data', function(data){
+                teamname = data[0];
+                if (teamname != initTeam){
+                    console.log(teamname);
+                    if(initTeam != null){
+                        TeamName.create({
                             teamID: teamid,
                             teamName: initTeam,
                             positions: positions,
@@ -120,70 +122,112 @@ TeamName.sync({force:true}).then(() => {
                             goalsfor: goalsfor,
                             goalsagainst: goalsagainst,
                             goaldiff: goaldiff
-                        });
-            }
+                                });
+                    }
 
-            initTeam = teamname;
-            teamid = data[1];
-            positions = [];
-            points = [];
-            wins = [];
-            draws = [];
-            losses = [];
-            goalsfor = [];
-            goalsagainst = [];
-            goaldiff = [];
+                    initTeam = teamname;
+                    teamid = data[1];
+                    positions = [];
+                    points = [];
+                    wins = [];
+                    draws = [];
+                    losses = [];
+                    goalsfor = [];
+                    goalsagainst = [];
+                    goaldiff = [];
 
-            for(var i = 0; i < years.length; i++){
-                positions.push('21');
-                points.push('0');
-                wins.push('0');
-                draws.push('0');
-                losses.push('0');
-                goalsfor.push('0');
-                goalsagainst.push('0');
-                goaldiff.push('0');
-            }
-        }else{
-            var year = parseInt(data[2]);
-            var index = years.indexOf(year);
-            positions[index] = data[3];
-            points[index] = data[10];
-            wins[index] = data[4];
-            draws[index] = data[5];
-            losses[index] = data[6];
-            goalsfor[index] = data[7];
-            goalsagainst[index] = data[8];
-            goaldiffnum = data[9];
-            goaldiff[index] = goaldiffnum
+                    for(var i = 1; i < years.length; i++){
+                        positions.push('21');
+                        points.push('0');
+                        wins.push('0');
+                        draws.push('0');
+                        losses.push('0');
+                        goalsfor.push('0');
+                        goalsagainst.push('0');
+                        goaldiff.push('0');
+                    }
 
+                    var year = parseInt(data[2]);
+                    console.log(year);
+                    var index = years.indexOf(year);
+                    console.log(index);
+                    positions[index] = data[3];
+                    points[index] = data[10];
+                    wins[index] = data[4];
+                    draws[index] = data[5];
+                    losses[index] = data[6];
+                    goalsfor[index] = data[7];
+                    goalsagainst[index] = data[8];
+                    goaldiffnum = data[9];
+                    goaldiff[index] = goaldiffnum
+                    
+                }else{
+                    var year = parseInt(data[2]);
+                    console.log(year);
+                    var index = years.indexOf(year);
+                    console.log(index);
+                    positions[index] = data[3];
+                    points[index] = data[10];
+                    wins[index] = data[4];
+                    draws[index] = data[5];
+                    losses[index] = data[6];
+                    goalsfor[index] = data[7];
+                    goalsagainst[index] = data[8];
+                    goaldiffnum = data[9];
+                    goaldiff[index] = goaldiffnum
+
+                }
+            })
+            .on('end',function(data){
+                TeamName.create({
+                    teamID: teamid,
+                    teamName: initTeam,
+                    positions: positions,
+                    points: points,
+                    wins: wins,
+                    draws: draws,
+                    losses: losses, 
+                    goalsfor: goalsfor,
+                    goalsagainst: goalsagainst,
+                    goaldiff: goaldiff
+                });
+                console.log("Read finished");
+            });
         }
-    })
-    .on('end',function(data){
-        TeamName.create({
-            teamID: teamid,
-            teamName: initTeam,
-            positions: positions,
-            points: points,
-            wins: wins,
-            draws: draws,
-            losses: losses, 
-            goalsfor: goalsfor,
-            goalsagainst: goalsagainst,
-            goaldiff: goaldiff
-        });
-        console.log("Read finished");
     });
 });
 
-mongoose.Promise = Promise
+DataTypes.sync({force:false}).then(() => {
+    DataTypes.count().then(c => {
+        if(c == 0){
+            DataTypes.create({typeName: "position", color: "#e90052", scaleupper: 1, scalelower:20 });
+            DataTypes.create({typeName: "points", color: "#9604ff", scaleupper: 100, scalelower:0 });
+            DataTypes.create({typeName: "wins", color: "#04f5ff", scaleupper: 40, scalelower:0 });
+            DataTypes.create({typeName: "draws", color: "#ffffff", scaleupper: 40, scalelower:0 });
+            DataTypes.create({typeName: "losses", color: "#00ff85", scaleupper: 40, scalelower:0 });
+            DataTypes.create({typeName: "goalsfor", color: "#EAFF04", scaleupper: 100, scalelower:0 });
+            DataTypes.create({typeName: "goalsagainst", color: "#e94a00", scaleupper: 100, scalelower:0 });
+            DataTypes.create({typeName: "goaldiff", color: "#3785fa", scaleupper: 80, scalelower:-80 });
+        }
+    });
+});
 
-var dbUrl = 'mongodb://ntooley:user123@ds147391.mlab.com:47391/node-test-tooley'
 
-var Message = mongoose.model('Message', {
-    name: String,
-    message: String
-})
+
+// mongoose.Promise = Promise
+
+// var dbUrl = 'mongodb://ntooley:user123@ds147391.mlab.com:47391/node-test-tooley'
+
+// var Message = mongoose.model('Message', {
+//     name: String,
+//     message: String
+// })
+
+// global controller
+app.get('/*',function(req,res,next){
+    res.header('Access-Control-Allow-Origin' , '*' );
+    next(); // http://expressjs.com/guide.html#passing-route control
+});
 
 app.get('/messages', (req, res)=>{
     Message.find({}, (err, messages)=>{
@@ -191,35 +235,48 @@ app.get('/messages', (req, res)=>{
     })
 })
 
-app.post('/messages', (req, res)=>{
-    var message = new Message(req.body)
+app.get('/leaguedata', (req, res)=>{
+    TeamName.findAll({order: [['teamName', 'ASC']]}).then(teamData => {
+        var type = req.query.type;
 
-    message.save().then(() => {
-
-        Message.findOne({message: 'badword'}, (err, censored)=>{
-            if(censored){
-            console.log('censored word find', censored)
-            Message.remove({_id: censored.id}, (err) => {
-                    console.log("removed bad word")
-            })
+        switch(type){
+            case "points":
+                res.send(teamData);
+                break;
         }
-        })
-         io.emit('message', req.body)
-        res.sendStatus(200)
-    }).catch((err) => {
-        res.sendStatus(500)
-        return console.error(err)
+        
     })
+})
+
+// app.post('/messages', (req, res)=>{
+//     var message = new Message(req.body)
+
+//     message.save().then(() => {
+
+//         Message.findOne({message: 'badword'}, (err, censored)=>{
+//             if(censored){
+//             console.log('censored word find', censored)
+//             Message.remove({_id: censored.id}, (err) => {
+//                     console.log("removed bad word")
+//             })
+//         }
+//         })
+//          io.emit('message', req.body)
+//         res.sendStatus(200)
+//     }).catch((err) => {
+//         res.sendStatus(500)
+//         return console.error(err)
+//     })
     
-})
+// })
 
-io.on('connection', (socket) => {
-    console.log('A user is connected')
-})
+// io.on('connection', (socket) => {
+//     console.log('A user is connected')
+// })
 
-mongoose.connect(dbUrl,{ useNewUrlParser: true }, (err) => {
-    console.log('db connection', err)
-})
+// mongoose.connect(dbUrl,{ useNewUrlParser: true }, (err) => {
+//     console.log('db connection', err)
+// })
 
 var server = http.listen(3000, () => {
     console.log('server is listening on port ', server.address().port)
