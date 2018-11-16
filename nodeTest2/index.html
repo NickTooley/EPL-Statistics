@@ -8,7 +8,7 @@
     crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="sassstyle.css">
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     
@@ -49,38 +49,38 @@
                     <div class="graph-labels">
                             <ul class="graph-labels-ul">
                                 <li class="labels">
-                                    <input type="radio" name="graph-rb" id="positions-rb" checked/>
+                                    <input type="radio" name="graph-rb" id="positions-rb" onclick="changedataset('position')" checked/>
                                     <label for="positions-rb">Position</label>
                                 </li>
                                 <li class="labels">
-                                    <input type="radio" name="graph-rb" id="points-rb" onclick="newPathFun()"/>
+                                    <input type="radio" name="graph-rb" id="points-rb" onclick="changedataset('points')"/>
                                     <label for="points-rb">Points</label>
                                 </li>
                                 <li class="labels">
-                                    <input type="radio" name="graph-rb" id="wins-rb" />
+                                    <input type="radio" name="graph-rb" id="wins-rb" onclick="changedataset('wins')"/>
                                     <label for="wins-rb">Wins</label>
                                 </li>
                                 <li class="labels">
-                                    <input type="radio" name="graph-rb" id="draws-rb" />
+                                    <input type="radio" name="graph-rb" id="draws-rb" onclick="changedataset('draws')"/>
                                     <label for="draws-rb">Draws</label>
                                 </li>
                                 <li class="labels">
-                                    <input type="radio" name="graph-rb" id="losses-rb" />
+                                    <input type="radio" name="graph-rb" id="losses-rb" onclick="changedataset('losses')"/>
                                     <label for="losses-rb">Losses</label>
                                 </li>
                             </ul>
                         <div class="row align-items-center flex-md-row flex-column d-flex no-gutters labels-row2">
                             <ul class="graph-labels-ul">
                                 <li class="labels">
-                                        <input type="radio" name="graph-rb" id="goalsfor-rb" />
+                                        <input type="radio" name="graph-rb" id="goalsfor-rb" onclick="changedataset('goalsfor')"/>
                                         <label for="goalsfor-rb">Goals For</label>
                                 </li>
                                 <li class="labels">
-                                        <input type="radio" name="graph-rb" id="goalsagainst-rb" />
+                                        <input type="radio" name="graph-rb" id="goalsagainst-rb" onclick="changedataset('goalsagainst')"/>
                                         <label for="goalsagainst-rb">Goals Against</label>
                                 </li>
                                 <li class="labels">
-                                        <input type="radio" name="graph-rb" id="goaldiff-rb" />
+                                        <input type="radio" name="graph-rb" id="goaldiff-rb" onclick="changedataset('goaldiff')"/>
                                         <label for="goaldiff-rb">Goal Difference</label>
                                 </li>
                             </ul>
@@ -93,6 +93,20 @@
     </div> 
 </body>
 <script>
+
+    var POINTSUPPER = 100;
+    var POINTSLOWER = 20;
+    var POSITIONUPPER = 1;
+    var POSITIONLOWER = 21;
+    var RESULTUPPER = 40;
+    var RESULTLOWER = 0;
+    var GOALSFORUPPER = 100;
+    var GOALSFORLOWER = 20;
+    var GOALSAGAINSTUPPER = 100;
+    var GOALSAGAINSTLOWER = 10;
+    var GOALDIFFUPPER = 80;
+    var GOALDIFFLOWER = -80;
+
     var allTeams = [];
     
     var tooltip = d3.select("body").append("div")	
@@ -265,17 +279,18 @@
             
             for(var i = 0; i < allTeams.length; i++){
                 console.log(allTeams.length);
+                var label = allTeams[i].teamID + "-line";
                 $("#fillTeams").append("<div class='form-checkboxes'>"+
-                                            "<input type='checkbox' name='cb' id='"+allTeams[i].teamID+ "' checked/>"+
-                                            "<label for='"+allTeams[i].teamID+ "'>"+allTeams[i].teamName+"</label><br />"+
+                                            "<input type='checkbox' name='cb' id='"+allTeams[i].teamID+ "' onclick='handleChange(this)' checked/>"+
+                                            "<label for='"+allTeams[i].teamID+ "' onmouseover=\"handleMouseOverForm('"+label+"')\" onmouseout=\"handleMouseOutForm('"+label+"')\">"+allTeams[i].teamName+"</label><br />"+
                                         "</div>");
 
                 $("ul.clubs").append("<li><a class='d-none d-md-block headericons'  href='#'><span class='badge-50 "+ allTeams[i].teamID +" headerspan'></span></a></li>");
                 
                 // if(checkedteams.indexOf(allTeams[i].teamID) > -1){
                 //     console.log(checkedteams);
-                    var teamid = allTeams[i].teamID+"-line";
-                    new_Line_function(teamid, allTeams[i].positions, 1, 21);
+                var teamid = allTeams[i].teamID+"-line";
+                new_Line_function(label, allTeams[i].positions, 1, 21);
                 // }
             }
 
@@ -314,6 +329,241 @@
     function handleOnClick(d, i) {
         console.log(d3.select(this).attr("xlink:href"));
         window.location.href = d3.select(this).attr("xlink:href");
+    }
+
+    function changedataset(field){
+            switch(field) {
+                case "position":
+                    for(var i = 0; i < allTeams.length; i++){
+                        var checkedteams = getCheckedBoxes("cb");
+                        if(checkedteams.indexOf(allTeams[i].teamID) > -1){
+                            var teamid = allTeams[i].teamID + "-line";
+                            var positions = allTeams[i].positions;
+                            modPathFun(teamid, positions, POSITIONUPPER, POSITIONLOWER);
+                        }
+                    }
+                    break;
+                
+                case "points":
+                    for(var i = 0; i < allTeams.length; i++){
+                        var checkedteams = getCheckedBoxes("cb");
+                        if(checkedteams.indexOf(allTeams[i].teamID) > -1){
+                            var points = allTeams[i].points;
+                            var teamid = allTeams[i].teamID + "-line";
+                            modPathFun(teamid, points, POINTSUPPER, POINTSLOWER);
+                        }
+                    }   
+                    break;
+                
+                case "wins": 
+                    for(var i = 0; i < allTeams.length; i++){
+                        var checkedteams = getCheckedBoxes("cb");
+                        if(checkedteams.indexOf(allTeams[i].teamID) > -1){
+                            var teamid = allTeams[i].teamID + "-line";
+                            var wins = allTeams[i].wins;
+                            modPathFun(teamid, wins, RESULTUPPER, RESULTLOWER);
+                        }
+                    }
+                    break;
+
+                case "draws": 
+                    for(var i = 0; i < allTeams.length; i++){
+                        var checkedteams = getCheckedBoxes("cb");
+                        if(checkedteams.indexOf(allTeams[i].teamID) > -1){
+                            var teamid = allTeams[i].teamID + "-line";
+                            var draws = allTeams[i].draws;
+                            modPathFun(teamid, draws, RESULTUPPER, RESULTLOWER);
+                        }
+                    }
+                    break;
+
+                case "losses": 
+                    for(var i = 0; i < allTeams.length; i++){
+                        var checkedteams = getCheckedBoxes("cb");
+                        if(checkedteams.indexOf(allTeams[i].teamID) > -1){
+                            var teamid = allTeams[i].teamID + "-line";
+                            var losses = allTeams[i].losses;
+                            modPathFun(teamid, losses, RESULTUPPER, RESULTLOWER);
+                        }
+                    }
+                    break;
+
+                case "goalsagainst": 
+                    for(var i = 0; i < allTeams.length; i++){
+                        var checkedteams = getCheckedBoxes("cb");
+                        if(checkedteams.indexOf(allTeams[i].teamID) > -1){
+                            var teamid = allTeams[i].teamID + "-line";
+                            var goalsagainst = allTeams[i].goalsagainst;
+                            modPathFun(teamid, goalsagainst, GOALSAGAINSTUPPER, GOALSAGAINSTLOWER);
+                        }
+                    }
+                    break;
+
+                case "goalsfor": 
+                    for(var i = 0; i < allTeams.length; i++){
+                        var checkedteams = getCheckedBoxes("cb");
+                        if(checkedteams.indexOf(allTeams[i].teamID) > -1){
+                            var teamid = allTeams[i].teamID + "-line";
+                            var goalsfor = allTeams[i].goalsfor;
+                            modPathFun(teamid, goalsfor, GOALSFORUPPER, GOALSFORLOWER);
+                        }
+                    }
+                    break;
+
+                case "goaldiff": 
+                    for(var i = 0; i < allTeams.length; i++){
+                        var checkedteams = getCheckedBoxes("cb");
+                        if(checkedteams.indexOf(allTeams[i].teamID) > -1){
+                            var teamid = allTeams[i].teamID + "-line";
+                            var goaldiff = allTeams[i].goaldiff;
+                            modPathFun(teamid, goaldiff, GOALDIFFUPPER, GOALDIFFLOWER);
+                        }
+                    }
+                    break;
+            }
+        
+    }
+
+    function modPathFun(id, datas, scaleupper, scalelower){
+        var height = svgHeight - margin.top - margin.bottom;
+
+        var newlinearr = [];
+
+        var x = d3.scaleLinear()
+        .domain([0,datas.length])
+        .rangeRound([0, width]);
+
+        y.domain([scalelower,scaleupper]);
+
+        var yAxis2 = d3.axisRight(y)
+        .ticks(21)
+        .tickSize(width);
+
+        svg.select(".yAxis").transition().call(yAxis2);
+
+        g.selectAll(".tick line").attr("stroke", "#fff").attr("stroke-opacity", "0.05").attr("stroke-width", 2);
+        g.selectAll(".tick text").attr("fill", "white").attr("padding", "2px");
+
+        for(var i in datas) {
+            i = parseInt(i);
+            newlinearr.push([x(i), y(datas[i])]);
+            i = i + 1;
+        }
+
+        var newline2 = d3.line();
+        d3.select("#"+id).transition().attr('d', newline2(newlinearr));
+
+    }
+
+
+    function handleMouseOverForm(id) {
+	    d3.select("#" + id).attr("z-index", 10).attr("stroke-width", 5).attr("stroke", "#e90052");
+    }
+    
+    function handleMouseOutForm(id) {
+    	d3.select("#" + id).attr("stroke-width", 3).attr("stroke", "steelblue").attr("z-index", 0);
+    }
+
+    function handleChange(checkbox){
+        if(checkbox.checked){
+            addLine(checkbox.id);
+        }else{
+            removeLine(checkbox.id);
+        }
+    }
+
+    function removeLine(id) {
+        d3.select("#"+id+"-line").remove();
+    }
+
+    function addLine(id) {
+        var teamid = id+"-line";
+        
+        var data = null;
+        var scaleupper = 0;
+        var scalelower = 0;
+        var toRetrieve = $("input[name=graph-rb]:checked").attr('id');
+        
+        switch(toRetrieve){
+            case 'positions-rb':
+                for(var i = 0; i < allTeams.length; i++){
+                    if(id == allTeams[i].teamID){
+                        scaleupper = POSITIONUPPER;
+                        scalelower = POSITIONLOWER;
+                        data = allTeams[i].positions;
+                        console.log(data);
+                    }
+                } 
+                break;
+            case 'points-rb':
+                for(var i = 0; i < allTeams.length; i++){
+                    if(id == allTeams[i].teamID){
+                        scaleupper = POINTSUPPER;
+                        scalelower = POINTSLOWER;
+                        data = allTeams[i].points;
+                    }
+                } 
+                break;
+            case 'draws-rb':
+                for(var i = 0; i < allTeams.length; i++){
+                    if(id == allTeams[i].teamID){
+                        scaleupper = RESULTUPPER;
+                        scalelower = RESULTLOWER;
+                        data = allTeams[i].draws;
+                    }
+                } 
+                break;
+            case 'losses=rb':
+                for(var i = 0; i < allTeams.length; i++){
+                    if(id == allTeams[i].teamID){
+                        scaleupper = RESULTUPPER;
+                        scalelower = RESULTLOWER;
+                        data = allTeams[i].losses;
+                    }
+                } 
+                break;
+            case 'goalsfor-rb':
+                for(var i = 0; i < allTeams.length; i++){
+                    if(id == allTeams[i].teamID){
+                        scaleupper = GOALSFORUPPER;
+                        scalelower = GOALSFORLOWER;
+                        data = allTeams[i].goalsfor;
+                    }
+                } 
+                break;
+            case 'goalsagainst-rb':
+                for(var i = 0; i < allTeams.length; i++){
+                    if(id == allTeams[i].teamID){
+                        scaleupper = GOALSAGAINSTUPPER;
+                        scalelower = GOALSAGAINSTLOWER;
+                        data = allTeams[i].goalsagainst;
+                    }
+                }  
+                break;
+            case 'wins-rb':
+                for(var i = 0; i < allTeams.length; i++){
+                    if(id == allTeams[i].teamID){
+                        scaleupper = RESULTUPPER;
+                        scalelower = RESULTLOWER;
+                        data = allTeams[i].wins;
+                    }
+                }  
+                break;
+            case 'goaldiff-rb':
+                for(var i = 0; i < allTeams.length; i++){
+                    if(id == allTeams[i].teamID){
+                        scaleupper = GOALDIFFUPPER;
+                        scalelower = GOALDIFFLOWER;
+                        data = allTeams[i].goaldiff;
+                    }
+                }   
+                break;
+                
+        }
+        if(data != null){
+            
+            new_Line_function(teamid, data, scaleupper, scalelower);
+        }
     }
 
 </script>

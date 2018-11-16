@@ -1,0 +1,305 @@
+.fill-block {
+  display: block;
+  background-color: #38003c;
+  height: 60px;
+  width: 100%;
+  padding-right: -50px; }
+
+#positions-cb.labels label {
+  background: #e90052; }
+
+#positions-cb2 label::before {
+  background: #e90052; }
+
+#points-cb.labels input[type="checkbox"] {
+  background: #9604ff; }
+
+#wins-cb.labels input[type="checkbox"] {
+  background: #04f5ff; }
+
+.container-fluid {
+  background-color: #38003c;
+  padding: 0px;
+  height: 700px; }
+
+.form-overlay {
+  margin-top: -20px;
+  background-color: white;
+  width: 300px;
+  height: 785px;
+  padding-top: 5px;
+  border-left: 1px solid #e7e7e7;
+  border-right: 1px solid #e7e7e7;
+  border-bottom: 1px solid #e7e7e7;
+  border-top: 5px solid #e90052; }
+
+#d3-content {
+  margin-top: -30px;
+  margin-bottom: 170px; }
+
+.labels label {
+  position: relative;
+  display: inline-block;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  padding-left: 30px;
+  padding-right: 10px;
+  line-height: 36px;
+  cursor: pointer; }
+
+.labels label::before {
+  content: " ";
+  position: absolute;
+  top: 6px;
+  left: 0;
+  display: block;
+  width: 24px;
+  height: 24px;
+  border: 2px solid #38003c;
+  border-radius: 4px;
+  z-index: -1; }
+
+.labels input[type="radio"], .labels input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  z-index: -1; }
+
+.labels input[type="radio"] + label::before, .labels input[type="checkbox"] + label::before {
+  border-radius: 18px; }
+
+.labels input[type="checkbox"]:checked + label, .labels input[type="radio"]:checked + label {
+  padding-left: 25px;
+  padding-right: 25px;
+  color: #fff;
+  border-radius: 100px; }
+
+.labels input[type="checkbox"]:checked + label::before, .labels input[type="radio"]:checked + label::before {
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: #38003c; }
+
+.labels-row2 {
+  margin-top: -40px;
+  margin-left: 50px; }
+
+.labels label,
+.labels label::before {
+  -webkit-transition: .25s all ease;
+  -o-transition: .25s all ease;
+  transition: .25s all ease; }
+
+.graph-labels-ul {
+  list-style: none;
+  display: inline-block;
+  margin-top: 30px; }
+
+.graph-labels-ul li {
+  float: left;
+  margin-right: 20px; }
+
+header {
+  width: 100%;
+  padding: 0px; }
+
+.subheader {
+  margin-left: -60px;
+  width: 100%; }
+
+.clubs {
+  list-style-type: none;
+  padding-bottom: 0px;
+  padding-left: 80px; }
+
+.clubs li {
+  float: left;
+  width: 5%; }
+
+.form-checkboxes {
+  font-size: 14px; }
+  .form-checkboxes input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    z-index: -1; }
+  .form-checkboxes input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    z-index: -1; }
+  .form-checkboxes label {
+    position: relative;
+    display: inline-block;
+    margin-right: 10px;
+    margin-bottom: 0px;
+    padding-left: 30px;
+    padding-right: 10px;
+    line-height: 36px;
+    cursor: pointer; }
+  .form-checkboxes label::before {
+    content: " ";
+    position: absolute;
+    top: 8px;
+    left: 0;
+    display: block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #e90052;
+    border-radius: 4px;
+    z-index: -0; }
+  .form-checkboxes input[type="radio"]:checked + label, .form-checkboxes input[type="checkbox"]:checked + label {
+    padding-left: 10px;
+    color: #fff;
+    z-index: 1; }
+  .form-checkboxes input[type="radio"]:checked + label::before, .form-checkboxes input[type="checkbox"]:checked + label::before {
+    top: 10%;
+    width: 100%;
+    height: 90%;
+    z-index: -1;
+    background: #e90052; }
+  .form-checkboxes label, .form-checkboxes label::before {
+    -webkit-transition: .25s all ease;
+    -o-transition: .25s all ease;
+    transition: .25s all ease; }
+
+.tooltiplogo {
+  float: left; }
+
+div.tooltip {
+  position: absolute;
+  width: 200px;
+  height: 50px;
+  padding: 2px;
+  background: lightsteelblue;
+  border: 0px;
+  border-radius: 4px;
+  pointer-events: none; }
+
+.tooltipcontent {
+  height: 50px; }
+
+.tooltip li {
+  list-style: none;
+  display: inline; }
+
+.tooltip li.tooltiptext {
+  position: absolute;
+  top: 15px;
+  left: 50px; }
+
+.tooltip2 li {
+  list-style: none;
+  display: inline; }
+
+div.tooltip2 {
+  position: absolute;
+  width: 80px;
+  height: 28px;
+  padding: 2px;
+  background: lightsteelblue;
+  border: 0px;
+  border-radius: 4px;
+  pointer-events: none;
+  text-align: center; }
+
+.header-logo {
+  z-index: 100;
+  height: 120px;
+  /* padding-left:10px; */ }
+
+.badges {
+  /* margin-left: 10px;
+    margin-top: 5px; */
+  background-color: #ffffff;
+  display: block;
+  padding-top: 15px;
+  height: 60px;
+  padding-left: 0px;
+  margin-left: -40px; }
+
+.badge-50 {
+  background-image: url(badges-50-sprite.png);
+  background-repeat: no-repeat;
+  width: 50px;
+  height: 50px;
+  display: block;
+  transform: scale(0.6); }
+
+.badge-50.headerspan {
+  margin-right: 5px;
+  margin-left: 5px; }
+
+.badge-50.tooltiplogo {
+  margin-right: 15px; }
+
+li.active {
+  border-bottom: 5px solid #e90052; }
+
+/* .content-div{
+    margin-right:15px;
+} */
+.badge-50:hover {
+  transform: scale(0.7);
+  transition: all .1s ease-in-out; }
+
+.BOU {
+  background-position-x: -100px;
+  background-position-y: -250px; }
+
+.badge-50.ARS {
+  background-position: 0 -100px; }
+
+.badge-50.BHA {
+  background-position: -200px -200px; }
+
+.badge-50.BOU {
+  background-position: -100px -250px; }
+
+.badge-50.BUR {
+  background-position: -50px -300px; }
+
+.badge-50.CAR {
+  background-position: -150px -300px; }
+
+.badge-50.CHE {
+  background-position: -300px -300px; }
+
+.badge-50.CRY {
+  background-position: -100px -350px; }
+
+.badge-50.EVE {
+  background-position: 0 -400px; }
+
+.badge-50.FUL {
+  background-position: -450px -200px; }
+
+.badge-50.HUD {
+  background-position: -150px -450px; }
+
+.badge-50.LEI {
+  background-position: -500px -250px; }
+
+.badge-50.LIV {
+  background-position: -500px -450px; }
+
+.badge-50.MCI {
+  background-position: -500px -500px; }
+
+.badge-50.MUN {
+  background-position: -550px -400px; }
+
+.badge-50.NEW {
+  background-position: -550px -500px; }
+
+.badge-50.SOT {
+  background-position: -650px -500px; }
+
+.badge-50.TOT {
+  background-position: -500px -650px; }
+
+.badge-50.WAT {
+  background-position: -700px -50px; }
+
+.badge-50.WHU {
+  background-position: -700px -150px; }
+
+.badge-50.WOL {
+  background-position: -700px -400px; }

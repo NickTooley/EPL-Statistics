@@ -2,14 +2,13 @@ var express = require ('express');
 var bodyParser = require('body-parser');
 var app = express();
 var http = require('http').Server(app)
-var io = require('socket.io')(http)
-var mongoose = require('mongoose');
 const Sequelize = require('sequelize');
 const pginit = require('pg');
 const pginit2 = require('pg-hstore');
 const parse = require('csv-parse');
 var fs = require('fs');
 var csv = require('fast-csv');
+// require("babel-core").transform("code", options);
 
 app.use(express.static(__dirname));
 app.use(bodyParser.json());
@@ -160,7 +159,7 @@ TeamName.sync({force:false}).then(() => {
                     goalsagainst[index] = data[8];
                     goaldiffnum = data[9];
                     goaldiff[index] = goaldiffnum
-                    
+
                 }else{
                     var year = parseInt(data[2]);
                     console.log(year);
@@ -212,21 +211,10 @@ DataTypes.sync({force:false}).then(() => {
     });
 });
 
-
-
-// mongoose.Promise = Promise
-
-// var dbUrl = 'mongodb://ntooley:user123@ds147391.mlab.com:47391/node-test-tooley'
-
-// var Message = mongoose.model('Message', {
-//     name: String,
-//     message: String
-// })
-
 // global controller
 app.get('/*',function(req,res,next){
     res.header('Access-Control-Allow-Origin' , '*' );
-    next(); // http://expressjs.com/guide.html#passing-route control
+    next(); 
 });
 
 app.get('/messages', (req, res)=>{
@@ -247,36 +235,6 @@ app.get('/leaguedata', (req, res)=>{
         
     })
 })
-
-// app.post('/messages', (req, res)=>{
-//     var message = new Message(req.body)
-
-//     message.save().then(() => {
-
-//         Message.findOne({message: 'badword'}, (err, censored)=>{
-//             if(censored){
-//             console.log('censored word find', censored)
-//             Message.remove({_id: censored.id}, (err) => {
-//                     console.log("removed bad word")
-//             })
-//         }
-//         })
-//          io.emit('message', req.body)
-//         res.sendStatus(200)
-//     }).catch((err) => {
-//         res.sendStatus(500)
-//         return console.error(err)
-//     })
-    
-// })
-
-// io.on('connection', (socket) => {
-//     console.log('A user is connected')
-// })
-
-// mongoose.connect(dbUrl,{ useNewUrlParser: true }, (err) => {
-//     console.log('db connection', err)
-// })
 
 var server = http.listen(3000, () => {
     console.log('server is listening on port ', server.address().port)
