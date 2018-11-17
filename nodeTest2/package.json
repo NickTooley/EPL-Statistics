@@ -4,9 +4,9 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
-    "startmon": "nodemon server.js",
-    "build-css": "node-sass --include-path scss style.scss sassstyle.css"
+    "start": "nodemon --exec babel-node server.js --ignore public/",
+    "build-css": "node-sass --include-path scss style.scss sassstyle.css",
+    "dev": "webpack-wd"
   },
   "keywords": [],
   "author": "",
@@ -14,20 +14,31 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "csv": "^4.0.0",
+    "ejs": "^2.6.1",
     "express": "^4.16.3",
     "fast-csv": "^2.4.1",
-    "mongoose": "^5.2.5",
     "node-sass": "^4.10.0",
     "nodemon": "^1.18.6",
     "pg": "^7.6.1",
     "pg-hstore": "^2.3.2",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
     "sass": "^1.15.0",
-    "sequelize": "^4.41.2",
-    "socket.io": "^2.1.1"
+    "sequelize": "^4.41.2"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.1.6",
-    "babel-core": "^6.26.3"
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^10.0.1",
+    "babel-loader": "^8.0.4",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "eslint": "^5.9.0",
+    "eslint-plugin-react": "^7.11.1",
+    "nodemon": "^1.18.6",
+    "webpack": "^4.25.1"
   },
   "description": ""
 }
