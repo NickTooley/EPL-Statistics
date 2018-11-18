@@ -1,29 +1,37 @@
 import { TeamName } from './db';
 import config from './config';
 import apiRouter from './api';
-
-console.log(config);
-
-var express = require ('express');
-var bodyParser = require('body-parser');
+import sassMiddleware from 'node-sass-middleware';
+import path from 'path';
+import express from 'express';
+import bodyParser from 'body-parser';
 var app = express();
 var http = require('http').Server(app)
-const Sequelize = require('sequelize');
-const pginit = require('pg');
-const pginit2 = require('pg-hstore');
-const parse = require('csv-parse');
-var fs = require('fs');
-var csv = require('fast-csv');
+import nunjucks from 'nunjucks';
 // require("babel-core").transform("code", options);
 
 app.use(express.static(__dirname));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded( { extended: false }));
 
-app.set('view engine', 'ejs');
+app.use(sassMiddleware({
+    src: path.join(__dirname, 'sass'),
+    dest: path.join(__dirname, 'public')
+}));
+
+var _templates = process.env.NODE_PATH ? process.env.NODE_PATH + '/templates' : 'templates' ;
+
+nunjucks.configure( _templates, {
+    autoescape: true,
+    cache: false,
+    express: app
+} ) ;
+
+app.engine( 'html', nunjucks.render );
+app.set('view engine', 'html');
 
 // global controller
-app.get('/*',function(req,res,next){
+app.get('/*',(req, res, next) => {
     res.header('Access-Control-Allow-Origin' , '*' );
     next(); 
 });
@@ -32,7 +40,7 @@ app.use('/api', apiRouter);
 app.use(express.static('public'));
 
 app.get('/test', (req, res)=> {
-    res.render('index');
+    res.render('base');
 })
 
 

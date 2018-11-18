@@ -1,0 +1,168 @@
+<!doctype html>
+<head>
+    <title>EPL Statistics</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
+    
+    <link rel="stylesheet" href="style.css">
+    <!-- <script src="https://d3js.org/d3.v5.min.js"></script> -->
+    
+</head>
+<body>
+    <div id="root">
+        <script src="/bundle.js" charset="utf-8"></script>
+    </div>
+</body>
+
+<script>
+    // var tooltip = d3.select("body").append("div")	
+    //     .attr("class", "tooltip")				
+    //     .style("opacity", 0);
+
+    // var tooltip2 = d3.select("body").append("div")	
+    //     .attr("class", "tooltip2")				
+    //     .style("opacity", 0);
+
+    // window.onmousemove = function (e) {
+    //     var x = e.clientX,
+    //         y = e.clientY;
+            
+    //     tooltip.style.top = (y - 60) + 'px';
+    //     tooltip.style.left = (x - 50) + 'px';
+    //     tooltip2.style.top = (y - 40) + 'px';
+    //     tooltip2.style.left = (x - 40) + 'px';
+    // };
+
+
+    //////////////////////
+    //SHOULD BE IN REACT// 
+    //////////////////////
+
+
+    // var svgWidth = $("#d3-content").width(), svgHeight = 600;
+    // var margin = { top: 20, right: 20, bottom: 30, left: 50 };
+    // var width = svgWidth - margin.left - margin.right;
+    // var height = svgHeight - margin.top - margin.bottom;
+
+    // var svg = d3.select("svg")
+    //     .attr("width", svgWidth)
+    //     .attr("height", svgHeight)
+    //     .attr("class", "line-graph");
+
+    // var g = svg.append("g")
+    //     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    // var x = d3.scaleTime()
+    //     .domain([new Date(1993,0,0), new Date(2018,0,0)])
+    //     .rangeRound([0,width]);    
+
+    // var y = d3.scaleLinear()
+    //     .rangeRound([height, 0]);
+
+    // // x.domain([0,15]);
+    // y.domain([21,1]);
+
+    // var newLine = d3.line()
+    //     .x(function(d) { return x(d.round)})
+    //     .y(function(d) { return y(d.value)})
+    //     // x.domain(d3.extent(arr, function(d) { return d.round}));
+        
+    //     // y.domain(d3.extent(arr, function(d) { return d.value}));
+    // var xAxis = d3.axisBottom(x)
+    //             .ticks(24);
+
+    // var yAxis = d3.axisRight(y)
+    //     .ticks(21)
+    //     .tickSize(width);
+
+    // g.append("g")
+    // .attr("transform", "translate(0," + height + ")")
+    // .call(xAxis)
+    // .select(".domain")
+    // .attr("stroke", "white");
+
+    // g.append("g")
+    //     .attr("class", "yAxis")
+    //     .call(yAxis)
+    //     .append("text")
+    //     .attr("fill", "#000")
+    //     .attr("transform", "rotate(-90)")
+    //     .attr("y", -30)
+    //     .attr("dy", "0.71em")
+    //     .attr("text-anchor", "end")
+    //     .attr("fill", "white");
+
+    // g.append("g")
+    //     .select(".domain")
+    //     .attr("stroke", "white")
+    //     .remove();
+
+    // g.selectAll(".tick line").attr("stroke", "#fff").attr("stroke-opacity", "0.05").attr("stroke-width", 2);
+    // g.selectAll(".tick text").attr("fill", "white").attr("padding", "2px");
+
+    function new_Line_function(id, datas, scaleupper, scalelower){
+
+        var height = svgHeight - margin.top - margin.bottom;
+        console.log(height);
+
+        var newlinearr = [];
+
+        var x = d3.scaleLinear()
+        // .domain([0,datas.length])
+        .domain([0,datas.length])
+        .rangeRound([0, width]);
+
+        var y = d3.scaleLinear()
+        .domain([scalelower,scaleupper])
+        .rangeRound([height, 0]);
+
+        for(var i in datas) {
+            i = parseInt(i);
+            newlinearr.push([x(i), y(datas[i])]);
+            i = i + 1;
+        }
+
+        var newline2 = d3.line();
+
+        var svg = d3.select("svg")
+
+        var index = id.indexOf("-");
+        var newID = id.substring(0,index);
+
+        g.append("path")
+        .datum(newlinearr)
+        .attr("fill", "none")
+        .attr("stroke", "steelblue")
+        .attr("stroke-linejoin", "round")
+        .attr("stroke-linecap", "round")
+        .attr("stroke-width", 3)
+        .attr("z-index", 0)
+        .attr("d", newline2)    
+        .on("mouseover", handleMouseOver)
+        .on("mouseout", handleMouseOut)
+        .on("click", handleOnClick)
+        .attr("xlink:href", "('teams.show_team', team='') }}"+newID)
+        .attr("id", id);
+    }
+
+    function getCheckedBoxes(chkboxName) {
+        var checkboxes = document.getElementsByName(chkboxName);
+        var checkboxesChecked = [];
+        // loop over them all
+        for (var i=0; i<checkboxes.length; i++) {
+            // And stick the checked ones onto an array...
+            if (checkboxes[i].checked) {
+                checkboxesChecked.push(checkboxes[i].id);
+            }
+        }
+        return checkboxesChecked.length > 0 ? checkboxesChecked : null;
+    }
+
+
+</script>
+
+{% block scripts %}
+
+{% endblock %}

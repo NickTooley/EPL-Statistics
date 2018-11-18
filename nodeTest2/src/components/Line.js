@@ -1,0 +1,149 @@
+import React from 'react';
+import * as d3 from 'd3';
+import PropTypes from 'prop-types';
+
+class Line extends React.Component {
+    constructor(props){
+        super(props)
+        this.state = {
+             pageHeader: "Default Header",
+             margin: { top: 20, right: 20, bottom: 30, left: 50 },
+             teamid: this.props.teamid
+            };
+    }
+
+    componentDidMount() {
+        this.drawLine();
+    }
+
+    componentDidUpdate() {
+        this.modLine()
+    }
+
+    prepData() {
+
+        let scales = this.props.scales;
+        let scaleupper = scales[0];
+        let scalelower = scales[1];
+        
+
+        let svgWidth = $("#d3-content").width();
+        let newlinearr = [];
+        console.log(this.props.data.length);
+        let margin = { top: 20, right: 20, bottom: 30, left: 50 };
+
+        let width = svgWidth - margin.left - margin.right;
+        let height = 600 - this.state.margin.top - this.state.margin.bottom;
+
+        let xScale = d3.scaleTime()
+            .domain([0, this.props.data.length])
+            .rangeRound([0,width]);  
+
+        let yScale = d3.scaleLinear()
+            .domain([scalelower,scaleupper])
+            .rangeRound([height, 0]);
+
+        for(let i in this.props.data) {
+            i = parseInt(i);
+            newlinearr.push([xScale(i), yScale(this.props.data[i])]);
+            i = i + 1;
+        }
+
+        return newlinearr;
+
+
+    }
+
+    modLine() {
+
+        // var newlinearr = [];
+
+        // var x = d3.scaleLinear()
+        // .domain([0,datas.length])
+        // .rangeRound([0, width]);
+
+        // y.domain([scalelower,scaleupper]);
+
+        // var yAxis2 = d3.axisRight(y)
+        // .ticks(21)
+        // .tickSize(width);
+
+        // svg.select(".yAxis").transition().call(yAxis2);
+
+        // g.selectAll(".tick line").attr("stroke", "#fff").attr("stroke-opacity", "0.05").attr("stroke-width", 2);
+        // g.selectAll(".tick text").attr("fill", "white").attr("padding", "2px");
+
+        // for(var i in datas) {
+        //     i = parseInt(i);
+        //     newlinearr.push([x(i), y(datas[i])]);
+        //     i = i + 1;
+        // }
+        
+        let newlinearr = this.prepData();
+
+        var newline2 = d3.line();
+        d3.select("#" + this.props.teamid + "-line").transition().attr('d', newline2(newlinearr));
+    }
+
+    handleOnClick(id){
+        // d3.select("#"+ id).attr("z-index", 10).attr("stroke-width", 5).attr("stroke", "#e90052");
+        
+    }
+
+    handleMouseOut(id){
+        d3.select("#hoverline").remove();
+    }
+
+    drawLine() {
+        
+        let newlinearr = this.prepData();
+
+        let newline2 = d3.line();
+
+        let svg = d3.select("svg")
+
+        let g = svg.append("g")
+        .attr("transform", "translate(" + this.state.margin.left + "," + this.state.margin.top + ")")
+        .attr("id", "gID");
+
+        let lineid = this.props.teamid + "-line";
+
+        g.append("path")
+            .datum(newlinearr)
+            .attr("fill", "none")
+            .attr("stroke", "steelblue")
+            .attr("stroke-linejoin", "round")
+            .attr("stroke-linecap", "round")
+            .attr("stroke-width", 3)
+            .attr("z-index", 0)
+            .attr("d", newline2) 
+            .attr("id", lineid) 
+            //.on("mouseover", handleMouseOver)
+            .on("mouseout", this.handleMouseOut(lineid))
+            .on("mouseover", d => {
+                console.log(d);
+                g.append("path")
+                    .datum(d)
+                    .attr("z-index", 10)
+                    .attr("stroke-width", 5)
+                    .attr("stroke", "#e90052")
+                    .attr("stroke-linejoin", "round")
+                    .attr("stroke-linecap", "round")
+                    .attr("d", newline2)
+                    .attr("fill", "none")
+                    .attr("id", "hoverline")
+                    .on("mouseout", d => {
+                        d3.select("#hoverline").remove();
+                    });
+            });
+            
+    }
+
+    render() {
+        return(
+            null
+        )
+    }
+}
+
+export default Line;

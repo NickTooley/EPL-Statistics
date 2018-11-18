@@ -1,0 +1,261 @@
+{% extends 'base.html' %}
+
+{% block headerlogos %}
+    {% for data in dataset%}    
+        {% set teamStr = data.teamID %}
+        {% if teamStr == teamData.teamID %}
+        <li class="active"><a class="d-none d-md-block headericons" href="{{ url_for('teams.show_team', team=teamStr) }}"><span class="badge-50 {{teamStr}} headerspan"></span></a></li>
+        {% else %}
+        <li><a class="d-none d-md-block headericons" href="{{ url_for('teams.show_team', team=teamStr) }}"><span class="badge-50 {{teamStr}} headerspan"></span></a></li>
+        {% endif %}
+    {% endfor %}
+{% endblock %}
+
+{% block sideform %}
+    <div class="form-checkboxes">
+        <input type="radio" name="cb" id="none-cb" onclick="changeteamcompare('none')" checked/>
+        <label for="none-cb" >None</label><br />
+    </div>
+    {% for data in dataset %}
+        {% if data.teamID != teamData.teamID %}
+            <div class="form-checkboxes">
+                <input type="radio" name="cb" id="{{ data.teamID }}""  onclick="changeteamcompare('{{data.teamID}}')"/>
+                <!-- <label for="{{ data.teamID }}"  onmouseover="handleMouseOverForm('#{{ data.teamID }}-line')" onmouseout="handleMouseOutForm('#{{ data.teamID }}-line')">{{ data.teamName }}</label><br /> -->
+                <label for="{{ data.teamID }}" >{{ data.teamName }}</label><br />
+            </div>
+        {% endif %}
+    {% endfor %} 
+{% endblock %}
+
+{% block graphtags %}
+<ul class="graph-labels-ul">
+        <li class="labels">
+            <input type="checkbox" name="graph-rb" id="position-cb" onclick="changedataset(this)" checked/>
+            <label for="position-cb" id="position-cb2" >Position</label>
+        </li>
+        <li class="labels">
+            <input type="checkbox" name="graph-rb" id="points-cb" onclick="changedataset(this)" />
+            <label for="points-cb">Points</label>
+        </li>
+        <li class="labels">
+            <input type="checkbox" name="graph-rb" id="wins-cb" onclick="changedataset(this)" checked/>
+            <label for="wins-cb">Wins</label>
+        </li>
+        <li class="labels">
+            <input type="checkbox" name="graph-rb" id="draws-cb" onclick="changedataset(this)" />
+            <label for="draws-cb">Draws</label>
+        </li>
+        <li class="labels">
+            <input type="checkbox" name="graph-rb" id="losses-cb" onclick="changedataset(this)" checked/>
+            <label for="losses-cb">Losses</label>
+        </li>
+    </ul>
+<div class="row align-items-center flex-md-row flex-column d-flex no-gutters labels-row2">
+    <ul class="graph-labels-ul">
+        <li class="labels">
+                <input type="checkbox" name="graph-rb" id="goalsfor-cb" onclick="changedataset(this)" />
+                <label for="goalsfor-cb">Goals For</label>
+        </li>
+        <li class="labels">
+                <input type="checkbox" name="graph-rb" id="goalsagainst-cb" onclick="changedataset(this)" />
+                <label for="goalsagainst-cb">Goals Against</label>
+        </li>
+        <li class="labels">
+                <input type="checkbox" name="graph-rb" id="goaldiff-cb" onclick="changedataset(this)" checked/>
+                <label for="goaldiff-cb">Goal Difference</label>
+        </li>
+    </ul>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+
+    var position = {{ teamData.position }};
+    var wins = {{teamData.wins}};
+    var draws = {{teamData.draws}};
+    var losses = {{teamData.losses}};
+    var goalsfor = {{teamData.goalsfor}};
+    var goalsagainst = {{teamData.goalsagainst}};
+    var goaldiff = {{teamData.goaldiff}};
+    var points = {{teamData.points}};
+
+    var y2 = d3.scaleLinear().domain([0,100]).rangeRound([height,0]);
+    var yAxis2 = d3.axisLeft(y2).ticks(21).tickSize(0);
+
+    g.append("g").call(yAxis2).attr("class", "leftAxis");
+    g.selectAll(".tick text").attr("fill", "white").attr("padding", "2px");
+
+    
+    new_team_line("position", position, 1, 21, "#e90052");
+    new_team_line("wins", wins, 100, 0, "#04f5ff");
+    new_team_line("losses", losses, 100, 0, "#00ff85");
+    new_team_line("goaldiff",goaldiff, 80,-80,"#3785fa");
+
+    function handleMouseOut(d, i){
+        tooltip2.transition().style("opacity", 0);
+    }
+    
+    function handleMouseOver(d, i){
+        var dataID = d3.select(this).attr("id");
+        tooltip2.transition().style("opacity", .85);
+        tooltip2.html("<div class='tooltipcontent2'><li class='tooltiptext2'>"+ toTitleCase(dataID)+"</li></div> ")
+            .style("left", (d3.event.pageX - 40) + "px")		
+            .style("top", (d3.event.pageY - 40) + "px");
+    }
+
+    function changedataset(checkbox){
+        if(checkbox.checked){
+            var checked = $("input[name=cb]:checked").attr('id');
+            console.log(checked);
+            var str = checkbox.id;
+            var index = str.indexOf("-cb");
+            var newstr = str.substring(0,index);
+
+            switch (newstr){
+                {% for type in dataTypes %}
+                    case "{{type.typeName}}":
+                        new_team_line("{{type.typeName}}", {{type.typeName}}, {{type.scaleupper}}, {{type.scalelower}}, "{{type.color}}" );
+                        break;
+                {% endfor %}
+                
+            }
+
+            {% for data in dataset %}
+                if("{{data.teamID}}" == checked ){
+                    changeteamcompare("{{data.teamID}}");
+                }
+            {% endfor %}
+        }else{
+            var str = checkbox.id;
+            var index = str.indexOf("-cb");
+            var newstr = str.substring(0,index);
+            console.log(".compare #"+newstr);
+
+            d3.select(".compare#"+newstr).remove();
+            d3.select(".mainTeam#"+newstr).remove();
+        }
+    }
+
+    function toTitleCase(str) {
+        return str.replace(
+            /\w\S*/g,
+            function(txt) {
+                return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+            }
+        );
+    }
+
+    function new_team_line(id, datas, scaleupper, scalelower, color){
+        var height = svgHeight - margin.top - margin.bottom;
+        console.log(height);
+
+        var newlinearr = [];
+
+        var x = d3.scaleLinear()
+        // .domain([0,datas.length])
+        .domain([0,datas.length])
+        .rangeRound([0, width]);
+
+        var y = d3.scaleLinear()
+        .domain([scalelower,scaleupper])
+        .rangeRound([height, 0]);
+
+        for(var i in datas) {
+            i = parseInt(i);
+            newlinearr.push([x(i), y(datas[i])]);
+            i = i + 1;
+        }
+
+        var newline2 = d3.line();
+
+        var svg = d3.select("svg")
+
+        g.append("path")
+        .datum(newlinearr)
+        .attr("fill", "none")
+        .attr("stroke", color)
+        .attr("stroke-linejoin", "round")
+        .attr("stroke-linecap", "round")
+        .attr("stroke-width", 5)
+        .attr("z-index", 0)
+        .attr("d", newline2)
+        .on("mouseover", handleMouseOver)
+        .on("mouseout", handleMouseOut)
+        .attr("class", "mainTeam")
+        .attr("id", id);
+
+    }
+
+    function compare_team_line(id, datas, scaleupper, scalelower, color){
+        var height = svgHeight - margin.top - margin.bottom;
+        console.log(height);
+
+        var newlinearr = [];
+
+        var x = d3.scaleLinear()
+        // .domain([0,datas.length])
+        .domain([0,datas.length])
+        .rangeRound([0, width]);
+
+        var y = d3.scaleLinear()
+        .domain([scalelower,scaleupper])
+        .rangeRound([height, 0]);
+
+        for(var i in datas) {
+            i = parseInt(i);
+            newlinearr.push([x(i), y(datas[i])]);
+            i = i + 1;
+        }
+
+        var newline2 = d3.line();
+
+        var svg = d3.select("svg")
+
+        g.append("path")
+        .datum(newlinearr)
+        .attr("fill", "none")
+        .attr("stroke", color)
+        .attr("stroke-linejoin", "round")
+        .attr("stroke-linecap", "round")
+        .attr("stroke-width", 5)
+        .attr("stroke-opacity", "0.3")
+        .attr("z-index", 0)
+        .attr("d", newline2)
+        // .on("mouseover", handleMouseOver)
+        // .on("mouseout", handleMouseOut)
+        .attr("class", "compare")
+        .attr("id", id);
+
+    }
+
+    function changeteamcompare(id){
+        d3.selectAll(".compare").remove();
+        var checkedData = getCheckedBoxes("graph-rb");
+        {% for data in dataset %}
+        if("{{data.teamID}}" == id){
+            for(var i = 0; i < checkedData.length; i++ ){
+                switch(checkedData[i]){
+                    {% for type in dataTypes %}
+                    {% set typeStr = type.typeName %}
+                    {% set typeSet = obj_to_dict(data) %}
+                    case "{{type.typeName}}-cb":
+                        var scaleupper = 100;
+                        var scalelower = 0;
+                        if("{{type.typeName}}" == "position"){
+                            scaleupper = 1;
+                            scalelower = 21;
+                        }else if("{{type.typeName}}" == "goaldiff"){
+                           scaleupper = 80;
+                           scalelower = -80;
+                        }
+                        compare_team_line("{{type.typeName}}", {{typeSet.get(typeStr)}}, scaleupper, scalelower, "{{ type.color }}");
+                        break;
+                    {% endfor %}
+                }
+            }
+        }
+        {% endfor %}
+    }
+</script>
+{% endblock %}
