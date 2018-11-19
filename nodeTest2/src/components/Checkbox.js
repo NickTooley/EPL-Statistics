@@ -35,9 +35,6 @@ class Checkbox extends React.Component {
         }
     }
 
-    componentDidMount(){
-            // d3.select("#"+this.props.teamID+"-label").on("mouseover", this.handleMouseOver(this.props.teamID));
-    }
 
     render() {
         return(

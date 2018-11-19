@@ -17,6 +17,32 @@ class Chart extends React.Component {
 
       }
 
+    componentDidUpdate() {
+        this.modChart();
+    }
+
+    modChart() {
+        let svgWidth = $("#d3-content").width(), svgHeight = 600;
+        let margin = { top: 20, right: 20, bottom: 30, left: 50 };
+        var width = svgWidth - margin.left - margin.right;
+        var height = svgHeight - margin.top - margin.bottom;
+
+        var y = d3.scaleLinear()
+            .rangeRound([height, 0])
+            .domain([this.props.scales[1], this.props.scales[0]]);
+
+        var yAxis2 = d3.axisRight(y)
+        .ticks(21)
+        .tickSize(width);
+
+        let svg = d3.select("svg");
+
+        svg.select(".yAxis").transition().call(yAxis2);
+
+        svg.selectAll(".tick line").attr("stroke", "#fff").attr("stroke-opacity", "0.05").attr("stroke-width", 2);
+        svg.selectAll(".tick text").attr("fill", "white").attr("padding", "2px");
+    }
+
     drawChart() {
         let svgWidth = $("#d3-content").width(), svgHeight = 600;
         let margin = { top: 20, right: 20, bottom: 30, left: 50 };
@@ -36,6 +62,7 @@ class Chart extends React.Component {
             .domain([new Date(1993,0,0), new Date(2018,0,0)])
             .rangeRound([0,width]);    
     
+        console.log(this.props.scales);
         let y = d3.scaleLinear()
             .rangeRound([height, 0])
             .domain([21,1]);

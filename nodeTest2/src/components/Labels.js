@@ -8,7 +8,7 @@ class Labels extends React.Component {
         return (
             <div className="graph-labels">
                     <ul className="graph-labels-ul">
-                        <Label type={"positions"} func={this.props.func}/>
+                        <Label type={"positions"} func={this.props.func} def={true}/>
                         <Label type={"points"} func={this.props.func}/>
                         <Label type={"wins"} func={this.props.func}/>
                         <Label type={"draws"} func={this.props.func}/>

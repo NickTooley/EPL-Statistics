@@ -63,18 +63,6 @@ class App extends React.Component {
         tooltip.style.left = (x - 50) + 'px';
     }
 
-    click() {
-        // axios.get('/api/points')
-        //     .then(resp => {
-        //         console.log(resp)
-        //         this.setState({
-        //             data: resp.data.data,
-        //             scale: resp.data.scales
-        //         })
-        //     })
-        //     .catch(console.error);
-    }
-
     render() {
         return (
             <div className="container-fluid no-gutters" onMouseMove={this.onMouseMove.bind(this)} onClick={() => this.click()}>

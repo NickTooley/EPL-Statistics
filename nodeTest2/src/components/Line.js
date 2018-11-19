@@ -29,7 +29,6 @@ class Line extends React.Component {
 
         let svgWidth = $("#d3-content").width();
         let newlinearr = [];
-        console.log(this.props.data.length);
         let margin = { top: 20, right: 20, bottom: 30, left: 50 };
 
         let width = svgWidth - margin.left - margin.right;
@@ -63,12 +62,10 @@ class Line extends React.Component {
     }
 
     handleOnClick(id){
-        // d3.select("#"+ id).attr("z-index", 10).attr("stroke-width", 5).attr("stroke", "#e90052");
         
     }
 
     handleMouseOut(id){
-        console.log(id);
         d3.select("#" +id)
         .attr("stroke", "steelblue")
         .attr("stroke-width", 3);
@@ -76,15 +73,6 @@ class Line extends React.Component {
     }
 
     drawLine() {
-
-        let tipid = this.props.teamid + "-tooltip";
-
-        // window.onmousemove = function (e) {
-        //     var x = e.clientX,
-        //         y = e.clientY;
-        //     tooltip.style.top = (y - 60) + 'px';
-        //     tooltip.style.left = (x - 50) + 'px';
-        // };
         
         let newlinearr = this.prepData();
 
@@ -108,7 +96,6 @@ class Line extends React.Component {
             .attr("z-index", 0)
             .attr("d", newline2) 
             .attr("id", lineid) 
-            //.on("mouseover", handleMouseOver)
             .on("mouseout", d => {
                 d3.select("#"+lineid)
                 .attr("stroke", "steelblue")
