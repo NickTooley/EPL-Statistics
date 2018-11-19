@@ -91,10 +91,23 @@ class Line extends React.Component {
     }
 
     handleMouseOut(id){
-        d3.select("#hoverline").remove();
+        console.log(id);
+        d3.select("#" +id)
+        .attr("stroke", "steelblue")
+        .attr("stroke-width", 3);
+
     }
 
     drawLine() {
+
+        let tipid = this.props.teamid + "-tooltip";
+
+        // window.onmousemove = function (e) {
+        //     var x = e.clientX,
+        //         y = e.clientY;
+        //     tooltip.style.top = (y - 60) + 'px';
+        //     tooltip.style.left = (x - 50) + 'px';
+        // };
         
         let newlinearr = this.prepData();
 
@@ -119,22 +132,31 @@ class Line extends React.Component {
             .attr("d", newline2) 
             .attr("id", lineid) 
             //.on("mouseover", handleMouseOver)
-            .on("mouseout", this.handleMouseOut(lineid))
+            .on("mouseout", d => {
+                d3.select("#"+lineid)
+                .attr("stroke", "steelblue")
+                .attr("stroke-width", 3);
+
+                d3.select(".tooltip")
+                    .style("opacity", 0);
+                    
+            })
             .on("mouseover", d => {
-                console.log(d);
-                g.append("path")
-                    .datum(d)
+                d3.select("#"+lineid)
                     .attr("z-index", 10)
                     .attr("stroke-width", 5)
-                    .attr("stroke", "#e90052")
-                    .attr("stroke-linejoin", "round")
-                    .attr("stroke-linecap", "round")
-                    .attr("d", newline2)
-                    .attr("fill", "none")
-                    .attr("id", "hoverline")
-                    .on("mouseout", d => {
-                        d3.select("#hoverline").remove();
-                    });
+                    .attr("stroke", "#e90052");
+                
+                d3.select(".tooltip")
+                    .html("<div class='tooltipcontent'><li class='tooltiptext'>"+this.props.teamname+"</li><li><span class='badge-50 "+ this.props.teamid + " tooltiplogo'></span></li></div> ")
+                    .style("left", (d3.event.pageX - 50) + "px")		
+                    .style("top", (d3.event.pageY - 60) + "px")
+                    .style("opacity", .85);
+            })
+            .on("mousemove", d => {
+                d3.select(".tooltip")
+                    .style("left", (d3.event.pageX - 50) + "px")		
+                    .style("top", (d3.event.pageY - 60) + "px");
             });
             
     }

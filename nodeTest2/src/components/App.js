@@ -5,6 +5,7 @@ import Chart from './Chart';
 import Sideform from './Sideform';
 import Labels from './Labels';
 import axios from 'axios';
+import * as d3 from 'd3'; 
 
 
 class App extends React.Component {
@@ -18,10 +19,14 @@ class App extends React.Component {
     }
     
     componentDidMount() {
-        console.log('did mount');
+        var tooltip = d3.select("body").append("div")	
+            .attr("class", "tooltip")
+            .attr("id", "tooltip")			
+            .style("opacity", 0);
+        
+
         axios.get('/api/data')
             .then(resp => {
-                console.log(resp.data);
                 this.setState({
                     data: resp.data,
                     scale: [1,21]
@@ -34,9 +39,21 @@ class App extends React.Component {
         console.log('will Unmount');
     }
 
+    onMouseMove(e) {
+        var x = e.screenX;
+        var y = e.screenY;
+        
+        var tooltip = d3.select("#tooltip");
+        console.log(tooltip.style.top);
+
+        
+        tooltip.style.top = (y - 60) + 'px';
+        tooltip.style.left = (x - 50) + 'px';
+    }
+
     render() {
         return (
-            <div className="container-fluid no-gutters">
+            <div className="container-fluid no-gutters" onMouseMove={this.onMouseMove.bind(this)}>
                 <Header teams={this.state.data}/>
                 <div className="row justify-content-center content-div no-gutters" >
                     <div className="col-9">

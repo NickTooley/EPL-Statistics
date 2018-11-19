@@ -19,7 +19,7 @@ class Header extends React.Component {
                 <div className="row  align-items-center flex-md-row flex-column d-flex badges">
                         <ul className="clubs">
                         {this.props.teams.map(data => 
-                                <li><a className="d-none d-md-block headericons" href="#"><span className={"badge-50 headerspan " + data.teamID} ></span></a></li>
+                                <li key={data.teamID}><a className="d-none d-md-block headericons" href="#"><span className={"badge-50 headerspan " + data.teamID} ></span></a></li>
                             )}
 
                         </ul>
