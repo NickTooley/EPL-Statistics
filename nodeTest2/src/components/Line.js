@@ -56,29 +56,6 @@ class Line extends React.Component {
 
     modLine() {
 
-        // var newlinearr = [];
-
-        // var x = d3.scaleLinear()
-        // .domain([0,datas.length])
-        // .rangeRound([0, width]);
-
-        // y.domain([scalelower,scaleupper]);
-
-        // var yAxis2 = d3.axisRight(y)
-        // .ticks(21)
-        // .tickSize(width);
-
-        // svg.select(".yAxis").transition().call(yAxis2);
-
-        // g.selectAll(".tick line").attr("stroke", "#fff").attr("stroke-opacity", "0.05").attr("stroke-width", 2);
-        // g.selectAll(".tick text").attr("fill", "white").attr("padding", "2px");
-
-        // for(var i in datas) {
-        //     i = parseInt(i);
-        //     newlinearr.push([x(i), y(datas[i])]);
-        //     i = i + 1;
-        // }
-        
         let newlinearr = this.prepData();
 
         var newline2 = d3.line();

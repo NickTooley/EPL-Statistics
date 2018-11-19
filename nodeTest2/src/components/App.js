@@ -16,6 +16,7 @@ class App extends React.Component {
              data: [],
              scale: [0,0]
             };
+        this.changeData = this.changeData.bind(this)
     }
     
     componentDidMount() {
@@ -25,11 +26,24 @@ class App extends React.Component {
             .style("opacity", 0);
         
 
-        axios.get('/api/data')
+        axios.get('/api/positions')
             .then(resp => {
                 this.setState({
-                    data: resp.data,
-                    scale: [1,21]
+                    data: resp.data.data,
+                    scale: resp.data.scales
+                })
+            })
+            .catch(console.error);
+    }
+
+    changeData(dataType){
+        console.log('/api/'+dataType);
+        axios.get('/api/'+dataType)
+            .then(resp => {
+                console.log(resp.data.data);
+                this.setState({
+                    data: resp.data.data,
+                    scale: resp.data.scales
                 })
             })
             .catch(console.error);
@@ -44,16 +58,26 @@ class App extends React.Component {
         var y = e.screenY;
         
         var tooltip = d3.select("#tooltip");
-        console.log(tooltip.style.top);
-
         
         tooltip.style.top = (y - 60) + 'px';
         tooltip.style.left = (x - 50) + 'px';
     }
 
+    click() {
+        // axios.get('/api/points')
+        //     .then(resp => {
+        //         console.log(resp)
+        //         this.setState({
+        //             data: resp.data.data,
+        //             scale: resp.data.scales
+        //         })
+        //     })
+        //     .catch(console.error);
+    }
+
     render() {
         return (
-            <div className="container-fluid no-gutters" onMouseMove={this.onMouseMove.bind(this)}>
+            <div className="container-fluid no-gutters" onMouseMove={this.onMouseMove.bind(this)} onClick={() => this.click()}>
                 <Header teams={this.state.data}/>
                 <div className="row justify-content-center content-div no-gutters" >
                     <div className="col-9">
@@ -62,7 +86,7 @@ class App extends React.Component {
                             
                             <div className="col-sm-10" id="d3-content">
                                 <Chart data={this.state.data} scales={this.state.scale}/>
-                                <Labels />
+                                <Labels func={this.changeData}/>
                             </div>
                         </div>
                     </div>

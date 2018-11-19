@@ -100,65 +100,65 @@
     //     .remove();
 
     // g.selectAll(".tick line").attr("stroke", "#fff").attr("stroke-opacity", "0.05").attr("stroke-width", 2);
-    // g.selectAll(".tick text").attr("fill", "white").attr("padding", "2px");
+    // // g.selectAll(".tick text").attr("fill", "white").attr("padding", "2px");
 
-    function new_Line_function(id, datas, scaleupper, scalelower){
+    // function new_Line_function(id, datas, scaleupper, scalelower){
 
-        var height = svgHeight - margin.top - margin.bottom;
-        console.log(height);
+    //     var height = svgHeight - margin.top - margin.bottom;
+    //     console.log(height);
 
-        var newlinearr = [];
+    //     var newlinearr = [];
 
-        var x = d3.scaleLinear()
-        // .domain([0,datas.length])
-        .domain([0,datas.length])
-        .rangeRound([0, width]);
+    //     var x = d3.scaleLinear()
+    //     // .domain([0,datas.length])
+    //     .domain([0,datas.length])
+    //     .rangeRound([0, width]);
 
-        var y = d3.scaleLinear()
-        .domain([scalelower,scaleupper])
-        .rangeRound([height, 0]);
+    //     var y = d3.scaleLinear()
+    //     .domain([scalelower,scaleupper])
+    //     .rangeRound([height, 0]);
 
-        for(var i in datas) {
-            i = parseInt(i);
-            newlinearr.push([x(i), y(datas[i])]);
-            i = i + 1;
-        }
+    //     for(var i in datas) {
+    //         i = parseInt(i);
+    //         newlinearr.push([x(i), y(datas[i])]);
+    //         i = i + 1;
+    //     }
 
-        var newline2 = d3.line();
+    //     var newline2 = d3.line();
 
-        var svg = d3.select("svg")
+    //     var svg = d3.select("svg")
 
-        var index = id.indexOf("-");
-        var newID = id.substring(0,index);
+    //     var index = id.indexOf("-");
+    //     var newID = id.substring(0,index);
 
-        g.append("path")
-        .datum(newlinearr)
-        .attr("fill", "none")
-        .attr("stroke", "steelblue")
-        .attr("stroke-linejoin", "round")
-        .attr("stroke-linecap", "round")
-        .attr("stroke-width", 3)
-        .attr("z-index", 0)
-        .attr("d", newline2)    
-        .on("mouseover", handleMouseOver)
-        .on("mouseout", handleMouseOut)
-        .on("click", handleOnClick)
-        .attr("xlink:href", "('teams.show_team', team='') }}"+newID)
-        .attr("id", id);
-    }
+    //     g.append("path")
+    //     .datum(newlinearr)
+    //     .attr("fill", "none")
+    //     .attr("stroke", "steelblue")
+    //     .attr("stroke-linejoin", "round")
+    //     .attr("stroke-linecap", "round")
+    //     .attr("stroke-width", 3)
+    //     .attr("z-index", 0)
+    //     .attr("d", newline2)    
+    //     .on("mouseover", handleMouseOver)
+    //     .on("mouseout", handleMouseOut)
+    //     .on("click", handleOnClick)
+    //     .attr("xlink:href", "('teams.show_team', team='') }}"+newID)
+    //     .attr("id", id);
+    // }
 
-    function getCheckedBoxes(chkboxName) {
-        var checkboxes = document.getElementsByName(chkboxName);
-        var checkboxesChecked = [];
-        // loop over them all
-        for (var i=0; i<checkboxes.length; i++) {
-            // And stick the checked ones onto an array...
-            if (checkboxes[i].checked) {
-                checkboxesChecked.push(checkboxes[i].id);
-            }
-        }
-        return checkboxesChecked.length > 0 ? checkboxesChecked : null;
-    }
+    // function getCheckedBoxes(chkboxName) {
+    //     var checkboxes = document.getElementsByName(chkboxName);
+    //     var checkboxesChecked = [];
+    //     // loop over them all
+    //     for (var i=0; i<checkboxes.length; i++) {
+    //         // And stick the checked ones onto an array...
+    //         if (checkboxes[i].checked) {
+    //             checkboxesChecked.push(checkboxes[i].id);
+    //         }
+    //     }
+    //     return checkboxesChecked.length > 0 ? checkboxesChecked : null;
+    // }
 
 
 </script>

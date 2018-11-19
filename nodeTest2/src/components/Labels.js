@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Label from './Label';
 
 class Labels extends React.Component {
 
@@ -7,41 +8,17 @@ class Labels extends React.Component {
         return (
             <div className="graph-labels">
                     <ul className="graph-labels-ul">
-                        <li className="labels">
-                            <input type="radio" name="graph-rb" id="positions-rb" onClick={() => null} defaultChecked/>
-                            <label htmlFor="positions-rb">Position</label>
-                        </li>
-                        <li className="labels">
-                            <input type="radio" name="graph-rb" id="points-rb" onClick={() => null}/>
-                            <label htmlFor="points-rb">Points</label>
-                        </li>
-                        <li className="labels">
-                            <input type="radio" name="graph-rb" id="wins-rb" onClick={() => null}/>
-                            <label htmlFor="wins-rb">Wins</label>
-                        </li>
-                        <li className="labels">
-                            <input type="radio" name="graph-rb" id="draws-rb" onClick={() => null}/>
-                            <label htmlFor="draws-rb">Draws</label>
-                        </li>
-                        <li className="labels">
-                            <input type="radio" name="graph-rb" id="losses-rb" onClick={() => null}/>
-                            <label htmlFor="losses-rb">Losses</label>
-                        </li>
+                        <Label type={"positions"} func={this.props.func}/>
+                        <Label type={"points"} func={this.props.func}/>
+                        <Label type={"wins"} func={this.props.func}/>
+                        <Label type={"draws"} func={this.props.func}/>
+                        <Label type={"losses"} func={this.props.func}/>
                     </ul>
                 <div className="row align-items-center flex-md-row flex-column d-flex no-gutters labels-row2">
                     <ul className="graph-labels-ul">
-                        <li className="labels">
-                                <input type="radio" name="graph-rb" id="goalsFor-rb" onClick={() => null}/>
-                                <label htmlFor="goalsFor-rb">Goals For</label>
-                        </li>
-                        <li className="labels">
-                                <input type="radio" name="graph-rb" id="goalsagainst-rb" onClick={() => null}/>
-                                <label htmlFor="goalsagainst-rb">Goals Against</label>
-                        </li>
-                        <li className="labels">
-                                <input type="radio" name="graph-rb" id="goaldiff-rb" onClick={() => null}/>
-                                <label htmlFor="goaldiff-rb">Goal Difference</label>
-                        </li>
+                        <Label type={"goalsfor"} func={this.props.func}/>
+                        <Label type={"goalsagainst"} func={this.props.func}/>
+                        <Label type={"goaldiff"} func={this.props.func}/>
                     </ul>
                 </div>
             </div>

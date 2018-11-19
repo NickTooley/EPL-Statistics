@@ -5,7 +5,8 @@ class Checkbox extends React.Component {
     constructor(props){
         super(props)
         this.state = {
-             pageHeader: "Default Header" 
+             pageHeader: "Default Header",
+             selected:true
             };
     }
 
@@ -17,6 +18,23 @@ class Checkbox extends React.Component {
         d3.select("#" + id + "-line").attr("stroke", "steelblue").attr("stroke-width", 3);
     }
 
+    handleChange(id){
+        let state = !this.state.selected;
+        if(this.state.selected){
+            this.setState({
+                selected: state
+            });
+            d3.select("#"+id+"-line")
+                .style("opacity", 0);
+        }else{
+            this.setState({
+                selected: state
+            });
+            d3.select("#"+id+"-line")
+                .style("opacity", 1);
+        }
+    }
+
     componentDidMount(){
             // d3.select("#"+this.props.teamID+"-label").on("mouseover", this.handleMouseOver(this.props.teamID));
     }
@@ -24,7 +42,7 @@ class Checkbox extends React.Component {
     render() {
         return(
             <div className="form-checkboxes">
-                <input type="checkbox" name="cb" id={this.props.teamID} defaultChecked/>
+                <input type="checkbox" name="cb" onChange={() => this.handleChange(this.props.teamID)} id={this.props.teamID} defaultChecked/>
                 <label id={this.props.teamID + "-label"} htmlFor={this.props.teamID} onMouseOver={() => this.handleMouseOver(this.props.teamID)} onMouseOut={() => this.handleMouseOut(this.props.teamID)}>{this.props.teamName}</label><br />
             </div>
         )
