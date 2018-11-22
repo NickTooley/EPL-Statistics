@@ -52,16 +52,6 @@ app.get('/leaguedata', (req, res)=>{
     })
 })
 
-app.use(function(req, res, next){
-    res.status(404);
-    res.render('404', { url: req.url });
-    return;
-})
-
-app.use(function(error, req, res, next) {
-    res.render('500', 500);
- });
-
 var server = http.listen(config.port, () => {
     console.log('server is listening on port ', server.address().port)
 });

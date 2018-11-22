@@ -28,7 +28,6 @@ class App extends React.Component {
 
         axios.get('/api/positions')
             .then(resp => {
-                console.log(resp)
                 this.setState({
                     data: resp.data.data,
                     scale: resp.data.scales
