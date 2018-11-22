@@ -39,7 +39,7 @@ app.get('/*',(req, res, next) => {
 app.use('/api', apiRouter);
 app.use(express.static('public'));
 
-app.get('/test', (req, res)=> {
+app.get('/', (req, res)=> {
     res.render('base');
 })
 
