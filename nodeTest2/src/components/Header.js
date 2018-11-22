@@ -12,7 +12,7 @@ class Header extends React.Component {
                 
             <div className="d-flex align-items-start flex-md-row flex-column" >
                 <div className="header-logo">
-                    <a href="/" ><img src="./premier-league-logo-header.svg" /></a>
+                    <a href="/" ><img src="http://0.0.0.0:3000/premier-league-logo-header.svg" /></a>
                 </div>
             <header>
 
