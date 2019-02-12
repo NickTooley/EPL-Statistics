@@ -1,5 +1,5 @@
 # Web3
 
-Flask/MongoDB :  http://13.238.195.216:81/
+Flask/MongoDB :  http://54.252.139.228:81/
 
-Node/PostreSQL : http://13.238.195.216
+Node/PostreSQL : http://54.252.139.228/
